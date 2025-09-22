@@ -1,0 +1,62 @@
+# Task ID: 7
+# Title: Workout Program Generator
+# Status: done
+# Dependencies: 3, 4
+# Priority: high
+# Description: Implement logic to generate the 6-week workout program based on user level
+# Details:
+1. Create a WorkoutProgramService class
+2. Implement methods to generate the complete 6-week program based on user level
+3. For each level (Rookie, Rising, Alpha, Giga), implement the specific rep schemes as defined in the PRD
+4. Structure the program as a nested map/list with weeks, days, and sets
+5. Store the generated program in the database
+6. Implement methods to retrieve current day's workout
+
+Example structure:
+```dart
+Map<int, Map<int, List<int>>> generateProgram(UserLevel level) {
+  // Returns a map of week -> day -> rep counts for each set
+  // Example: {1: {1: [2,3,2,2,2,3,2,2,...], 2: [...], 3: [...]}, 2: {...}}
+}
+```
+
+# Test Strategy:
+Write unit tests to verify correct program generation for each user level. Test edge cases and verify the program matches the specifications in the PRD.
+
+# Subtasks:
+## 1. Implement Rep Scheme Logic for Different User Levels [done]
+### Dependencies: None
+### Description: Create the core logic to generate appropriate rep schemes for each user level (Rookie, Rising, Alpha, Giga) according to the PRD specifications.
+### Details:
+1. Define constants for each level's rep patterns
+2. Implement helper methods to generate the appropriate rep counts based on user level
+3. Create a method that returns the rep scheme for a specific week and day based on the user's level
+4. Ensure the rep schemes follow the progression defined in the PRD
+
+## 2. Implement Program Structure Generation [done]
+### Dependencies: 7.1
+### Description: Build the complete nested map/list structure that represents the 6-week program with all workouts organized by week, day, and sets.
+### Details:
+1. Implement the generateProgram method that returns a nested map structure
+2. Organize the structure as Map<int, Map<int, List<int>>> where the outer key is the week number, inner key is the day number, and the list contains rep counts
+3. Ensure all 6 weeks and all days per week are properly populated
+4. Include appropriate comments to explain the structure
+
+## 3. Implement Database Storage for Generated Programs [done]
+### Dependencies: 7.2
+### Description: Create functionality to persist the generated workout programs in the database and associate them with the appropriate user.
+### Details:
+1. Design a database schema to store the workout program structure
+2. Implement methods to convert the program structure to a database-friendly format
+3. Create save/update methods to store the program in the database with user association
+4. Implement error handling for database operations
+
+## 4. Implement Current Day Workout Retrieval [done]
+### Dependencies: 7.3
+### Description: Create methods to retrieve the current day's workout for a user based on their progress in the program.
+### Details:
+1. Implement a method to determine the current week and day based on the user's start date
+2. Create a method to retrieve the specific workout for the current day from the stored program
+3. Include logic to handle edge cases (program completion, missed days, etc.)
+4. Format the retrieved workout data for presentation in the UI
+

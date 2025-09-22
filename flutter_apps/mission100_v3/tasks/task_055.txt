@@ -1,0 +1,146 @@
+# Task ID: 55
+# Title: Fix Mission Transition Logic: Update WorkoutSession Completion Status and Improve Next Workout Calculation
+# Status: done
+# Dependencies: 4, 10
+# Priority: high
+# Description: Fix the issue where completed workout sessions are not being counted correctly in the getNextWorkout method, preventing users from progressing to the next week of their training program, and resolve achievement system integration issues.
+# Details:
+1. Analyze and fix the getNextWorkout method implementation:
+   - Replace hardcoded user ID (1) with the actual user profile ID
+   - Fix the completed sessions counting error (using count instead of length)
+   - Add detailed debug logs for better problem tracking
+   - Ensure proper session counting across user profiles
+
+2. Fix achievement system integration issues:
+   - In workout_screen.dart, replace incorrect calls to non-existent checkAndUpdateAchievements method with the correct checkAchievements method
+   - Ensure workout data is accurately passed to achievement checks (pushup count, workout time, form quality, additional data)
+   - Update test files with the same corrections
+
+3. Implement improved session counting algorithm:
+   ```dart
+   Future<WorkoutSession> getNextWorkout() async {
+     // Get user profile ID instead of hardcoded value
+     final userId = await _userService.getCurrentUserId();
+     
+     // Get all completed sessions for the current program with correct user ID
+     final completedSessions = await _repository.getCompletedSessions(currentProgramId, userId);
+     
+     // Count completed sessions per week
+     Map<int, int> sessionsPerWeek = {};
+     for (var session in completedSessions) {
+       sessionsPerWeek[session.week] = (sessionsPerWeek[session.week] ?? 0) + 1;
+     }
+     
+     // Add debug logs
+     _logger.debug('Completed sessions count: ${completedSessions.length}');
+     _logger.debug('Sessions per week: $sessionsPerWeek');
+     
+     // Determine current week and day
+     int currentWeek = 1;
+     int currentDay = 1;
+     
+     // Find the current week (last week that doesn't have all sessions completed)
+     for (int week = 1; week <= program.totalWeeks; week++) {
+       int completedInWeek = sessionsPerWeek[week] ?? 0;
+       int requiredSessions = program.sessionsPerWeek;
+       
+       _logger.debug('Week $week: $completedInWeek/$requiredSessions completed');
+       
+       if (completedInWeek < requiredSessions) {
+         currentWeek = week;
+         currentDay = completedInWeek + 1;
+         break;
+       }
+     }
+     
+     _logger.debug('Next workout: Week $currentWeek, Day $currentDay');
+     
+     // Create next workout session
+     return WorkoutSession(
+       date: DateTime.now(),
+       week: currentWeek,
+       day: currentDay,
+       targetReps: program.getTargetRepsForWeek(currentWeek),
+       completedReps: [],
+       isCompleted: false,
+       totalReps: 0,
+       totalTime: Duration.zero,
+     );
+   }
+   ```
+
+4. Update achievement integration in workout_screen.dart:
+   ```dart
+   // Replace incorrect method call
+   // OLD: checkAndUpdateAchievements(session);
+   // NEW:
+   await achievementService.checkAchievements(
+     pushupCount: session.totalReps,
+     workoutTime: session.totalTime,
+     formQuality: session.averageFormScore,
+     additionalData: {
+       'week': session.week,
+       'day': session.day,
+       'completed': session.isCompleted,
+     },
+   );
+   ```
+
+5. Update the WorkoutSession completion logic:
+   - Ensure the isCompleted flag is properly set when all sets are completed
+   - Add validation to prevent partial completion from being counted as full completion
+
+6. Update the UI to reflect the correct progression status:
+   - Show the current week and day more prominently
+   - Add visual indicators for completed sessions
+   - Display progress toward the next week
+
+# Test Strategy:
+1. Unit Testing:
+   - Write unit tests for the updated getNextWorkout method
+   - Test with various scenarios of completed and incomplete sessions
+   - Verify correct week and day calculation for different program progressions
+   - Test edge cases like all sessions completed, no sessions completed, etc.
+   - Verify achievement system integration with correct method calls
+
+2. Integration Testing:
+   - Create test scenarios that simulate completing workouts across multiple days
+   - Verify that after completing all sessions in a week, the next session is correctly set to the next week
+   - Test the transition between weeks with different numbers of required sessions
+   - Confirm achievements are properly triggered after workout completion
+
+3. Manual Testing:
+   - Complete a workout session and verify it's properly marked as completed
+   - Complete all sessions in a week and verify progression to the next week (specifically 1st week day 1 → 1st week day 2)
+   - Test interrupting a workout and resuming it later
+   - Verify that the UI correctly displays the current progress
+   - Test on different devices to ensure consistent behavior
+   - Verify achievement notifications appear when conditions are met
+
+4. Regression Testing:
+   - Ensure that fixing this issue doesn't break other functionality
+   - Verify that historical workout data is still displayed correctly
+   - Check that statistics and achievements are still calculated properly
+
+5. Database Verification:
+   - Directly inspect the database to confirm that session completion status is correctly stored
+   - Verify that queries are retrieving the correct set of completed sessions
+   - Confirm user-specific data is properly filtered by user ID
+
+6. Performance Testing:
+   - Measure the performance impact of the new counting algorithm
+   - Ensure the app remains responsive when calculating the next workout with a large history of sessions
+
+# Subtasks:
+## 55.1. Fix getNextWorkout method implementation [done]
+### Dependencies: None
+### Description: Replace hardcoded user ID (1) with actual user profile ID, fix completed sessions counting error, and add detailed debug logs.
+### Details:
+
+
+## 55.2. Fix achievement system integration [done]
+### Dependencies: None
+### Description: Replace incorrect checkAndUpdateAchievements method calls with correct checkAchievements method and ensure proper data passing.
+### Details:
+
+

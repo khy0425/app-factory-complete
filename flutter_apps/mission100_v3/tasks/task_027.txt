@@ -1,0 +1,207 @@
+# Task ID: 27
+# Title: Task #27: UI Enhancement and Ad Integration
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Improve the user interface by adding language toggle functionality, fixing text and layout issues, and integrating Google Mobile Ads with appropriate layout optimizations.
+# Details:
+This task involves several UI improvements and ad integration:
+
+1. Language Toggle Implementation:
+   - Add a language toggle switch/button that allows users to switch between Korean and English
+   - Ensure all text elements throughout the app respond to language changes
+   - Store language preference in local storage for persistence across app sessions
+
+2. Button Text Improvements:
+   - Change the text on the main CTA button from "Chad 여정 시작하기" to "Start for Chad"
+   - Review and update any other buttons that may need text improvements for clarity and consistency
+
+3. Workout Screen Overflow Fix:
+   - Identify and fix the 79-pixel overflow issue on the workout screen
+   - Ensure proper responsiveness across different device sizes
+   - Test the fix on multiple screen dimensions to confirm resolution
+
+4. Google Mobile Ads Integration:
+   - Implement banner ads using the provided ID: ca-app-pub-1075071967728463/9498612269
+   - Implement interstitial (full-screen) ads using the provided ID: ca-app-pub-1075071967728463/7039728635
+   - Set up appropriate ad loading and display logic (e.g., show interstitial ads between workout sessions)
+   - Implement test ads for development environment
+
+5. Layout Optimization for Ads:
+   - Adjust UI layouts to accommodate ad spaces without disrupting user experience
+   - Ensure ads don't overlap with interactive elements
+   - Optimize padding and margins around ad containers
+   - Consider implementing ad-free spaces for critical user interactions
+
+The implementation should maintain consistency with the existing app theme (Task #24) and work seamlessly with the push-up tutorial system (Task #26).
+
+# Test Strategy:
+Testing should cover all aspects of the implementation:
+
+1. Language Toggle Testing:
+   - Verify toggle button works correctly in all app screens
+   - Confirm all text elements update appropriately when language is changed
+   - Test language persistence across app restarts
+   - Verify proper fallback behavior if translations are missing
+
+2. Button Text Testing:
+   - Verify all button text changes have been implemented correctly
+   - Check text alignment and sizing on various screen sizes
+   - Ensure text is properly localized in both languages
+
+3. Overflow Issue Testing:
+   - Test workout screen on multiple device sizes and orientations
+   - Verify no horizontal scrolling occurs due to overflow
+   - Use layout inspection tools to confirm the 79-pixel overflow is resolved
+   - Test with developer tools to simulate various screen dimensions
+
+4. Ad Integration Testing:
+   - Verify banner ads load and display correctly
+   - Test interstitial ad triggers and display timing
+   - Confirm ad IDs are correctly implemented
+   - Test ad behavior when device is offline
+   - Verify test ads appear in debug builds and real ads in release builds
+
+5. Layout Optimization Testing:
+   - Test UI with ads enabled on various device sizes
+   - Verify no UI elements are obscured by ads
+   - Test user interactions near ad placements
+   - Perform usability testing to ensure ads don't significantly impact user experience
+
+Additional testing:
+   - Perform regression testing on existing features
+   - Test app performance with ads enabled
+   - Verify compliance with Google AdMob policies
+   - Test ad behavior during different app states (background, foreground)
+
+# Subtasks:
+## 1. Implement Language Toggle Functionality [done]
+### Dependencies: None
+### Description: Create a language toggle switch that allows users to switch between Korean and English throughout the app.
+### Details:
+1. Add a toggle button/switch in the app header or settings screen
+2. Implement a language context provider using React Context API
+3. Create language resource files for both Korean and English text
+4. Set up a mechanism to store language preference in local storage
+5. Ensure the language setting persists across app sessions
+6. Add language change event listeners to update UI components when language changes
+<info added on 2025-05-23T12:59:35.509Z>
+Google Mobile Ads Integration:
+1. Added Google Mobile Ads package (v5.3.1)
+2. Completed Android configuration:
+   - Added app ID to AndroidManifest.xml
+   - Added internet and network permissions
+3. Implemented AdService class with:
+   - Banner and interstitial ad support
+   - Test and production ad ID handling
+   - Automatic ad loading and reloading
+   - Interstitial ads on workout completion, level up, and app launch
+4. Added ad service initialization in main.dart
+
+Workout Screen Improvements:
+1. Fixed 79px overflow issue:
+   - Implemented SingleChildScrollView for scrollability
+   - Modified SafeArea bottom exclusion
+   - Improved layout with Column structure
+2. Added bottom banner ad space:
+   - Displayed banner ads through AdWidget
+   - Added placeholder for ad load failures
+   - Reserved space for ad height
+3. Added automatic interstitial ad display on workout completion
+
+Technical Details:
+- Fixed banner ad height: 50px
+- Configured interstitial ad display probabilities (workout completion: 50%, level up: 30%, app launch: 20%)
+- Implemented ad load state tracking and automatic reload
+- Optimized ad instance management for memory efficiency
+</info added on 2025-05-23T12:59:35.509Z>
+
+## 2. Update Button Text and UI Labels [done]
+### Dependencies: None
+### Description: Change the text on the main CTA button and review all UI labels for consistency and clarity in both languages.
+### Details:
+1. Change main CTA button text from "Chad 여정 시작하기" to "Start for Chad"
+2. Create an inventory of all buttons and text labels in the app
+3. Update text content in both language resource files
+4. Ensure text length variations between languages don't break layouts
+5. Apply consistent capitalization and terminology across the app
+6. Update any hardcoded text to use the language resource system
+<info added on 2025-05-23T13:00:04.369Z>
+✅ Language Toggle Functionality Implementation Complete
+
+Implementation Details:
+- Created LocaleService:
+  * Language setting storage/loading (SharedPreferences)
+  * Korean/English toggle functionality
+  * Language state verification and conversion utilities
+- Implemented LocaleProvider (Riverpod):
+  * StateNotifier-based language state management
+  * Auto-loading of saved language settings
+  * Various convenience providers (isKorean, localeShort, etc.)
+- Mission100App Integration:
+  * Converted to ConsumerWidget
+  * Dynamic locale setting connection
+  * Real-time language change support
+- SplashScreen Language Toggle Button:
+  * Positioned in top-right corner
+  * Current language indicator (KR/EN)
+  * Icon and text combination UI
+  * One-touch language switching
+
+UI/UX Improvements:
+- "Mission: 100" title fixed in English (per user request)
+- "Start for Chad" button text updated (per user request)
+- Elegant semi-transparent background for language toggle button
+- Immediate app-wide reflection of language changes
+
+Technical Implementation:
+- Permanent language setting storage via SharedPreferences
+- App-wide synchronization with Riverpod state management
+- Dynamic connection to MaterialApp locale property
+- Language setting persistence between sessions
+</info added on 2025-05-23T13:00:04.369Z>
+
+## 3. Fix Workout Screen Overflow Issue [done]
+### Dependencies: None
+### Description: Identify and resolve the 79-pixel overflow issue on the workout screen and ensure proper responsiveness.
+### Details:
+1. Use React DevTools or browser inspector to identify the source of the overflow
+2. Adjust container dimensions, padding, or margins to eliminate the overflow
+3. Implement responsive design techniques (flex layouts, percentage-based sizing)
+4. Add overflow handling for content that may vary in size
+5. Test fixes on multiple screen sizes to ensure proper display
+6. Implement media queries if needed for specific device dimensions
+
+## 4. Implement Google Mobile Banner Ads [done]
+### Dependencies: None
+### Description: Integrate Google Mobile Ads SDK and implement banner advertisements in appropriate locations.
+### Details:
+1. Install and configure the Google Mobile Ads SDK
+2. Create banner ad components with the provided ID: ca-app-pub-1075071967728463/9498612269
+3. Implement test ad IDs for development environment
+4. Add banner ad containers at the bottom of key screens
+5. Implement ad loading and error handling logic
+6. Add ad lifecycle management (load, show, hide, destroy)
+
+## 5. Implement Google Mobile Interstitial Ads [done]
+### Dependencies: None
+### Description: Add full-screen interstitial advertisements to display between workout sessions.
+### Details:
+1. Create interstitial ad service using the provided ID: ca-app-pub-1075071967728463/7039728635
+2. Implement preloading logic to ensure ads are ready when needed
+3. Add triggers to show interstitial ads at appropriate moments (between workout sessions)
+4. Implement frequency capping to avoid showing too many ads
+5. Add proper event handling for ad close, display, and failure events
+6. Ensure app state is preserved correctly when returning from an interstitial ad
+
+## 6. Optimize Layouts for Ad Integration [done]
+### Dependencies: None
+### Description: Adjust UI layouts to accommodate ad spaces without disrupting user experience.
+### Details:
+1. Modify screen layouts to reserve space for banner ads
+2. Adjust padding and margins around ad containers
+3. Ensure critical UI elements remain accessible when ads are displayed
+4. Implement safe areas to prevent ads from overlapping interactive elements
+5. Add graceful fallbacks for cases when ads fail to load
+6. Create ad-free zones for critical user interactions like workout execution
+

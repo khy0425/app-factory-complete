@@ -1,0 +1,330 @@
+# Task ID: 42
+# Title: Implement Data Persistence for Workout Sessions
+# Status: done
+# Dependencies: 40
+# Priority: high
+# Description: Develop a robust system to prevent data loss during unexpected app terminations by implementing immediate data persistence after each set completion and adding workout resumption functionality.
+# Details:
+1. Implement immediate data persistence:
+   - Modify the WorkoutService to save each completed set to the database immediately.
+   - Use a transaction to ensure data integrity when saving multiple related entities.
+   - Example: 
+     ```dart
+     Future<void> saveCompletedSet(WorkoutSet set) async {
+       await database.transaction((txn) async {
+         await txn.insert('workout_sets', set.toMap());
+         await txn.update('workouts', {'last_updated': DateTime.now().toIso8601String()}, where: 'id = ?', whereArgs: [set.workoutId]);
+       });
+     }
+     ```
+
+2. Implement app lifecycle monitoring:
+   - Use Flutter's WidgetsBindingObserver to detect app state changes.
+   - In the main app widget, override the didChangeAppLifecycleState method.
+   - When the app is about to be terminated (AppLifecycleState.detached), trigger a final save of all pending data.
+
+3. Utilize SharedPreferences for temporary data storage:
+   - Store the current workout state (workout ID, current exercise, set number) in SharedPreferences.
+   - Update this information after each set completion and when switching exercises.
+   - Example:
+     ```dart
+     Future<void> saveWorkoutProgress(int workoutId, int exerciseIndex, int setNumber) async {
+       final prefs = await SharedPreferences.getInstance();
+       await prefs.setInt('current_workout_id', workoutId);
+       await prefs.setInt('current_exercise_index', exerciseIndex);
+       await prefs.setInt('current_set_number', setNumber);
+     }
+     ```
+
+4. Implement workout resumption functionality:
+   - On app startup, check SharedPreferences for any saved workout state.
+   - If a saved state exists, prompt the user to resume the workout or start a new one.
+   - Implement a WorkoutResumptionService to handle the logic of restoring the previous workout state.
+
+5. Develop workout state restoration logic:
+   - Create a method to reconstruct the workout state from the database and SharedPreferences data.
+   - Fetch completed sets for the saved workout ID and rebuild the workout progress.
+   - Example:
+     ```dart
+     Future<WorkoutState> reconstructWorkoutState() async {
+       final prefs = await SharedPreferences.getInstance();
+       final workoutId = prefs.getInt('current_workout_id');
+       if (workoutId == null) return null;
+       
+       final completedSets = await database.query('workout_sets', where: 'workout_id = ?', whereArgs: [workoutId]);
+       // Reconstruct workout state using completedSets and other saved data
+       // ...
+     }
+     ```
+
+6. Update the UI to support workout resumption:
+   - Modify the WorkoutScreen to accept a reconstructed workout state.
+   - Implement a dialog or screen to prompt users about resuming their workout.
+
+7. Implement error handling and data integrity checks:
+   - Add try-catch blocks around critical data saving operations.
+   - Implement data validation before saving to ensure consistency.
+   - Log any errors or inconsistencies for debugging purposes.
+
+# Test Strategy:
+1. Unit Tests:
+   - Test the saveCompletedSet function with various input scenarios.
+   - Verify that SharedPreferences correctly stores and retrieves workout progress.
+   - Test the reconstructWorkoutState function with different saved states.
+
+2. Integration Tests:
+   - Simulate app termination during a workout and verify data persistence.
+   - Test the full workflow of starting a workout, completing sets, force-closing the app, and resuming the workout.
+
+3. UI Tests:
+   - Verify that the workout resumption prompt appears correctly when applicable.
+   - Test navigation and state management when resuming a workout vs. starting a new one.
+
+4. Edge Case Testing:
+   - Test behavior when the app is terminated between exercises or during rest periods.
+   - Verify correct handling of multiple workouts in progress (e.g., if the app is force-closed multiple times).
+
+5. Performance Testing:
+   - Measure the time taken to save data after each set completion.
+   - Evaluate any potential impact on UI responsiveness during data saving operations.
+
+6. Stress Testing:
+   - Simulate rapid set completions and app terminations to ensure data integrity.
+
+7. Compatibility Testing:
+   - Verify functionality across different devices and OS versions.
+
+8. Data Integrity Checks:
+   - After simulated crashes, verify that the reconstructed workout state matches the expected state based on completed sets.
+
+9. Error Handling Tests:
+   - Simulate database errors or SharedPreferences failures to ensure graceful error handling.
+
+10. User Acceptance Testing:
+    - Have real users perform workouts with intentional force-closes to validate the resumption experience.
+
+# Subtasks:
+## 1. Implement Immediate Data Persistence [done]
+### Dependencies: None
+### Description: Modify the WorkoutService to save each completed set to the database immediately using transactions for data integrity.
+### Details:
+Update WorkoutService to include a saveCompletedSet method that uses database transactions. This method should insert the completed set into the workout_sets table and update the last_updated field in the workouts table. Ensure proper error handling and logging.
+<info added on 2025-05-30T12:08:09.683Z>
+분석 계획:
+1. 현재 워크아웃 데이터 저장 방식 분석
+   - workout_sets 테이블 구조 검토
+   - 기존 저장 로직의 타이밍 및 효율성 평가
+   
+2. WorkoutScreen에서 세트 완료 후 데이터 저장 흐름 확인
+   - 사용자 인터페이스에서 세트 완료 이벤트 추적
+   - 현재 데이터 흐름 및 지연 시간 측정
+   
+3. 즉시 저장을 위한 데이터베이스 트랜잭션 설계
+   - 세트 완료 즉시 저장하는 트랜잭션 로직 설계
+   - 동시성 문제 해결 방안 마련
+   
+4. 세트별 즉시 저장 메커니즘 구현
+   - saveCompletedSet 메소드 구현
+   - 오류 처리 및 로깅 시스템 통합
+</info added on 2025-05-30T12:08:09.683Z>
+<info added on 2025-05-30T12:29:01.178Z>
+# 구현 완료: 즉시 데이터 영속성 시스템
+
+## 구현된 핵심 기능
+
+### 1. 데이터베이스 구조 확장
+- `workout_sessions` 테이블 추가로 진행 중인 세션 관리 구현
+- 데이터베이스 버전 2로 업그레이드 및 자동 마이그레이션 로직 구현
+- 세션별 세트 진행 상황을 실시간으로 추적하는 구조 설계
+
+### 2. WorkoutHistoryService 확장
+- `startWorkoutSession()`: 새 운동 세션 시작 메소드 구현
+- `saveSetProgress()`: 세트 완료 시 즉시 저장 기능 구현
+- `completeWorkoutSession()`: 세션 완료 및 정식 기록 이전 처리
+- `recoverIncompleteSession()`: 미완료 세션 자동 복구 메커니즘 구현
+- `cleanupCompletedSessions()`: 완료된 세션 정리 로직 추가
+
+### 3. workout_screen.dart 통합
+- 세션 ID 상태 관리 (`_sessionId`, `_isRecoveredSession`) 구현
+- `_initializeSession()`: 시작 시 미완료 세션 복구 또는 새 세션 생성 로직
+- `_markSetCompleted()`: 세트 완료 시 즉시 데이터베이스 저장 처리
+- `_saveSetProgressImmediately()`: 비동기 세트 진행 상황 저장 메소드
+- `_saveWorkoutHistoryBackup()`: 세션 실패 시 백업 저장 기능
+
+### 4. 안전장치 메커니즘
+- 세션 생성/저장 실패 시에도 운동 계속 진행 가능하도록 설계
+- 기존 저장 방식과 병행하여 데이터 손실 방지 시스템 구축
+- 오류 처리 및 로깅으로 디버깅 지원 기능 추가
+
+## 데이터 안전성 향상
+- 각 세트 완료 시 즉시 데이터베이스에 저장되어 앱 강제 종료 시에도 진행 상황 보존
+- 앱 재시작 시 미완료 세션 자동 복구로 사용자 경험 개선
+- 데이터베이스 트랜잭션 기반 안전한 저장 구현
+- 백업 저장 시스템으로 이중 안전장치 제공
+
+## 성능 최적화
+- 비동기 저장으로 UI 블로킹 방지
+- 오류 발생 시에도 운동 진행에 영향 없도록 설계
+- 효율적인 세션 관리로 메모리 사용량 최적화
+
+다음 단계: SharedPreferences 기반 로컬 백업 시스템 구현 예정
+</info added on 2025-05-30T12:29:01.178Z>
+
+## 2. Implement App Lifecycle Monitoring [done]
+### Dependencies: 42.1
+### Description: Use Flutter's WidgetsBindingObserver to detect app state changes and trigger data saving when the app is about to be terminated.
+### Details:
+Override the didChangeAppLifecycleState method in the main app widget. When AppLifecycleState.detached is detected, call a method to save all pending workout data. Implement this final save method in the WorkoutService.
+<info added on 2025-05-30T12:29:20.392Z>
+**앱 수명 주기 모니터링 구현 시작**
+
+Flutter의 WidgetsBindingObserver를 활용하여 앱 수명 주기 상태 변화를 감지하는 시스템을 구현합니다. workout_screen.dart 파일에 WidgetsBindingObserver를 구현하고, 상태 클래스에서 initState()에 WidgetsBinding.instance.addObserver(this)를 추가하고 dispose()에서 observer를 제거합니다.
+
+didChangeAppLifecycleState 메서드를 오버라이드하여 다음 상태 변화를 처리합니다:
+- AppLifecycleState.paused: 앱이 백그라운드로 갈 때 현재 세션 상태를 백업
+- AppLifecycleState.detached: 앱이 종료될 때 WorkoutService의 최종 저장 메서드 호출
+- AppLifecycleState.resumed: 필요시 데이터 복원 로직 실행
+
+WorkoutService에는 긴급 데이터 저장을 위한 saveEmergencyData() 메서드를 구현하여 앱 종료 시 모든 미저장 운동 데이터를 안전하게 저장합니다.
+</info added on 2025-05-30T12:29:20.392Z>
+<info added on 2025-05-30T12:31:49.567Z>
+**앱 수명 주기 모니터링 구현 완료**
+
+**구현된 핵심 기능:**
+
+1. **WidgetsBindingObserver 통합**:
+   - WorkoutScreen에 WidgetsBindingObserver mixin 추가
+   - initState에서 observer 등록, dispose에서 해제
+   - 앱 수명 주기 상태 변화 실시간 감지
+
+2. **수명 주기 상태 처리**:
+   - `AppLifecycleState.paused`: 백그라운드 진입 시 현재 상태 백업
+   - `AppLifecycleState.detached`: 앱 종료 시 긴급 데이터 저장
+   - `AppLifecycleState.resumed`: 앱 재활성화 시 백업 복원 확인
+   - `AppLifecycleState.inactive/hidden`: 일시적 상태 변화 로깅
+
+3. **다층 백업 시스템**:
+   - **데이터베이스 백업**: 세션 테이블에 현재 진행 상황 즉시 저장
+   - **SharedPreferences 백업**: 로컬 저장소에 완전한 상태 정보 백업
+   - **긴급 저장**: 앱 종료 시 최소한의 진행 상황이라도 WorkoutHistory로 저장
+
+4. **백업 데이터 구조**:
+   - 세션 ID, 현재 세트, 현재 반복수, 완료된 반복수 배열
+   - 목표 반복수, 세트 완료 여부, 휴식 시간 상태
+   - 운동 제목, 사용자 레벨, 백업 타임스탬프
+
+5. **오류 처리 및 안전성**:
+   - 각 백업 단계별 독립적 오류 처리
+   - 백업 실패 시에도 운동 진행에 영향 없음
+   - 긴급 저장 시 최소 1회라도 완료한 경우만 저장
+   - 24시간 후 오래된 백업 데이터 자동 정리
+
+**사용자 경험 개선:**
+- 앱이 예상치 못하게 종료되어도 진행 상황 보존
+- 백그라운드 진입 시 현재 진행 중인 세트도 안전하게 저장
+- 복구 시 사용자에게 적절한 피드백 제공
+- 무음/투명한 백업으로 운동 집중도 방해 없음
+
+**성능 최적화:**
+- 비동기 백업 처리로 UI 블로킹 방지
+- 필요한 경우에만 백업 수행 (진행 중인 세트가 있을 때)
+- 효율적인 JSON 직렬화로 빠른 저장/복원
+
+다음 단계에서는 자동 복구 알림 시스템을 구현하여 사용자가 복구된 세션을 더 잘 인식할 수 있도록 하겠습니다.
+</info added on 2025-05-30T12:31:49.567Z>
+
+## 3. Implement Temporary Data Storage with SharedPreferences [done]
+### Dependencies: 42.1, 42.2
+### Description: Use SharedPreferences to store the current workout state, including workout ID, current exercise, and set number.
+### Details:
+Create methods to save and retrieve workout progress using SharedPreferences. Update this information after each set completion and when switching exercises. Implement proper error handling and data validation.
+<info added on 2025-05-30T12:32:24.591Z>
+## SharedPreferences Implementation Completed
+
+### Implemented Features:
+1. **SharedPreferences Backup System**:
+   - `_saveStateToSharedPreferences()`: Serializes complete workout state to JSON for local storage
+   - Stores all state data including session ID, current set/reps, completed reps array, target values
+   - Records backup timestamp with 24-hour automatic expiration
+
+2. **Restoration System**:
+   - `_checkBackupRestoration()`: Verifies and processes backup data when app is reactivated
+   - Treats only backups within 24 hours as valid
+   - Manages storage space through automatic backup data cleanup
+
+3. **Integrated Backup Strategy**:
+   - Performs database backup and SharedPreferences backup simultaneously
+   - Maximizes data loss prevention through multi-layer safeguards
+   - Preserves latest state even during forced app termination
+
+### Backup Data Structure:
+```json
+{
+  "sessionId": "session identifier",
+  "currentSet": current_set_index,
+  "currentReps": current_repetitions,
+  "completedReps": [completed_repetitions_array],
+  "targetReps": [target_repetitions_array],
+  "isSetCompleted": set_completion_status,
+  "isRestTime": rest_time_status,
+  "restTimeRemaining": remaining_rest_time,
+  "workoutTitle": "workout_title",
+  "level": "user_level",
+  "timestamp": "backup_time"
+}
+```
+
+### Usage Scenarios:
+- On background entry: Immediate backup of current state
+- On app exit: Emergency backup to preserve progress
+- On app restart: Backup verification and restoration guidance if needed
+
+### Performance and Reliability:
+- Asynchronous processing to avoid UI performance impact
+- Workout progress continues unaffected even if errors occur
+- Efficient data storage through JSON serialization
+</info added on 2025-05-30T12:32:24.591Z>
+
+## 4. Develop Workout Resumption Functionality [done]
+### Dependencies: 42.1, 42.2, 42.3
+### Description: Create a system to check for saved workout states on app startup and allow users to resume interrupted workouts.
+### Details:
+Implement a WorkoutResumptionService that checks SharedPreferences for saved workout states on app startup. Create methods to reconstruct the workout state from database and SharedPreferences data. Update the UI to support workout resumption, including a prompt for users to resume or start a new workout. Implement error handling and data integrity checks throughout the resumption process.
+<info added on 2025-05-30T12:39:28.938Z>
+Workout Resumption Functionality 구현 완료:
+
+✅ WorkoutResumptionService 서비스 생성:
+- hasResumableWorkout(): SharedPreferences와 데이터베이스에서 재개 가능한 운동 검사
+- getResumptionData(): 두 데이터 소스에서 복원 데이터 수집 및 최적 소스 선택
+- clearBackupData(): 재개 완료 후 백업 데이터 정리
+- validateWorkoutState(): 운동 상태 데이터 유효성 검증
+- recordResumptionStats(): 재개 통계 추적 및 기록
+
+✅ WorkoutResumptionDialog UI 위젯 생성:
+- 발견된 운동 정보 상세 표시 (운동명, 진행 세트, 완료 횟수)
+- 데이터 소스 정보 (SharedPreferences/Database) 표시
+- 운동 재개 vs 새 운동 시작 선택 옵션
+- 현대적인 Material Design 스타일링
+
+✅ HomeScreen 통합:
+- initState에서 자동 운동 재개 체크 로직
+- _checkWorkoutResumption(): 앱 시작 시 재개 가능한 운동 자동 검사
+- _showWorkoutResumptionDialog(): 사용자 친화적 재개 확인 다이얼로그
+- _resumeWorkout(): 재개 선택 시 WorkoutScreen으로 데이터와 함께 이동
+- _startNewWorkout(): 새 운동 선택 시 백업 데이터 정리
+
+✅ WorkoutScreen 재개 모드 지원:
+- 생성자에 isResuming, resumptionData 매개변수 추가
+- _resumeFromData(): 전달받은 복원 데이터로 운동 상태 정확히 복원
+- 재개 시 motivational message와 UI 피드백 제공
+- 모든 운동 상태 (세트, 반복, 완료 기록) 정확한 복원
+
+✅ 통합 테스트:
+- 앱 시작 시 자동 재개 체크 동작
+- 재개 다이얼로그 UI 및 UX 검증
+- 운동 상태 정확한 복원 확인
+- 에러 핸들링 및 fallback 로직 테스트
+
+구현된 시스템은 앱 강제 종료 후 다시 시작 시 자동으로 미완료 운동을 감지하고, 사용자에게 재개 옵션을 제공하며, 선택에 따라 정확한 상태로 운동을 재개하거나 새로 시작할 수 있습니다.
+</info added on 2025-05-30T12:39:28.938Z>
+

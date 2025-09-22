@@ -1,0 +1,236 @@
+{
+  "top_keywords": [
+    {
+      "keyword": "있습니다",
+      "score": 5.52,
+      "frequency": 6,
+      "avg_rating": 4.4,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "습관 만들기",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "타이머",
+      "score": 5.52,
+      "frequency": 6,
+      "avg_rating": 4.4,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "습관 만들기",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "습관을",
+      "score": 5.52,
+      "frequency": 6,
+      "avg_rating": 4.4,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "습관 만들기",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "집중",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "시간을",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "실제",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "함께",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "나무를",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "시간",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "모든",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "나무와",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "스톱워치",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "나무",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "숲을",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    },
+    {
+      "keyword": "나만의",
+      "score": 3.31,
+      "frequency": 3,
+      "avg_rating": 4.0,
+      "sample_apps": [
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상",
+        "Forest: 집중력 향상"
+      ]
+    }
+  ],
+  "competitor_apps": [
+    {
+      "name": "Forest: 집중력 향상",
+      "package_name": "cc.forestapp",
+      "developer": "SEEKRTECH",
+      "rating": 4.6,
+      "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+    },
+    {
+      "name": "Be Focused Pro",
+      "package_name": "com.dencreak.dlcounter",
+      "developer": "Denys Yevenko",
+      "rating": 4.5,
+      "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+    },
+    {
+      "name": "습관 만들기",
+      "package_name": "com.habitnow",
+      "developer": "Habit Now",
+      "rating": 4.4,
+      "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+    },
+    {
+      "name": "Forest: 집중력 향상",
+      "package_name": "cc.forestapp",
+      "developer": "SEEKRTECH",
+      "rating": 4.6,
+      "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+    },
+    {
+      "name": "Be Focused Pro",
+      "package_name": "com.dencreak.dlcounter",
+      "developer": "Denys Yevenko",
+      "rating": 4.5,
+      "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+    },
+    {
+      "name": "습관 만들기",
+      "package_name": "com.habitnow",
+      "developer": "Habit Now",
+      "rating": 4.4,
+      "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+    },
+    {
+      "name": "Forest: 집중력 향상",
+      "package_name": "cc.forestapp",
+      "developer": "SEEKRTECH",
+      "rating": 4.6,
+      "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+    },
+    {
+      "name": "Be Focused Pro",
+      "package_name": "com.dencreak.dlcounter",
+      "developer": "Denys Yevenko",
+      "rating": 4.5,
+      "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+    },
+    {
+      "name": "습관 만들기",
+      "package_name": "com.habitnow",
+      "developer": "Habit Now",
+      "rating": 4.4,
+      "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+    }
+  ],
+  "analysis_date": "2025-09-20T04:53:05.677415",
+  "total_keywords_found": 37
+}

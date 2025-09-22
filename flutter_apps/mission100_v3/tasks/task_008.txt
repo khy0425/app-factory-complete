@@ -1,0 +1,90 @@
+# Task ID: 8
+# Title: Home Screen UI Implementation
+# Status: done
+# Dependencies: 3, 4, 5
+# Priority: medium
+# Description: Implement the home screen UI as specified in the PRD
+# Details:
+1. Create a responsive layout with:
+   - Current Chad level image at the top center
+   - Today's mission card showing:
+     - Week and day information
+     - Set-by-set target rep counts
+     - "Start Workout" button
+   - Progress bar at the bottom showing overall completion
+   - Motivational message
+2. Implement state management using StatefulWidget for real-time data loading
+3. Connect to repository to fetch current user data and workout
+4. Add animations for smooth transitions
+5. Implement pull-to-refresh functionality
+6. Handle loading, error, and empty data states
+7. Display detailed workout information in the mission card
+8. Show program progress statistics (overall and weekly)
+9. Implement error handling with retry functionality
+10. Fix DatabaseService getUserProfile() method bug
+11. Add automatic data refresh after workout completion
+
+# Test Strategy:
+Test UI rendering on different screen sizes. Verify data is correctly displayed from the repository. Test user interactions and navigation. Perform widget tests for key components. Test error handling and loading states. Verify pull-to-refresh functionality. Test automatic data refresh after workout completion.
+
+# Subtasks:
+## 8.1. Convert to StatefulWidget [completed]
+### Dependencies: None
+### Description: Change home screen to StatefulWidget for real-time data loading and state management
+### Details:
+
+
+## 8.2. Database Integration [completed]
+### Dependencies: None
+### Description: Connect to DatabaseService and WorkoutProgramService for real data loading
+### Details:
+
+
+## 8.3. Loading State Management [completed]
+### Dependencies: None
+### Description: Implement UI for loading, error, and empty data states
+### Details:
+
+
+## 8.4. Today's Mission Card [completed]
+### Dependencies: None
+### Description: Implement detailed workout information display including week/day info, set-by-set target reps, total reps/sets, and rest day handling
+### Details:
+
+
+## 8.5. Progress Card [completed]
+### Dependencies: None
+### Description: Display overall program and weekly progress with statistics (total pushups, remaining goals)
+### Details:
+
+
+## 8.6. Refresh Functionality [completed]
+### Dependencies: None
+### Description: Implement pull-to-refresh and refresh button
+### Details:
+
+
+## 8.7. Error Handling [completed]
+### Dependencies: None
+### Description: Add appropriate error messages and retry functionality for data loading failures
+### Details:
+
+
+## 8.8. User Profile Integration [completed]
+### Dependencies: None
+### Description: Display Chad level and messages based on actual user data
+### Details:
+
+
+## 8.9. Bug Fix in DatabaseService [completed]
+### Dependencies: None
+### Description: Fix bug in getUserProfile() method
+### Details:
+
+
+## 8.10. Auto Refresh After Workout [completed]
+### Dependencies: None
+### Description: Implement automatic data refresh after workout completion
+### Details:
+
+

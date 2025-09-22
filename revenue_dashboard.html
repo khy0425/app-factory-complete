@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Revenue Dashboard</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #ffd700;
+            padding: 20px;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .app-card {
+            background: #2a2a2a;
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .metric {
+            margin: 10px 0;
+            padding: 10px;
+            background: #3a3a3a;
+            border-radius: 5px;
+        }
+        .revenue {
+            font-size: 24px;
+            color: #00ff00;
+        }
+        h1 { text-align: center; }
+        h2 { color: #ffd700; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Chad Apps Revenue Dashboard</h1>
+
+    <div class="dashboard">
+        <div class="app-card">
+            <h2>Mission100 v3</h2>
+            <div class="metric">
+                <div>일일 활성 사용자</div>
+                <div class="revenue">1,234</div>
+            </div>
+            <div class="metric">
+                <div>예상 일일 수익</div>
+                <div class="revenue">$12.34</div>
+            </div>
+            <div class="metric">
+                <div>광고 노출</div>
+                <div>15,234</div>
+            </div>
+        </div>
+
+        <div class="app-card">
+            <h2>GigaChad Runner</h2>
+            <div class="metric">
+                <div>일일 활성 사용자</div>
+                <div class="revenue">856</div>
+            </div>
+            <div class="metric">
+                <div>예상 일일 수익</div>
+                <div class="revenue">$8.56</div>
+            </div>
+            <div class="metric">
+                <div>광고 노출</div>
+                <div>10,123</div>
+            </div>
+        </div>
+
+        <div class="app-card">
+            <h2>Squat Master</h2>
+            <div class="metric">
+                <div>일일 활성 사용자</div>
+                <div class="revenue">678</div>
+            </div>
+            <div class="metric">
+                <div>예상 일일 수익</div>
+                <div class="revenue">$6.78</div>
+            </div>
+            <div class="metric">
+                <div>광고 노출</div>
+                <div>8,456</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center;">
+        <h2>📊 총 예상 일일 수익: <span class="revenue">$27.68</span></h2>
+        <h3>월 예상 수익: <span class="revenue">$830.40</span></h3>
+    </div>
+
+    <script>
+        // 실시간 업데이트 시뮬레이션
+        setInterval(() => {
+            const revenues = document.querySelectorAll('.revenue');
+            revenues.forEach(rev => {
+                const current = parseFloat(rev.textContent.replace('$', ''));
+                const change = (Math.random() - 0.5) * 0.1;
+                const newValue = (current * (1 + change)).toFixed(2);
+                rev.textContent = '$' + newValue;
+            });
+        }, 5000);
+    </script>
+</body>
+</html>

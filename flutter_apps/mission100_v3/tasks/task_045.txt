@@ -1,0 +1,270 @@
+# Task ID: 45
+# Title: Fix PlatformException Error in Notification Settings for Android 12+
+# Status: done
+# Dependencies: 14
+# Priority: high
+# Description: Resolve the PlatformException error occurring in notification settings for Android 12+ devices by implementing proper permission handling for exact alarms and improving the NotificationService.
+# Details:
+1. Implement SCHEDULE_EXACT_ALARM permission request for Android 12+:
+   - Add the necessary permission to the AndroidManifest.xml file:
+     ```xml
+     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+     ```
+   - Create a method to check and request the permission:
+     ```dart
+     Future<bool> requestScheduleExactAlarmPermission() async {
+       if (Platform.isAndroid) {
+         final androidInfo = await DeviceInfoPlugin().androidInfo;
+         if (androidInfo.version.sdkInt >= 31) {
+           return await FlutterAlarmClock.requestScheduleExactAlarmPermission();
+         }
+       }
+       return true;
+     }
+     ```
+
+2. Improve NotificationService permission check logic:
+   - Update the NotificationService to include the new permission check:
+     ```dart
+     class NotificationService {
+       Future<bool> requestPermissions() async {
+         final notificationPermissionGranted = await _requestNotificationPermission();
+         final scheduleExactAlarmPermissionGranted = await requestScheduleExactAlarmPermission();
+         return notificationPermissionGranted && scheduleExactAlarmPermissionGranted;
+       }
+       // ... other methods
+     }
+     ```
+
+3. Implement fallback notification method:
+   - Create a method to schedule inexact alarms as a fallback:
+     ```dart
+     Future<void> scheduleInexactNotification(int id, String title, String body, DateTime scheduledDate) async {
+       final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+       await flutterLocalNotificationsPlugin.schedule(
+         id,
+         title,
+         body,
+         scheduledDate,
+         NotificationDetails(android: AndroidNotificationDetails('channel_id', 'channel_name')),
+         androidAllowWhileIdle: true,
+       );
+     }
+     ```
+
+4. Add a dialog explaining the necessity of permissions:
+   - Create a custom dialog widget:
+     ```dart
+     Future<void> showPermissionExplanationDialog(BuildContext context) async {
+       return showDialog(
+         context: context,
+         builder: (BuildContext context) {
+           return AlertDialog(
+             title: Text('Permission Required'),
+             content: Text('This app needs permission to schedule exact alarms for precise workout reminders. Without this permission, reminders may be delayed.'),
+             actions: [
+               TextButton(
+                 child: Text('Cancel'),
+                 onPressed: () => Navigator.of(context).pop(false),
+               ),
+               TextButton(
+                 child: Text('Grant Permission'),
+                 onPressed: () => Navigator.of(context).pop(true),
+               ),
+             ],
+           );
+         },
+       );
+     }
+     ```
+
+5. Implement functionality to navigate to app settings:
+   - Add a method to open app settings:
+     ```dart
+     Future<void> openAppSettings() async {
+       await openAppSettings();
+     }
+     ```
+
+6. Implement conditional activation of notification features:
+   - Update the notification scheduling logic:
+     ```dart
+     Future<void> scheduleWorkoutReminder(DateTime scheduledDate) async {
+       final hasExactAlarmPermission = await requestScheduleExactAlarmPermission();
+       if (hasExactAlarmPermission) {
+         await scheduleExactNotification(/* parameters */);
+       } else {
+         await scheduleInexactNotification(/* parameters */);
+       }
+     }
+     ```
+
+7. Update the UI to reflect permission status:
+   - Add a permission status indicator in the notification settings screen
+   - Provide a button to request permissions or open app settings if permissions are denied
+
+# Test Strategy:
+1. Unit test the NotificationService:
+   - Mock platform version to test Android 12+ specific logic
+   - Verify that the correct permission request methods are called
+   - Test the fallback to inexact notifications when permissions are denied
+
+2. Integration test the notification scheduling flow:
+   - Test the full flow of requesting permissions, scheduling notifications, and handling denials
+   - Verify that exact alarms are used when permissions are granted, and inexact alarms when denied
+
+3. UI tests for permission dialogs and settings:
+   - Verify that the permission explanation dialog is displayed correctly
+   - Test the navigation to app settings when the appropriate button is tapped
+
+4. Manual testing on Android 12+ devices:
+   - Verify that the SCHEDULE_EXACT_ALARM permission is correctly requested
+   - Test scheduling notifications with and without the permission granted
+   - Confirm that inexact notifications are used as a fallback when permission is denied
+
+5. Edge case testing:
+   - Test behavior when permissions are revoked after being initially granted
+   - Verify proper handling of permission changes while the app is running
+
+6. Accessibility testing:
+   - Ensure all new UI elements related to permissions are accessible
+   - Test screen reader compatibility for permission dialogs and settings
+
+7. Regression testing:
+   - Verify that existing notification functionality still works on pre-Android 12 devices
+   - Confirm that other app features are not affected by the notification permission changes
+
+# Subtasks:
+## 1. Implement SCHEDULE_EXACT_ALARM permission handling [done]
+### Dependencies: None
+### Description: Add the necessary permission to AndroidManifest.xml and create a method to check and request the permission for Android 12+ devices.
+### Details:
+Update AndroidManifest.xml with SCHEDULE_EXACT_ALARM permission. Create a Dart method to check Android version and request the permission using FlutterAlarmClock plugin.
+<info added on 2025-05-30T12:45:32.869Z>
+SCHEDULE_EXACT_ALARM 권한 처리 구현 완료:
+
+✅ AndroidManifest.xml 권한 추가:
+- SCHEDULE_EXACT_ALARM 권한을 AndroidManifest.xml에 추가
+- Android 12+ 기기에서 정확한 알람 스케줄링을 위한 필수 권한
+
+✅ NotificationService 업데이트:
+- canScheduleExactAlarms(): Android 12+에서 권한 상태 확인
+- requestExactAlarmPermission(): 사용자를 설정 화면으로 안내
+- _safeScheduleNotification(): 권한 확인 후 안전한 알림 스케줄링
+- showPermissionRequestDialog(): 사용자 친화적 권한 요청 UI
+- 모든 알림 관련 메소드를 안전한 스케줄링으로 교체
+
+✅ Android 네이티브 코드 구현:
+- MainActivity.kt에 MethodChannel 구현
+- canScheduleExactAlarms() 네이티브 메소드로 실제 권한 상태 확인
+- requestExactAlarmPermission() 설정 화면 이동 로직
+- Android 12 미만 버전에서는 자동으로 true 반환
+
+✅ build.gradle 의존성 수정:
+- Kotlin 표준 라이브러리 의존성 추가
+- linter 오류 해결
+
+✅ 권한 상태 관리:
+- SharedPreferences에 권한 상태 저장
+- 권한 확인 결과 로깅 및 디버깅
+- 권한 없을 시 즉시 알림으로 fallback 처리
+
+✅ 사용자 경험 개선:
+- 권한 요청 이유 설명 다이얼로그
+- 각 권한별 상세 설명 제공
+- 시각적 아이콘과 색상으로 구분
+
+모든 알림 기능이 Android 12+ 호환성을 가지도록 업데이트 완료. PlatformException 오류 방지를 위한 안전 장치 구현.
+</info added on 2025-05-30T12:45:32.869Z>
+
+## 2. Update NotificationService with new permission logic [done]
+### Dependencies: 45.1
+### Description: Modify the NotificationService class to include the new SCHEDULE_EXACT_ALARM permission check alongside existing notification permissions.
+### Details:
+Update the requestPermissions method in NotificationService to check for both notification and SCHEDULE_EXACT_ALARM permissions. Return a boolean indicating if all required permissions are granted.
+<info added on 2025-05-30T12:48:02.133Z>
+NotificationService has been fully updated for Android 12+ compatibility:
+
+1. Replaced existing notification methods with safe versions:
+   - scheduleDailyWorkoutReminder() now uses _safeScheduleNotification()
+   - showSmartWorkoutReminder() checks permissions before scheduling
+   - showAchievementNotification() includes permission checks and safety measures
+   - All Chad evolution notification methods updated with safety checks
+   - Workout completion and streak encouragement notifications also replaced with safe versions
+
+2. Added hasPermission() method:
+   - Maintains compatibility with existing code
+   - Checks overall permission status from SharedPreferences
+
+3. Improved permission request dialog system:
+   - showPermissionRequestDialog() provides detailed permission explanations and UI
+   - Special handling for Android 12+ SCHEDULE_EXACT_ALARM permission
+   - Visual distinction with permission-specific icons and colors
+   - User-friendly explanations and guidance messages
+
+4. Integrated with settings_screen.dart:
+   - Completely replaced _showPermissionRequestDialog() with new system
+   - Added appropriate UI feedback based on permission request success/failure
+   - Automatic notification setting activation when permissions are granted
+   - Implemented error handling and fallback mechanisms
+
+5. Resolved build.gradle dependency issues:
+   - Added explicit Kotlin standard library
+   - Added AndroidX core libraries
+   - Added multidex support library
+   - Cleaned up dependencies to resolve MainActivity.kt linter errors
+
+All notification features now work safely on Android 12+ devices without PlatformException errors. When permissions are unavailable, immediate notifications are used as fallback to maintain user experience.
+</info added on 2025-05-30T12:48:02.133Z>
+
+## 3. Implement fallback notification method [done]
+### Dependencies: 45.2
+### Description: Create a method to schedule inexact alarms as a fallback when exact alarm permission is not granted.
+### Details:
+Develop a scheduleInexactNotification method using FlutterLocalNotificationsPlugin to schedule notifications with less precision when exact alarms are not possible.
+<info added on 2025-05-30T12:50:06.106Z>
+I've implemented a robust fallback notification system to handle Android 12+ permission constraints:
+
+The scheduleInexactNotification() method now provides inexact notification scheduling when SCHEDULE_EXACT_ALARM permission is unavailable. It attempts exact scheduling for notifications within 30 minutes, uses periodic checking for longer delays, displays immediate notifications for past times, and implements a three-tier fallback system (exact → inexact → immediate).
+
+The periodic check system (_schedulePeriodicCheck) starts checking 30 minutes before the target time using silent system notifications invisible to users, with SharedPreferences as a final fallback.
+
+The SharedPreferences backup system includes:
+- _scheduleSharedPreferencesCheck(): Stores notification data locally
+- checkPendingNotifications(): Verifies and displays pending notifications when app starts/activates
+- 7-day auto-cleanup for old notifications
+- Secure data storage via JSON serialization
+
+The _safeScheduleNotification method now uses the inexact notification system instead of immediate notifications when permissions are unavailable, with appropriate logging and error handling at each fallback stage.
+
+HomeScreen integration calls checkPendingNotifications() in both initState and didChangeAppLifecycleState to automatically check for pending notifications at app launch and when returning to foreground.
+
+This system ensures notifications still function on Android 12+ even without SCHEDULE_EXACT_ALARM permission, maintaining user experience while working around permission constraints.
+</info added on 2025-05-30T12:50:06.106Z>
+
+## 4. Update UI and implement conditional notification activation [done]
+### Dependencies: 45.2, 45.3
+### Description: Modify the app's UI to reflect permission status and implement logic to use either exact or inexact notifications based on granted permissions.
+### Details:
+Add a permission status indicator in the notification settings screen. Create a scheduleWorkoutReminder method that checks permissions and calls either exact or inexact notification scheduling. Implement a dialog to explain permission necessity and provide options to request or open app settings.
+<info added on 2025-05-30T13:04:30.490Z>
+# UI Updates and Conditional Notification Activation
+
+## Completed Features
+- Improved permission status indicator with user-friendly real-time permission checking UI
+- Enhanced workout reminder toggle with success/failure feedback and detailed permission guidance
+- Smart permission handling with automatic processing based on permission status
+- Visual status indicators distinguishing between required/optional permissions with icon-based status display
+- Code cleanup resolving all const errors and passing analysis
+
+## Key Modifications
+- Enhanced permission status cards in Settings screen with real-time updates
+- Implemented step-by-step permission verification and feedback when setting workout reminders
+- Fixed const errors in AndroidNotificationChannel
+- Resolved vibrationPattern const issues in NotificationService
+- Improved overall user experience
+
+## Compatibility
+Successfully achieved full Android 12+ compatibility with complete permission handling and fallback systems.
+</info added on 2025-05-30T13:04:30.490Z>
+

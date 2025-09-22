@@ -1,0 +1,62 @@
+{
+  "app": {
+    "name": "Simple Budget",
+    "package_name": "com.appfactory.budget",
+    "version": "1.0.0", 
+    "description": "간편한 가계부 - 용돈 기입장부터 투자 관리까지",
+    "author": "Finance Apps Team"
+  },
+  "theme": {
+    "primary_color": "#4CAF50",
+    "secondary_color": "#FF5722",
+    "accent_color": "#FFC107",
+    "font_family": "Roboto",
+    "is_dark_mode": false
+  },
+  "features": {
+    "timer_enabled": false,
+    "habit_tracking_enabled": true,
+    "statistics_enabled": true,
+    "achievements_enabled": true,
+    "social_sharing_enabled": false,
+    "backup_enabled": true,
+    "notifications_enabled": true,
+    "expense_tracking_enabled": true,
+    "budget_planning_enabled": true,
+    "category_management_enabled": true,
+    "receipt_scanning_enabled": true,
+    "investment_tracking_enabled": false
+  },
+  "ads": {
+    "android_app_id": "YOUR_ANDROID_APP_ID",
+    "android_banner_id": "YOUR_ANDROID_BANNER_ID",
+    "android_interstitial_id": "YOUR_ANDROID_INTERSTITIAL_ID", 
+    "android_rewarded_id": "YOUR_ANDROID_REWARDED_ID",
+    "ios_app_id": "YOUR_IOS_APP_ID",
+    "ios_banner_id": "YOUR_IOS_BANNER_ID",
+    "ios_interstitial_id": "YOUR_IOS_INTERSTITIAL_ID",
+    "ios_rewarded_id": "YOUR_IOS_REWARDED_ID",
+    "enable_banner_ads": true,
+    "enable_interstitial_ads": true,
+    "enable_rewarded_ads": false,
+    "test_device_ids": []
+  },
+  "payment": {
+    "subscription_enabled": false,
+    "one_time_purchase_enabled": true,
+    "subscription_product_ids": [],
+    "one_time_product_ids": ["premium_version", "advanced_analytics", "export_features"]
+  },
+  "target_market": {
+    "primary_audience": "20-40대 직장인, 주부, 대학생",
+    "age_range": "20-40",
+    "pain_points": ["돈 관리", "지출 추적", "예산 계획"],
+    "competitor_apps": ["뱅크샐러드", "토스", "Money Manager", "Mint"]
+  },
+  "marketing_strategy": {
+    "primary_keywords": ["가계부", "용돈기입장", "돈관리", "예산", "지출"],
+    "secondary_keywords": ["절약", "투자", "재테크", "경제", "금융"],
+    "content_themes": ["절약 노하우", "예산 관리 팁", "재테크 시작하기"],
+    "target_platforms": ["블로그", "유튜브", "카카오스토리", "네이버 카페"]
+  }
+}

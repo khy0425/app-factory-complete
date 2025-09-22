@@ -1,0 +1,27 @@
+{
+  "app_name": "semsem_master",
+  "note": "⚠️ 실제 사용시 AdMob 콘솔에서 생성된 ID로 교체 필요",
+  "android": {
+    "app_id": "ca-app-pub-XXXXXXXXXX~1870150220",
+    "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/18701502201",
+    "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/18701502202",
+    "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/18701502203"
+  },
+  "ios": {
+    "app_id": "ca-app-pub-XXXXXXXXXX~18701502204",
+    "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/18701502205",
+    "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/18701502206",
+    "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/18701502207"
+  },
+  "test_ids": {
+    "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+    "android_banner": "ca-app-pub-3940256099942544/6300978111",
+    "android_interstitial": "ca-app-pub-3940256099942544/1033173712",
+    "android_rewarded": "ca-app-pub-3940256099942544/5224354917",
+    "ios_app_id": "ca-app-pub-3940256099942544~1458002511",
+    "ios_banner": "ca-app-pub-3940256099942544/2934735716",
+    "ios_interstitial": "ca-app-pub-3940256099942544/4411468910",
+    "ios_rewarded": "ca-app-pub-3940256099942544/1712485313"
+  },
+  "setup_required": true
+}

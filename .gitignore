@@ -1,0 +1,65 @@
+# 환경변수 및 보안 파일들
+.env
+.env.local
+.env.production
+.env.development
+*_keys.json
+*_secrets.json
+api_keys.py
+config_secrets.py
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE 설정
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 로그 파일
+*.log
+logs/
+
+# 임시 파일
+temp/
+tmp/
+*.tmp
+
+# 생성된 앱들의 민감한 정보
+apps/*/config/secrets.json
+apps/*/keys/
+
+# 데이터베이스
+*.db
+*.sqlite
+*.sqlite3
+
+# OS 생성 파일
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

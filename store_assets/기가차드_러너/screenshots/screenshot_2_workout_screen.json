@@ -1,0 +1,11 @@
+{
+  "concept": {
+    "name": "workout_screen",
+    "title": "운동 화면",
+    "description": "운동 실행 화면, 타이머와 동작 가이드"
+  },
+  "dimensions": "1080x1920",
+  "type": "screenshot",
+  "generated_at": "2025-09-21T06:29:37.197126",
+  "size_kb": 150
+}

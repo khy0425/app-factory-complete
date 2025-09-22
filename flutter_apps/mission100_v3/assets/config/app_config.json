@@ -1,0 +1,45 @@
+{
+  "app": {
+    "name": "Mission 100",
+    "package_name": "com.example.mission100",
+    "version": "2.1.0",
+    "description": "100일 푸쉬업 챌린지 앱",
+    "author": "Mission 100 Team"
+  },
+  "theme": {
+    "primary_color": "#2196F3",
+    "secondary_color": "#FF5722",
+    "accent_color": "#FFC107",
+    "font_family": "Roboto",
+    "is_dark_mode": false
+  },
+  "features": {
+    "timer_enabled": true,
+    "habit_tracking_enabled": true,
+    "statistics_enabled": true,
+    "achievements_enabled": true,
+    "social_sharing_enabled": true,
+    "backup_enabled": true,
+    "notifications_enabled": true
+  },
+  "ads": {
+    "android_app_id": "ca-app-pub-1075071967728463~6042582986",
+    "android_banner_id": "ca-app-pub-1075071967728463/9498612269",
+    "android_interstitial_id": "ca-app-pub-1075071967728463/7039728635",
+    "android_rewarded_id": "",
+    "ios_app_id": "",
+    "ios_banner_id": "",
+    "ios_interstitial_id": "",
+    "ios_rewarded_id": "",
+    "enable_banner_ads": true,
+    "enable_interstitial_ads": true,
+    "enable_rewarded_ads": false,
+    "test_device_ids": []
+  },
+  "payment": {
+    "subscription_enabled": false,
+    "one_time_purchase_enabled": false,
+    "subscription_product_ids": [],
+    "one_time_product_ids": []
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "template_info": {
+    "name": "Chad Focus Timer",
+    "version": "1.0.0",
+    "category": "Productivity",
+    "description": "뽀모도로 + 시그마 그라인드셋 집중력 앱",
+    "target_audience": "20-40세 직장인, 학생",
+    "estimated_dev_time": "1 week",
+    "market_potential": "Medium-High"
+  },
+
+  "branding": {
+    "primary_color": "#2C2C2C",
+    "secondary_color": "#FFD700",
+    "accent_color": "#00FF41",
+    "font_heading": "Bebas Neue",
+    "font_body": "Roboto Mono",
+    "style": "minimal_power",
+    "voice": "focused_determination"
+  },
+
+  "features": {
+    "core": [
+      "pomodoro_timer",
+      "custom_intervals",
+      "break_reminders",
+      "session_tracking",
+      "distraction_blocking"
+    ],
+    "gamification": [
+      "focus_streaks",
+      "productivity_levels",
+      "daily_challenges",
+      "focus_leaderboard",
+      "achievement_system"
+    ],
+    "analytics": [
+      "focus_patterns",
+      "productivity_insights",
+      "time_tracking",
+      "goal_progress",
+      "weekly_reports"
+    ],
+    "premium": [
+      "unlimited_sessions",
+      "advanced_blocking",
+      "team_challenges",
+      "premium_sounds"
+    ]
+  },
+
+  "monetization": {
+    "model": "freemium",
+    "free_tier": {
+      "daily_sessions": 5,
+      "basic_timer": true,
+      "ads": true
+    },
+    "premium_tier": {
+      "price_monthly": 7.99,
+      "price_yearly": 59.99,
+      "unlimited_sessions": true,
+      "advanced_features": true,
+      "no_ads": true
+    }
+  },
+
+  "marketing": {
+    "primary_keywords": [
+      "뽀모도로", "집중력", "생산성", "타이머", "공부앱"
+    ],
+    "secondary_keywords": [
+      "시그마그라인드셋", "집중력향상", "시간관리", "생산성향상"
+    ],
+    "content_themes": [
+      "productivity_hacks",
+      "focus_techniques",
+      "time_management",
+      "grindset_mindset"
+    ]
+  },
+
+  "success_metrics": {
+    "week_1": {
+      "downloads": 800,
+      "dau": 200,
+      "session_completion": 65
+    },
+    "month_1": {
+      "downloads": 5000,
+      "dau": 1200,
+      "retention_d30": 30,
+      "revenue": 800
+    }
+  }
+}

@@ -1,0 +1,49 @@
+# Task ID: 33
+# Title: Task #33: Add Scroll Hint Animation to Level Check Screen
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Implement a subtle scroll hint animation on the level check screen that automatically scrolls slightly downward and then back up after the screen loads, naturally indicating to users that more content exists below.
+# Details:
+The implementation should focus on creating a smooth, non-intrusive animation that guides users to discover content below the fold:
+
+1. Create an animation sequence that triggers automatically after the level check screen fully loads (approximately 1-2 seconds delay)
+2. The animation should scroll the screen down by approximately 15-20% of the screen height, pause briefly (0.5-1 second), then return to the original position
+3. Use native animation libraries for the platform (Android/iOS) to ensure smooth performance
+4. The animation should be subtle enough not to disrupt the user experience but noticeable enough to draw attention
+5. Implement the animation with proper easing functions (e.g., ease-in-out) for natural movement
+6. Ensure the animation works correctly across different device sizes and orientations
+7. Add a flag in user preferences to disable the animation after the user has scrolled manually on this screen multiple times (indicating they're already aware of the scrollable content)
+8. The animation should not interfere with any user-initiated scrolling actions
+9. Optimize the animation to minimize performance impact, especially on lower-end devices
+10. Consider adding a small visual indicator (like a subtle arrow or pulse) at the bottom of the visible area to reinforce the scrolling hint
+
+# Test Strategy:
+To verify the successful implementation of the scroll hint animation:
+
+1. Manual Testing:
+   - Test the animation on multiple device sizes (small, medium, large screens)
+   - Verify the animation triggers automatically after screen load
+   - Confirm the animation is subtle yet noticeable
+   - Check that the animation doesn't interfere with manual scrolling
+   - Test the animation in both portrait and landscape orientations
+
+2. User Experience Testing:
+   - Conduct A/B testing with a small group of users to measure engagement with below-the-fold content
+   - Collect feedback on whether the animation feels natural or intrusive
+   - Track metrics on scroll depth before and after implementation
+
+3. Performance Testing:
+   - Measure frame rates during animation to ensure smooth performance (target 60fps)
+   - Test on lower-end devices to verify no significant performance degradation
+   - Check memory usage to ensure no leaks from animation objects
+
+4. Functional Testing:
+   - Verify the animation only plays once per session
+   - Confirm the animation stops immediately if user begins manual scrolling
+   - Test that the animation is disabled after users have manually scrolled multiple times
+   - Verify all content remains accessible during and after the animation
+
+5. Regression Testing:
+   - Ensure the animation doesn't affect other functionality on the level check screen
+   - Verify no impact on screen transition animations or other UI elements

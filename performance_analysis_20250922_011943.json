@@ -1,0 +1,56 @@
+{
+  "mission100_v3": {
+    "metrics": {
+      "downloads": 6255,
+      "daily_active_users": 1501,
+      "session_duration": 8.2,
+      "ad_revenue": 31.9,
+      "user_ratings": 4.0,
+      "retention_rate": 0.63
+    },
+    "score": 59.28999999999999,
+    "category": "fitness_challenge",
+    "type": "pushup_counter",
+    "features": [
+      "100day_challenge",
+      "progress_tracking",
+      "achievements"
+    ]
+  },
+  "gigachad_runner": {
+    "metrics": {
+      "downloads": 4028,
+      "daily_active_users": 920,
+      "session_duration": 10.9,
+      "ad_revenue": 20.95,
+      "user_ratings": 3.5,
+      "retention_rate": 0.51
+    },
+    "score": 47.519,
+    "category": "fitness_tracking",
+    "type": "gps_tracker",
+    "features": [
+      "gps_tracking",
+      "pace_analysis",
+      "route_mapping"
+    ]
+  },
+  "squat_master": {
+    "metrics": {
+      "downloads": 7072,
+      "daily_active_users": 1697,
+      "session_duration": 9.2,
+      "ad_revenue": 36.07,
+      "user_ratings": 4.6,
+      "retention_rate": 0.71
+    },
+    "score": 67.072,
+    "category": "fitness_challenge",
+    "type": "squat_counter",
+    "features": [
+      "30day_challenge",
+      "form_guidance",
+      "progress_stats"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+# Task ID: 3
+# Title: User Profile Model Implementation
+# Status: done
+# Dependencies: 2
+# Priority: high
+# Description: Implement the UserProfile data model class as specified in the PRD
+# Details:
+1. Create UserLevel enum with values: ROOKIE_CHAD, RISING_CHAD, ALPHA_CHAD, GIGA_CHAD
+2. Implement UserProfile class with fields:
+```dart
+class UserProfile {
+  int id;
+  UserLevel level; // enum for user level
+  int initialMaxReps; // initial test result
+  DateTime startDate;
+  int chadLevel; // chad evolution stage (0-7)
+  bool reminderEnabled;
+  String? reminderTime;
+  
+  // Add constructors, fromJson, toJson methods
+}
+```
+3. Implement repository pattern for UserProfile data access
+4. Add methods for profile creation and updates
+
+# Test Strategy:
+Write unit tests for UserProfile model. Test serialization/deserialization, validation logic, and repository operations.

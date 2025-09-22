@@ -1,0 +1,75 @@
+# Task ID: 29
+# Title: Task #29: Integrate Banner Advertisements in Tutorial Screens
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Add banner advertisements to the push-up tutorial list screen and detail screen (including YouTube player) to generate additional revenue, implementing the same responsive structure as the workout screen.
+# Details:
+Implementation should include:
+
+1. Banner Ad Integration:
+   - Add Google Mobile Ads banner advertisements at the bottom of both the push-up tutorial list screen and detail screens
+   - Ensure ads don't interfere with the YouTube player functionality on the detail screen
+   - Use the same ad unit IDs structure as implemented in Task #27, but create new specific ad unit IDs for tutorial screens
+
+2. Responsive Design Requirements:
+   - Follow the responsive layout pattern established in Task #28 (workout screen)
+   - Ensure proper ad display across all device sizes and orientations
+   - Implement dynamic spacing that adjusts based on screen size
+   - Handle safe area insets properly, especially on devices with notches or rounded corners
+
+3. Technical Considerations:
+   - Modify the tutorial screen layouts to accommodate the banner ads
+   - Ensure the YouTube player resizes appropriately when ads are displayed
+   - Implement ad loading with proper error handling and fallbacks
+   - Add ad refresh logic with appropriate timing (e.g., every 60 seconds)
+   - Ensure ads don't trigger when scrolling through tutorial content
+
+4. UI/UX Considerations:
+   - Maintain consistent UI/UX between workout and tutorial screens
+   - Ensure ad banners don't obstruct important tutorial content
+   - Add subtle visual separation between content and advertisements
+   - Consider user experience when transitioning between screens with ads
+
+5. Performance Optimization:
+   - Lazy-load advertisements to prevent impact on initial screen loading
+   - Monitor and optimize memory usage when displaying ads alongside video content
+   - Implement ad caching where appropriate to improve performance
+
+# Test Strategy:
+Testing should verify:
+
+1. Functional Testing:
+   - Verify banner ads appear correctly on both tutorial list and detail screens
+   - Confirm ads load properly and refresh at appropriate intervals
+   - Test ad behavior when navigating between tutorial screens
+   - Verify YouTube player functions correctly with ads present
+   - Test ad loading states and error handling
+
+2. Responsive Design Testing:
+   - Test on multiple physical devices with different screen sizes and aspect ratios
+   - Use simulator/emulator testing for additional device coverage
+   - Verify proper layout in both portrait and landscape orientations
+   - Confirm ads maintain proper size and position when screen size changes
+   - Test behavior when keyboard appears (if applicable)
+
+3. Performance Testing:
+   - Measure and compare app performance before and after ad integration
+   - Monitor memory usage when ads are displayed alongside video content
+   - Test scrolling performance on the tutorial list with ads present
+   - Verify app responsiveness during ad loading and refresh cycles
+
+4. Integration Testing:
+   - Verify ads appear correctly when navigating from other parts of the app
+   - Test behavior when switching between tutorial list and detail views
+   - Confirm proper ad behavior during app backgrounding and foregrounding
+
+5. Ad Network Testing:
+   - Verify test ads appear during development
+   - Confirm production ads appear correctly when using release build
+   - Test ad click-through behavior and return navigation
+   - Verify ad impression tracking is working correctly
+
+6. Accessibility Testing:
+   - Ensure screen readers can properly navigate content with ads present
+   - Verify content remains accessible when ads are displayed

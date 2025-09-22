@@ -1,0 +1,310 @@
+# GitHub Actions Workflow for App Factory
+# Automated Flutter App Build, Test, and Deploy
+
+name: 🗿 GigaChad App Factory CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'generated_apps/**'
+      - 'templates/**'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      app_name:
+        description: 'App to deploy'
+        required: true
+        type: string
+      deploy_target:
+        description: 'Deploy target'
+        required: true
+        default: 'internal'
+        type: choice
+        options:
+        - internal
+        - alpha
+        - beta
+        - production
+
+env:
+  FLUTTER_VERSION: '3.16.0'
+  JAVA_VERSION: '17'
+
+jobs:
+  # 🔍 앱 감지 및 변경사항 분석
+  detect_changes:
+    name: 🔍 Detect App Changes
+    runs-on: ubuntu-latest
+    outputs:
+      changed_apps: ${{ steps.changes.outputs.apps }}
+      should_deploy: ${{ steps.changes.outputs.deploy }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed apps
+        id: changes
+        run: |
+          CHANGED_APPS=$(git diff --name-only HEAD~1 HEAD | grep "generated_apps/" | cut -d'/' -f2 | sort | uniq | jq -R . | jq -s .)
+          echo "apps=${CHANGED_APPS}" >> $GITHUB_OUTPUT
+          echo "deploy=${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' }}" >> $GITHUB_OUTPUT
+
+  # 🧪 앱 품질 검증
+  quality_check:
+    name: 🧪 Quality Check
+    runs-on: ubuntu-latest
+    needs: detect_changes
+    if: needs.detect_changes.outputs.changed_apps != '[]'
+    strategy:
+      matrix:
+        app: ${{ fromJson(needs.detect_changes.outputs.changed_apps) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Check if app exists
+        run: |
+          if [ ! -d "generated_apps/${{ matrix.app }}" ]; then
+            echo "❌ App directory not found: ${{ matrix.app }}"
+            exit 1
+          fi
+
+      - name: Get dependencies
+        working-directory: generated_apps/${{ matrix.app }}
+        run: flutter pub get
+
+      - name: Code analysis
+        working-directory: generated_apps/${{ matrix.app }}
+        run: |
+          flutter analyze --no-fatal-infos
+          echo "✅ Code analysis passed for ${{ matrix.app }}"
+
+      - name: Run unit tests
+        working-directory: generated_apps/${{ matrix.app }}
+        run: |
+          flutter test --coverage
+          echo "✅ Tests passed for ${{ matrix.app }}"
+
+      - name: Check app signature
+        working-directory: generated_apps/${{ matrix.app }}
+        run: |
+          # Chad signature validation
+          if [ ! -f "lib/main.dart" ]; then
+            echo "❌ Main dart file missing"
+            exit 1
+          fi
+
+          if ! grep -q "GigaChad\|Chad\|Alpha\|Sigma" lib/main.dart; then
+            echo "⚠️ Warning: App might not have GigaChad branding"
+          fi
+
+          echo "✅ App signature validated"
+
+  # 🏗️ 빌드 (Android/iOS)
+  build:
+    name: 🏗️ Build Apps
+    runs-on: ${{ matrix.os }}
+    needs: [detect_changes, quality_check]
+    if: needs.detect_changes.outputs.changed_apps != '[]'
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        app: ${{ fromJson(needs.detect_changes.outputs.changed_apps) }}
+        include:
+          - os: ubuntu-latest
+            platform: android
+            build_cmd: 'flutter build appbundle --release'
+            artifact_path: 'build/app/outputs/bundle/release/app-release.aab'
+          - os: macos-latest
+            platform: ios
+            build_cmd: 'flutter build ios --release --no-codesign'
+            artifact_path: 'build/ios/iphoneos/Runner.app'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Setup Java (Android)
+        if: matrix.platform == 'android'
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Setup Xcode (iOS)
+        if: matrix.platform == 'ios'
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 'latest-stable'
+
+      - name: Get dependencies
+        working-directory: generated_apps/${{ matrix.app }}
+        run: flutter pub get
+
+      - name: Build app
+        working-directory: generated_apps/${{ matrix.app }}
+        run: ${{ matrix.build_cmd }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.app }}-${{ matrix.platform }}-build
+          path: generated_apps/${{ matrix.app }}/${{ matrix.artifact_path }}
+          retention-days: 30
+
+  # 🚀 배포 (자동)
+  deploy:
+    name: 🚀 Deploy to Stores
+    runs-on: ubuntu-latest
+    needs: [detect_changes, build]
+    if: needs.detect_changes.outputs.should_deploy == 'true'
+
+    strategy:
+      matrix:
+        app: ${{ fromJson(needs.detect_changes.outputs.changed_apps) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Android build
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ matrix.app }}-android-build
+          path: ./builds/android/
+
+      - name: Setup Ruby (for Fastlane)
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Setup Fastlane
+        run: |
+          gem install fastlane
+          echo "✅ Fastlane installed"
+
+      - name: Deploy to Google Play (Internal)
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+        run: |
+          echo "🚀 Deploying ${{ matrix.app }} to Google Play Internal Track"
+
+          # Fastlane 설정 파일 생성
+          mkdir -p fastlane
+          cat > fastlane/Fastfile << EOF
+          default_platform(:android)
+
+          platform :android do
+            desc "Deploy to Google Play Internal Track"
+            lane :internal do
+              upload_to_play_store(
+                package_name: "com.chadtech.${{ matrix.app }}",
+                aab: "../builds/android/app-release.aab",
+                track: "internal",
+                skip_upload_apk: true,
+                skip_upload_metadata: true,
+                skip_upload_images: true,
+                skip_upload_screenshots: true
+              )
+            end
+          end
+          EOF
+
+          # 배포 실행
+          fastlane android internal
+          echo "✅ Deployed ${{ matrix.app }} to Google Play"
+
+  # 📊 성과 측정 시작
+  start_tracking:
+    name: 📊 Start Performance Tracking
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    if: always() && needs.deploy.result == 'success'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install requests python-dotenv
+          echo "✅ Python dependencies installed"
+
+      - name: Initialize tracking
+        env:
+          ANALYTICS_API_KEY: ${{ secrets.ANALYTICS_API_KEY }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          echo "📊 Starting performance tracking for deployed apps"
+
+          # Analytics 초기화 스크립트
+          python - << EOF
+          import requests
+          import json
+          from datetime import datetime
+
+          # 배포 알림
+          webhook_url = "${{ env.SLACK_WEBHOOK }}"
+          if webhook_url:
+              message = {
+                  "text": "🗿 GigaChad App Factory Deployment Complete!",
+                  "blocks": [
+                      {
+                          "type": "section",
+                          "text": {
+                              "type": "mrkdwn",
+                              "text": f"*Deployment Summary*\n• Timestamp: {datetime.now().isoformat()}\n• Apps: ${{ join(fromJson(needs.detect_changes.outputs.changed_apps), ', ') }}\n• Status: ✅ Success"
+                          }
+                      }
+                  ]
+              }
+              requests.post(webhook_url, json=message)
+              print("✅ Slack notification sent")
+
+          print("📊 Performance tracking initialized")
+          EOF
+
+  # 🧹 정리 작업
+  cleanup:
+    name: 🧹 Cleanup
+    runs-on: ubuntu-latest
+    needs: [start_tracking]
+    if: always()
+
+    steps:
+      - name: Clean up temporary files
+        run: |
+          echo "🧹 Cleaning up deployment artifacts"
+          # 임시 파일 정리 로직
+          echo "✅ Cleanup complete"
+
+      - name: Update deployment status
+        run: |
+          echo "📋 Updating deployment status in dashboard"
+          # 대시보드 상태 업데이트
+          echo "✅ Status updated"

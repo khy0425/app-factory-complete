@@ -1,0 +1,32 @@
+{
+  "marketing": {
+    "aso": {
+      "primary_keywords": [
+        "있습니다",
+        "타이머",
+        "습관을"
+      ],
+      "secondary_keywords": [
+        "집중",
+        "시간을"
+      ],
+      "optimized_title_variants": [
+        "Focus Timer Pro",
+        "Focus Timer Pro - 있습니다",
+        "있습니다 Focus Timer Pro",
+        "Focus Timer Pro Pro",
+        "최고의 있습니다 - Focus Timer Pro"
+      ],
+      "keyword_density_target": {
+        "있습니다": 3,
+        "타이머": 2,
+        "습관을": 2
+      },
+      "competitor_analysis": {
+        "analyzed_date": "2025-09-20T04:53:05.681105",
+        "top_competitors": 5,
+        "keyword_gap_analysis": true
+      }
+    }
+  }
+}

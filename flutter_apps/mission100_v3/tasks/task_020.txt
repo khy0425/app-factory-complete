@@ -1,0 +1,204 @@
+# Task ID: 20
+# Title: Challenge Mode Implementation
+# Status: done
+# Dependencies: 7, 10
+# Priority: low
+# Description: Implement additional challenge modes as specified in the PRD
+# Details:
+1. Create a ChallengeService class
+2. Implement the following challenge modes:
+   - 7-day consecutive workout challenge
+   - 50 push-ups in one go challenge
+   - 200 push-ups challenge (after completing 100)
+3. Add challenge tracking and progress
+4. Implement challenge rewards and achievements
+5. Add challenge-specific UI elements
+
+Example implementation:
+```dart
+class ChallengeService {
+  Future<List<Challenge>> getAvailableChallenges(UserProfile profile) async {
+    // Determine which challenges are available based on user progress
+    // Return list of available challenges
+  }
+  
+  Future<void> startChallenge(int challengeId) async {
+    // Initialize challenge tracking
+    // Update user profile
+  }
+  
+  Future<void> updateChallengeProgress(int challengeId, int progress) async {
+    // Update challenge progress
+    // Check for completion
+  }
+}
+```
+
+# Test Strategy:
+Test challenge availability logic. Verify challenge progress tracking and completion detection. Test challenge rewards and achievements.
+
+# Subtasks:
+## 1. Create Challenge Model and Data Structures [done]
+### Dependencies: None
+### Description: Define the Challenge model class and related data structures to represent different challenge types, progress tracking, and completion status.
+### Details:
+Create a Challenge class with properties like id, title, description, type (enum for different challenge types), targetValue (e.g., 7 days, 50 push-ups), currentProgress, startDate, completionDate, isCompleted, and reward information. Include enums for challenge types and difficulty levels. Implement serialization/deserialization methods for database storage.
+<info added on 2025-05-28T07:56:29.271Z>
+Challenge model class and data structure completed:
+
+- Created Challenge model class in lib/models/challenge.dart
+- Implemented enums: ChallengeType (consecutiveDays, singleSession, cumulative), ChallengeDifficulty (easy, medium, hard, extreme), and ChallengeStatus (available, active, completed, failed, locked)
+- Created ChallengeReward class for the reward system
+- Implemented complete data serialization/deserialization (toMap/fromMap)
+- Added useful getter methods (progressPercentage, isCompleted, remainingProgress, etc.)
+- Implemented extension methods (displayName, emoji, etc.)
+
+Key features implemented:
+- Progress calculation and status management
+- Prerequisites system
+- Reward system
+- Metadata support
+- Date tracking (start date, completion date, last update)
+- Estimated time calculation
+</info added on 2025-05-28T07:56:29.271Z>
+
+## 2. Implement ChallengeService Class [done]
+### Dependencies: 20.1
+### Description: Create the ChallengeService class with core functionality for managing challenges including fetching available challenges, starting challenges, and updating progress.
+### Details:
+Implement the ChallengeService with methods for getAvailableChallenges(), startChallenge(), updateChallengeProgress(), completeChallenge(), and abandonChallenge(). Include logic to determine challenge availability based on user progress (e.g., 200 push-ups challenge only available after completing 100 push-ups challenge). Connect to the database service for persistence.
+<info added on 2025-05-28T08:00:08.439Z>
+ChallengeService class implementation completed:
+
+✅ Completed work:
+- Created ChallengeService class (lib/services/challenge_service.dart)
+- Defined 5 basic challenges (7 consecutive days, 50 at once, 100 cumulative, 200 cumulative, 14 consecutive days)
+- Implemented challenge state management (available, active, completed, failed, locked)
+- Implemented prerequisites system
+- Integrated reward system (badges, points, special features)
+
+🔧 Core functionality implemented:
+- getAvailableChallenges(): Query available challenges
+- startChallenge(): Start a challenge
+- updateChallengeProgress(): Update progress
+- _completeChallenge(): Process challenge completion
+- abandonChallenge(): Abandon a challenge
+- Special logic for each challenge type (consecutive days, single session, cumulative)
+- Data persistence through SharedPreferences
+- Integration with existing AchievementService and NotificationService
+
+🎯 Logic by challenge type:
+- Consecutive days: Fails if a day is missed, progress increases daily
+- Single session: Achieve goal in one session
+- Cumulative: Achieve goal across multiple sessions
+</info added on 2025-05-28T08:00:08.439Z>
+
+## 3. Implement Specific Challenge Types [done]
+### Dependencies: 20.2
+### Description: Implement the three specific challenge types with their unique tracking and completion logic.
+### Details:
+Extend the ChallengeService to handle the specific logic for each challenge type: 1) 7-day consecutive workout (track daily completion and reset on missed days), 2) 50 push-ups in one go (track max push-ups in a single session), 3) 200 push-ups challenge (track cumulative push-ups and verify prerequisite completion). Each challenge type should have custom validation and progress tracking logic.
+<info added on 2025-05-28T08:10:31.428Z>
+Implemented specific logic for each challenge type:
+
+✅ Completed implementations:
+- updateChallengesOnWorkoutComplete method to update challenges when workouts are completed
+- _updateConsecutiveDaysChallenge special logic for consecutive day challenges
+- getSingleSessionBestRecord to retrieve best records for single-session challenges
+- getCumulativeProgress to check progress on cumulative challenges
+- getConsecutiveDaysProgress to track streaks for consecutive day challenges
+- failChallenge functionality to handle challenge failures
+- restartChallenge capability to reset challenges
+- getTodayChallengesSummary to provide daily challenge status overview
+- getChallengeHint to offer tips and guidance for each challenge
+
+🔧 Core functionalities:
+- Consecutive days: Date-based progress tracking with automatic failure on missed days
+- Single session: Best record tracking with immediate completion upon goal achievement
+- Cumulative: Progress management across multiple sessions
+- Automatic failure handling and restart mechanisms
+- Methods for seamless integration with workout screens
+
+🎯 Special features:
+- Today's workout completion tracking
+- Customized hints for each challenge type
+- Automatic transition to restart-ready state upon failure
+- Challenge-specific progress calculation algorithms
+
+Next step: Implement UI for challenge progress tracking
+</info added on 2025-05-28T08:10:31.428Z>
+
+## 4. Create Challenge UI Components [done]
+### Dependencies: 20.1, 20.2
+### Description: Develop UI components for displaying challenges, progress tracking, and interaction.
+### Details:
+Create widgets for: 1) ChallengeListView to display available challenges, 2) ChallengeDetailView for viewing and starting a specific challenge, 3) ChallengeProgressWidget for visualizing progress (e.g., progress bars, streak calendars), 4) ChallengeCompletionDialog for celebrating completed challenges. Ensure consistent styling with the rest of the app and implement responsive layouts.
+<info added on 2025-05-28T08:17:50.489Z>
+챌린지 UI 컴포넌트 구현 완료:
+
+✅ 완료된 작업:
+- ChallengeScreen 메인 화면 구현 (3개 탭: 사용 가능, 진행 중, 완료)
+- ChallengeCard 위젯 구현 (챌린지 정보 카드)
+- ChallengeProgressWidget 구현 (챌린지 타입별 진행 상황 표시)
+- 메인 네비게이션에 챌린지 메뉴 추가
+- 운동 화면과 챌린지 시스템 통합
+
+🔧 구현된 UI 컴포넌트:
+- 챌린지 카드: 제목, 설명, 난이도, 상태, 진행률, 보상 정보 표시
+- 진행 상황 위젯: 연속일수/단일세션/누적 타입별 특화된 UI
+- 탭 기반 네비게이션: 사용 가능/진행 중/완료된 챌린지 분류
+- 반응형 디자인: 다양한 화면 크기 지원
+- 인터랙티브 요소: 시작/포기 버튼, 새로고침, 상태 표시
+
+🎨 UI/UX 특징:
+- 챌린지 타입별 색상 구분 (파란색/주황색/초록색)
+- 난이도별 시각적 표시 (이모지 + 색상)
+- 진행률 바 및 퍼센티지 표시
+- 힌트 및 팁 제공
+- 보상 정보 시각화
+- 완료 날짜 표시
+
+🔗 시스템 통합:
+- 운동 완료 시 자동 챌린지 업데이트
+- 메인 네비게이션 바에 챌린지 메뉴 추가
+- 기존 서비스들과 완벽한 연동
+</info added on 2025-05-28T08:17:50.489Z>
+
+## 5. Implement Challenge Rewards and Achievement Integration [done]
+### Dependencies: 20.2, 20.3
+### Description: Connect challenge completion to the rewards and achievements system, providing users with incentives for completing challenges.
+### Details:
+Extend ChallengeService to trigger reward distribution and achievement unlocks upon challenge completion. Implement methods to grant in-app currency, unlock special features, or award badges based on challenge difficulty. Create notifications for achievement unlocks. Update user profile with completed challenges and earned rewards. Ensure proper integration with existing achievement and reward systems.
+<info added on 2025-05-28T08:21:17.174Z>
+챌린지 보상 및 업적 시스템 통합 완료:
+
+✅ 완료된 작업:
+- AchievementType에 challenge 타입 추가
+- 6개의 챌린지 관련 업적 추가:
+  * challenge_7_days: 7일 연속 챌린지 완료 (레어, 500 XP)
+  * challenge_50_single: 50개 한번에 챌린지 완료 (에픽, 750 XP)
+  * challenge_100_cumulative: 100개 누적 챌린지 완료 (레어, 400 XP)
+  * challenge_200_cumulative: 200개 누적 챌린지 완료 (에픽, 800 XP)
+  * challenge_14_days: 14일 연속 챌린지 완료 (레전더리, 1200 XP)
+  * challenge_master: 모든 챌린지 완료 (레전더리, 2000 XP)
+
+🔧 구현된 통합 기능:
+- AchievementService에 _checkChallengeAchievements 메서드 추가
+- markChallengeCompleted 메서드로 챌린지 완료 시 업적 자동 체크
+- ChallengeService의 _grantRewards에 업적 시스템 통합
+- SharedPreferences를 통한 챌린지 완료 상태 영속화
+- 챌린지 완료 시 자동 업적 해제 및 알림
+
+🎯 보상 시스템:
+- 챌린지 완료 시 자동으로 관련 업적 해제
+- 경험치 보상 (400-2000 XP)
+- 배지 및 특별 기능 해금
+- 알림 시스템을 통한 즉시 피드백
+- 챌린지 마스터 업적으로 모든 챌린지 완료 인센티브 제공
+
+🔗 완전한 시스템 통합:
+- 운동 완료 → 챌린지 진행 → 업적 해제 → 알림 표시
+- 기존 업적 시스템과 완벽한 호환성
+- 타입 안전성 확보 및 linter 오류 해결
+</info added on 2025-05-28T08:21:17.174Z>
+

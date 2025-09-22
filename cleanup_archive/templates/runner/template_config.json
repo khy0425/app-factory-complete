@@ -1,0 +1,142 @@
+{
+  "template_info": {
+    "name": "GigaChad Runner",
+    "version": "1.0.0",
+    "category": "Health & Fitness",
+    "description": "100일 러닝 챌린지 앱 템플릿",
+    "target_audience": "20-35세 남성 러너",
+    "estimated_dev_time": "2 weeks",
+    "market_potential": "High"
+  },
+
+  "branding": {
+    "primary_color": "#1A1A1A",
+    "secondary_color": "#FFD700",
+    "accent_color": "#FF0000",
+    "font_heading": "Bebas Neue",
+    "font_body": "Roboto Condensed",
+    "style": "aggressive_motivational",
+    "voice": "sigma_grindset"
+  },
+
+  "features": {
+    "core": [
+      "daily_running_missions",
+      "distance_tracking",
+      "pace_analysis",
+      "route_mapping",
+      "weather_integration"
+    ],
+    "gamification": [
+      "chad_level_system",
+      "100_day_challenge",
+      "achievement_badges",
+      "global_leaderboard",
+      "streak_tracking"
+    ],
+    "social": [
+      "run_sharing",
+      "challenge_friends",
+      "community_posts",
+      "transformation_photos"
+    ],
+    "premium": [
+      "personal_coach_ai",
+      "custom_training_plans",
+      "advanced_analytics",
+      "exclusive_challenges"
+    ]
+  },
+
+  "monetization": {
+    "model": "freemium",
+    "free_tier": {
+      "daily_missions": 3,
+      "basic_tracking": true,
+      "ads": true
+    },
+    "premium_tier": {
+      "price_monthly": 9.99,
+      "price_yearly": 79.99,
+      "unlimited_missions": true,
+      "ai_coaching": true,
+      "no_ads": true
+    }
+  },
+
+  "marketing": {
+    "primary_keywords": [
+      "러닝", "기가차드", "100일챌린지", "러닝앱", "마라톤훈련"
+    ],
+    "secondary_keywords": [
+      "시그마그라인드셋", "알파러너", "런닝동기부여", "운동습관"
+    ],
+    "content_themes": [
+      "transformation_stories",
+      "motivational_quotes",
+      "running_tips",
+      "sigma_lifestyle"
+    ],
+    "target_platforms": [
+      "instagram_reels",
+      "tiktok",
+      "youtube_shorts",
+      "twitter"
+    ]
+  },
+
+  "technical": {
+    "flutter_version": "3.16.0",
+    "dependencies": [
+      "geolocator",
+      "google_maps_flutter",
+      "health",
+      "firebase_core",
+      "provider",
+      "hive"
+    ],
+    "platforms": ["android", "ios"],
+    "min_sdk": 21,
+    "target_sdk": 34
+  },
+
+  "deployment": {
+    "google_play": {
+      "track": "internal",
+      "rollout_percentage": 10,
+      "feature_graphic_required": true
+    },
+    "app_store": {
+      "testflight": true,
+      "app_review_required": true
+    },
+    "ci_cd": {
+      "github_actions": true,
+      "auto_build": true,
+      "auto_test": true
+    }
+  },
+
+  "success_metrics": {
+    "week_1": {
+      "downloads": 1000,
+      "dau": 300,
+      "retention_d1": 70,
+      "rating": 4.0
+    },
+    "month_1": {
+      "downloads": 10000,
+      "dau": 2000,
+      "retention_d7": 40,
+      "retention_d30": 20,
+      "revenue": 2000
+    },
+    "quarter_1": {
+      "downloads": 50000,
+      "dau": 8000,
+      "retention_d30": 25,
+      "arpu": 12.50,
+      "revenue": 15000
+    }
+  }
+}

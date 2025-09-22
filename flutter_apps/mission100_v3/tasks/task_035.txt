@@ -1,0 +1,53 @@
+# Task ID: 35
+# Title: Task #35: Add Scroll Hint Animation to Workout Screen
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Implement an automatic scroll hint animation on the workout screen, similar to the one on the level check screen, to naturally indicate to users that additional content (such as banner advertisements) exists below the visible area.
+# Details:
+The implementation should follow these guidelines:
+
+1. Reference the existing scroll hint animation from Task #33 (Level Check Screen) for consistency across the app.
+2. The animation should trigger automatically after the workout screen loads completely.
+3. The animation should gently scroll the screen downward by approximately 20-30 pixels and then return to the original position.
+4. The animation timing should be subtle but noticeable: approximately 1.5 seconds down and 1 second back up.
+5. The animation should only play once per session to avoid annoying users.
+6. Ensure the animation works properly with the recently fixed scrollable layout from Task #34.
+7. The animation should be smooth (use appropriate easing functions) and not interfere with user interactions.
+8. If a user begins scrolling manually, the hint animation should immediately stop.
+9. The implementation should be responsive and work correctly across different device sizes.
+10. Add appropriate logging to track when the animation is triggered and completed.
+11. Consider adding a small visual indicator (like a subtle arrow or glow effect) to enhance the hint if needed.
+12. Ensure the animation doesn't cause performance issues on lower-end devices.
+
+# Test Strategy:
+To verify the successful implementation of the scroll hint animation on the workout screen:
+
+1. Manual Testing:
+   - Test on at least 3 different device sizes (small, medium, large screens) to ensure responsive behavior.
+   - Verify the animation triggers automatically after the workout screen loads.
+   - Confirm the animation is subtle but noticeable to users.
+   - Check that the animation correctly reveals the existence of content below (banner ads).
+   - Verify the animation stops immediately when a user begins manual scrolling.
+   - Ensure the animation only plays once per session.
+
+2. Performance Testing:
+   - Measure frame rates during animation to ensure smooth performance (target 60fps).
+   - Test on lower-end devices to verify there are no performance issues.
+   - Check memory usage to ensure no leaks occur during animation cycles.
+
+3. Integration Testing:
+   - Verify the animation works correctly with the scrollable layout implemented in Task #34.
+   - Ensure the animation doesn't interfere with banner advertisements.
+   - Test the animation in conjunction with other UI elements on the workout screen.
+
+4. User Testing:
+   - Conduct A/B testing with a small group of users to gather feedback on the effectiveness of the hint.
+   - Track metrics on how many users scroll down after seeing the animation compared to before implementation.
+
+5. Regression Testing:
+   - Ensure no new UI issues are introduced on the workout screen.
+   - Verify all existing functionality continues to work properly.
+
+6. Accessibility Testing:
+   - Ensure the animation doesn't cause issues for users with motion sensitivity (consider respecting reduced motion settings).

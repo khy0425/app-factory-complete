@@ -1,0 +1,149 @@
+# Task ID: 46
+# Title: UI Bug Fixes and Improvements
+# Status: done
+# Dependencies: 8, 22, 26
+# Priority: high
+# Description: Fix UI bugs and improve visual elements including settings screen duplicate data management display, home screen card shorts and debug tools disabling, and adjusting PUSHUP MASTER progress tracking colors to match app theme.
+# Details:
+1. Fix Settings Screen Data Management Duplicate Display: [COMPLETED]
+   - Fixed duplicate backup/restore options in the _buildDataSettings() method in settings_screen.dart
+   - Maintained only the BackupScreen navigation
+
+2. Disable Card Shorts and Debug Tools in Home Screen: [COMPLETED]
+   - Verified that card shorts and debug tools are already commented out/disabled in home_screen.dart
+   - No additional modifications needed
+
+3. Adjust PUSHUP MASTER Progress Tracking Colors: [IN PROGRESS - 50% COMPLETE]
+   - Completed color updates in progress_tracking_screen.dart:
+     - Changed all hardcoded blue colors to AppColors.primaryColor for:
+       - TabBar indicatorColor, labelColor
+       - Progress indicator valueColor
+       - Button backgroundColor
+       - Chart gradient colors
+       - Calendar selectedDecoration, todayDecoration
+       - Statistics card colors
+       - Chad Evolution achievement colors
+   - Completed color updates in home_screen.dart:
+     - Updated tutorial button background color to AppColors.primaryColor
+     - Adjusted text and icon colors to black for better visibility on gold background
+   - Remaining color updates needed in:
+     - video_player_widget.dart (9 locations)
+     - pushup_tutorial_screen.dart (6 locations)
+     - pushup_tutorial_detail_screen.dart (8 locations)
+     - pushup_form_guide_screen.dart (22 locations)
+     - onboarding_screen.dart (5 locations)
+     - utils/constants.dart, services/ folder, etc.
+   - Implementation approach:
+     ```dart
+     // Replace hardcoded colors with theme references
+     // Before:
+     final progressColor = Color(0xFF4DABF7);
+     
+     // After:
+     final progressColor = AppColors.primaryColor;
+     ```
+   - Goal is to achieve a consistent gold theme throughout the app
+
+4. General UI Cleanup:
+   - Remove any console debug prints related to these UI components
+   - Ensure proper widget disposal to prevent memory leaks
+   - Optimize widget rebuilds to improve performance
+
+# Test Strategy:
+1. Settings Screen Data Management Testing: [COMPLETED]
+   - Manually verified that data management options appear exactly once
+   - Confirmed BackupScreen navigation works correctly
+
+2. Home Screen Features Testing: [COMPLETED]
+   - Verified Card Shorts and debug tools are not visible in production builds
+   - Confirmed no additional modifications were needed
+
+3. PUSHUP MASTER Color Scheme Testing:
+   - For completed color updates in progress_tracking_screen.dart and home_screen.dart:
+     - Verify all updated UI elements now use the consistent gold theme colors
+     - Test in both light and dark themes to ensure proper color adaptation
+   - For remaining files to update:
+     - Create a checklist to track each file's color update completion
+     - After each file update, verify the UI elements render correctly with the new colors
+     - Test specifically:
+       - video_player_widget.dart controls and UI elements
+       - Tutorial screens in pushup_tutorial_screen.dart and related files
+       - Form guide elements in pushup_form_guide_screen.dart
+       - Onboarding flow in onboarding_screen.dart
+   - Final verification:
+     - Use accessibility tools to verify color contrast meets WCAG standards
+     - Create screenshot comparisons to verify visual consistency
+     - Test on multiple device sizes to ensure responsive design
+
+4. Regression Testing:
+   - Perform a full app navigation test to ensure no other UI elements were affected
+   - Verify all fixed components maintain functionality while resolving visual issues
+   - Test on multiple device sizes and orientations to ensure responsive design
+
+# Subtasks:
+## 46.1. Fix Settings Screen Data Management Duplicate Display [completed]
+### Dependencies: None
+### Description: Fixed duplicate backup/restore options in the _buildDataSettings() method in settings_screen.dart and maintained only the BackupScreen navigation.
+### Details:
+
+
+## 46.2. Disable Card Shorts and Debug Tools in Home Screen [completed]
+### Dependencies: None
+### Description: Verified that card shorts and debug tools are already commented out/disabled in home_screen.dart. No additional modifications needed.
+### Details:
+
+
+## 46.3. Update Colors in progress_tracking_screen.dart [completed]
+### Dependencies: None
+### Description: Changed all hardcoded blue colors to AppColors.primaryColor in progress_tracking_screen.dart, including TabBar, progress indicators, buttons, charts, calendar elements, statistics cards, and achievement colors.
+### Details:
+
+
+## 46.4. Update Colors in home_screen.dart [completed]
+### Dependencies: None
+### Description: Updated tutorial button background color to AppColors.primaryColor and adjusted text and icon colors to black for better visibility on gold background.
+### Details:
+
+
+## 46.5. Update Colors in video_player_widget.dart [done]
+### Dependencies: None
+### Description: Replace all instances of hardcoded color 0xFF4DABF7 with AppColors.primaryColor in video_player_widget.dart (9 locations).
+### Details:
+
+
+## 46.6. Update Colors in pushup_tutorial_screen.dart [done]
+### Dependencies: None
+### Description: Replace all instances of hardcoded color 0xFF4DABF7 with AppColors.primaryColor in pushup_tutorial_screen.dart (6 locations).
+### Details:
+
+
+## 46.7. Update Colors in pushup_tutorial_detail_screen.dart [done]
+### Dependencies: None
+### Description: Replace all instances of hardcoded color 0xFF4DABF7 with AppColors.primaryColor in pushup_tutorial_detail_screen.dart (8 locations).
+### Details:
+
+
+## 46.8. Update Colors in pushup_form_guide_screen.dart [done]
+### Dependencies: None
+### Description: Replace all instances of hardcoded color 0xFF4DABF7 with AppColors.primaryColor in pushup_form_guide_screen.dart (22 locations).
+### Details:
+
+
+## 46.9. Update Colors in onboarding_screen.dart [done]
+### Dependencies: None
+### Description: Replace all instances of hardcoded color 0xFF4DABF7 with AppColors.primaryColor in onboarding_screen.dart (5 locations).
+### Details:
+
+
+## 46.1. Update Colors in utils/constants.dart and services/ folder [done]
+### Dependencies: None
+### Description: Identify and replace any hardcoded color references in utils/constants.dart and files in the services/ folder with AppColors.primaryColor.
+### Details:
+
+
+## 46.11. Final Color Consistency Testing [done]
+### Dependencies: None
+### Description: Perform comprehensive testing to ensure all UI elements have consistent gold theme colors across the entire app in both light and dark modes.
+### Details:
+
+

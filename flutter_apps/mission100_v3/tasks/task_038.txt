@@ -1,0 +1,75 @@
+# Task ID: 38
+# Title: Task #38: Implement Settings Screen with Customization Options
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Add a comprehensive settings screen that allows users to customize the app experience, including notification preferences, theme selection, language options, data backup/restore functionality, and app information, with access via a new tab in the BottomNavigationBar.
+# Details:
+The implementation should include:
+
+1. Create a new Settings tab in the BottomNavigationBar:
+   - Add an appropriate icon (gear or similar) for the settings tab
+   - Update the navigation logic to handle the new tab
+   - Ensure proper state management when switching between tabs
+
+2. Design and implement the main Settings screen with the following sections:
+   - Notification settings: Allow users to toggle various notification types (workout reminders, achievement notifications, etc.)
+   - Theme settings: Provide options for light/dark mode and potentially custom theme colors that align with the GigaChad aesthetic
+   - Language settings: Implement multi-language support with at least English and Korean options
+   - Data backup/restore: Create functionality to export and import user data (workout history, achievements, personal settings)
+   - App information: Display version number, developer information, terms of service, privacy policy, etc.
+
+3. Technical considerations:
+   - Use SharedPreferences or similar local storage for persisting user settings
+   - Implement proper state management to reflect setting changes immediately across the app
+   - Ensure all settings UI components follow the app's design language
+   - Create reusable setting item widgets for consistent appearance
+   - Implement proper navigation between main settings screen and sub-screens for detailed settings
+
+4. Accessibility considerations:
+   - Ensure all settings are accessible with proper labels for screen readers
+   - Implement sufficient contrast ratios for text and interactive elements
+   - Add appropriate semantics for assistive technologies
+
+5. Integration with existing features:
+   - Connect notification settings with the achievement/badge system from Task #37
+   - Ensure theme settings properly affect all UI components throughout the app
+   - Link data backup/restore with workout history and calendar data from Task #36
+
+# Test Strategy:
+Testing should cover the following areas:
+
+1. UI/UX Testing:
+   - Verify that the Settings tab appears correctly in the BottomNavigationBar
+   - Confirm that all settings sections are displayed properly with appropriate icons and descriptions
+   - Test navigation between main settings screen and sub-screens
+   - Ensure UI adapts properly to different screen sizes and orientations
+   - Verify that all text is properly localized when language settings are changed
+
+2. Functional Testing:
+   - Test each setting option to ensure it performs the expected action:
+     - Notification toggles should enable/disable the appropriate notifications
+     - Theme changes should immediately update the app's appearance
+     - Language changes should update all text throughout the app
+     - Data backup should create a valid export file
+     - Data restore should correctly import previously exported data
+   - Verify that settings persist after app restart
+
+3. Integration Testing:
+   - Confirm that notification settings properly affect the behavior of the achievement system
+   - Verify that theme changes are applied consistently across all screens
+   - Test that data backup/restore properly handles workout history and calendar data
+
+4. Performance Testing:
+   - Measure and optimize any performance impact when switching between tabs
+   - Ensure settings changes are applied without noticeable delay
+   - Verify that data backup/restore operations handle large datasets efficiently
+
+5. Accessibility Testing:
+   - Test with screen readers to ensure all settings are properly announced
+   - Verify color contrast meets accessibility standards
+   - Confirm that all interactive elements are properly sized for touch targets
+
+6. User Acceptance Testing:
+   - Conduct sessions with test users to gather feedback on the settings organization and usability
+   - Verify that settings options are clear and intuitive to users

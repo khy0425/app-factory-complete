@@ -1,0 +1,27 @@
+{
+  "app_name": "sanchaekgil_friend",
+  "note": "⚠️ 실제 사용시 AdMob 콘솔에서 생성된 ID로 교체 필요",
+  "android": {
+    "app_id": "ca-app-pub-XXXXXXXXXX~7110397660",
+    "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/71103976601",
+    "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/71103976602",
+    "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/71103976603"
+  },
+  "ios": {
+    "app_id": "ca-app-pub-XXXXXXXXXX~71103976604",
+    "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/71103976605",
+    "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/71103976606",
+    "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/71103976607"
+  },
+  "test_ids": {
+    "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+    "android_banner": "ca-app-pub-3940256099942544/6300978111",
+    "android_interstitial": "ca-app-pub-3940256099942544/1033173712",
+    "android_rewarded": "ca-app-pub-3940256099942544/5224354917",
+    "ios_app_id": "ca-app-pub-3940256099942544~1458002511",
+    "ios_banner": "ca-app-pub-3940256099942544/2934735716",
+    "ios_interstitial": "ca-app-pub-3940256099942544/4411468910",
+    "ios_rewarded": "ca-app-pub-3940256099942544/1712485313"
+  },
+  "setup_required": true
+}

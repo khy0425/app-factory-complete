@@ -1,0 +1,41 @@
+# Task ID: 16
+# Title: Rest Timer Implementation
+# Status: done
+# Dependencies: 9
+# Priority: medium
+# Description: Implement the configurable rest timer for between sets
+# Details:
+1. Create a RestTimerService class
+2. Implement timer functionality with:
+   - Configurable durations (60, 90, 120 seconds)
+   - Visual countdown display
+   - Sound/vibration alerts
+   - Background running capability
+   - Pause/resume functionality
+3. Add skip option for advanced users
+4. Implement timer state persistence
+5. Add animations for timer transitions
+
+Example implementation:
+```dart
+class RestTimerService {
+  Timer? _timer;
+  int _remainingSeconds = 0;
+  final StreamController<int> _timerStream = StreamController<int>.broadcast();
+  
+  Stream<int> get timerStream => _timerStream.stream;
+  
+  void startTimer(int durationSeconds) {
+    _remainingSeconds = durationSeconds;
+    _timer = Timer.periodic(Duration(seconds: 1), _onTick);
+  }
+  
+  void _onTick(Timer timer) {
+    // Update remaining time and notify listeners
+    // Handle completion
+  }
+}
+```
+
+# Test Strategy:
+Test timer accuracy and callbacks. Verify timer works correctly in different app states. Test pause/resume functionality. Mock timer for unit testing.

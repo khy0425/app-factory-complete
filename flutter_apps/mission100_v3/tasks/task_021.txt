@@ -1,0 +1,32 @@
+# Task ID: 21
+# Title: Workout Summary Screen Implementation
+# Status: done
+# Dependencies: 10
+# Priority: medium
+# Description: Implement the workout summary screen shown after completing a workout
+# Details:
+1. Create a workout summary screen with:
+   - Total push-ups completed
+   - Comparison to target
+   - Workout duration
+   - Set-by-set breakdown
+   - Achievement highlights
+   - Share button for results
+   - Next workout preview
+2. Add animations for revealing statistics
+3. Implement confetti effect for achievements
+4. Add motivational message based on performance
+5. Implement navigation to home or progress screen
+
+Example implementation:
+```dart
+Widget buildWorkoutSummary(WorkoutSession session) {
+  // Calculate summary statistics
+  // Build UI components for each statistic
+  // Add animations and interactive elements
+  // Return configured summary widget
+}
+```
+
+# Test Strategy:
+Test summary calculations with different workout data. Verify UI rendering on different screen sizes. Test share functionality. Perform widget tests for key components.

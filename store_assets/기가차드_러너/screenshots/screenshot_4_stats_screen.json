@@ -1,0 +1,11 @@
+{
+  "concept": {
+    "name": "stats_screen",
+    "title": "통계 화면",
+    "description": "운동 기록과 차트 분석"
+  },
+  "dimensions": "1080x1920",
+  "type": "screenshot",
+  "generated_at": "2025-09-21T06:29:37.197714",
+  "size_kb": 150
+}

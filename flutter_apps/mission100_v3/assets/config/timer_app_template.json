@@ -1,0 +1,45 @@
+{
+  "app": {
+    "name": "Focus Timer Pro",
+    "package_name": "com.example.focustimer",
+    "version": "1.0.0",
+    "description": "집중력 향상을 위한 포모도로 타이머",
+    "author": "Timer Apps Team"
+  },
+  "theme": {
+    "primary_color": "#FF5722",
+    "secondary_color": "#4CAF50",
+    "accent_color": "#FFC107",
+    "font_family": "Roboto",
+    "is_dark_mode": false
+  },
+  "features": {
+    "timer_enabled": true,
+    "habit_tracking_enabled": false,
+    "statistics_enabled": true,
+    "achievements_enabled": false,
+    "social_sharing_enabled": true,
+    "backup_enabled": true,
+    "notifications_enabled": true
+  },
+  "ads": {
+    "android_app_id": "YOUR_ANDROID_APP_ID",
+    "android_banner_id": "YOUR_ANDROID_BANNER_ID",
+    "android_interstitial_id": "YOUR_ANDROID_INTERSTITIAL_ID",
+    "android_rewarded_id": "YOUR_ANDROID_REWARDED_ID",
+    "ios_app_id": "YOUR_IOS_APP_ID",
+    "ios_banner_id": "YOUR_IOS_BANNER_ID",
+    "ios_interstitial_id": "YOUR_IOS_INTERSTITIAL_ID",
+    "ios_rewarded_id": "YOUR_IOS_REWARDED_ID",
+    "enable_banner_ads": true,
+    "enable_interstitial_ads": false,
+    "enable_rewarded_ads": true,
+    "test_device_ids": []
+  },
+  "payment": {
+    "subscription_enabled": true,
+    "one_time_purchase_enabled": true,
+    "subscription_product_ids": ["premium_monthly", "premium_yearly"],
+    "one_time_product_ids": ["remove_ads", "premium_features"]
+  }
+}

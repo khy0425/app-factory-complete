@@ -1,0 +1,166 @@
+{
+  "app": {
+    "name": "Mission 100",
+    "package_name": "com.example.mission100",
+    "version": "2.1.0",
+    "description": "100일 푸쉬업 챌린지 앱",
+    "author": "Mission 100 Team"
+  },
+  "theme": {
+    "primary_color": "#2196F3",
+    "secondary_color": "#FF5722",
+    "accent_color": "#FFC107",
+    "font_family": "Roboto",
+    "is_dark_mode": false
+  },
+  "features": {
+    "timer_enabled": true,
+    "habit_tracking_enabled": true,
+    "statistics_enabled": true,
+    "achievements_enabled": true,
+    "social_sharing_enabled": true,
+    "backup_enabled": true,
+    "notifications_enabled": true
+  },
+  "ads": {
+    "android_app_id": "ca-app-pub-1075071967728463~6042582986",
+    "android_banner_id": "ca-app-pub-1075071967728463/9498612269",
+    "android_interstitial_id": "ca-app-pub-1075071967728463/7039728635",
+    "android_rewarded_id": "",
+    "ios_app_id": "",
+    "ios_banner_id": "",
+    "ios_interstitial_id": "",
+    "ios_rewarded_id": "",
+    "enable_banner_ads": true,
+    "enable_interstitial_ads": true,
+    "enable_rewarded_ads": false,
+    "test_device_ids": []
+  },
+  "payment": {
+    "subscription_enabled": false,
+    "one_time_purchase_enabled": false,
+    "subscription_product_ids": [],
+    "one_time_product_ids": []
+  },
+  "marketing": {
+    "aso_keywords": [
+      "타이머",
+      "습관을",
+      "집중",
+      "시간을",
+      "실제"
+    ],
+    "optimized_description": "🔥 Mission 100 - 타이머 마스터의 시작!\n\n💪 100일 푸쉬업 챌린지로 당신의 한계를 뛰어넘으세요!\n\n✨ 핵심 기능\n• 과학적인 타이머 프로그램 (초보자→고수 단계별)\n• 실시간 습관을 추적 및 분석\n• 기가차드 캐릭터와 함께하는 재미있는 집중\n• 개인 맞춤형 난이도 조절 시스템\n\n🏆 왜 Mission 100이 특별한가요?\n• 6주 만에 푸쉬업 100개 달성 검증된 프로그램\n• 게임화된 타이머 시스템으로 재미있게 지속\n• 상세한 폼 가이드로 부상 없는 안전한 습관을\n• 성취감 극대화하는 업적 시스템\n\n🎯 이런 분들께 완벽:\n• 타이머 초보자부터 중급자까지\n• 집에서 간편하게 습관을하고 싶은 분\n• 게임처럼 재미있게 집중하고 싶은 분\n• 꾸준한 타이머 습관을 만들고 싶은 분\n\n🚀 지금 시작하면 100일 후 완전히 새로운 당신을 만날 수 있습니다!\n\n#️⃣ 타이머 #습관을 #집중 #시간을 #실제 #푸쉬업 #운동앱 #헬스 #피트니스 #챌린지",
+    "competitor_analysis": [
+      {
+        "name": "Forest: 집중력 향상",
+        "package_name": "cc.forestapp",
+        "developer": "SEEKRTECH",
+        "rating": 4.6,
+        "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+      },
+      {
+        "name": "Be Focused Pro",
+        "package_name": "com.dencreak.dlcounter",
+        "developer": "Denys Yevenko",
+        "rating": 4.5,
+        "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+      },
+      {
+        "name": "습관 만들기",
+        "package_name": "com.habitnow",
+        "developer": "Habit Now",
+        "rating": 4.4,
+        "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+      },
+      {
+        "name": "Forest: 집중력 향상",
+        "package_name": "cc.forestapp",
+        "developer": "SEEKRTECH",
+        "rating": 4.6,
+        "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+      },
+      {
+        "name": "Be Focused Pro",
+        "package_name": "com.dencreak.dlcounter",
+        "developer": "Denys Yevenko",
+        "rating": 4.5,
+        "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+      },
+      {
+        "name": "습관 만들기",
+        "package_name": "com.habitnow",
+        "developer": "Habit Now",
+        "rating": 4.4,
+        "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+      },
+      {
+        "name": "Forest: 집중력 향상",
+        "package_name": "cc.forestapp",
+        "developer": "SEEKRTECH",
+        "rating": 4.6,
+        "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+      },
+      {
+        "name": "Be Focused Pro",
+        "package_name": "com.dencreak.dlcounter",
+        "developer": "Denys Yevenko",
+        "rating": 4.5,
+        "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+      },
+      {
+        "name": "습관 만들기",
+        "package_name": "com.habitnow",
+        "developer": "Habit Now",
+        "rating": 4.4,
+        "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+      },
+      {
+        "name": "Forest: 집중력 향상",
+        "package_name": "cc.forestapp",
+        "developer": "SEEKRTECH",
+        "rating": 4.6,
+        "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+      },
+      {
+        "name": "Be Focused Pro",
+        "package_name": "com.dencreak.dlcounter",
+        "developer": "Denys Yevenko",
+        "rating": 4.5,
+        "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+      },
+      {
+        "name": "습관 만들기",
+        "package_name": "com.habitnow",
+        "developer": "Habit Now",
+        "rating": 4.4,
+        "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+      },
+      {
+        "name": "Forest: 집중력 향상",
+        "package_name": "cc.forestapp",
+        "developer": "SEEKRTECH",
+        "rating": 4.6,
+        "url": "https://play.google.com/store/apps/details?id=cc.forestapp"
+      },
+      {
+        "name": "Be Focused Pro",
+        "package_name": "com.dencreak.dlcounter",
+        "developer": "Denys Yevenko",
+        "rating": 4.5,
+        "url": "https://play.google.com/store/apps/details?id=com.dencreak.dlcounter"
+      },
+      {
+        "name": "습관 만들기",
+        "package_name": "com.habitnow",
+        "developer": "Habit Now",
+        "rating": 4.4,
+        "url": "https://play.google.com/store/apps/details?id=com.habitnow"
+      }
+    ],
+    "optimization_date": "2025-09-20T04:56:41.574490",
+    "recommendations": [
+      "핵심 키워드 활용: 타이머, 습관을"
+    ]
+  }
+}

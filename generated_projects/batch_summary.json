@@ -1,0 +1,64 @@
+{
+  "batch_date": "2025-09-21",
+  "total_apps": 10,
+  "successful": 10,
+  "failed": 0,
+  "projects": [
+    {
+      "idea": "명상과 호흡 연습 앱",
+      "project_dir": "generated_projects\\calm_breath",
+      "status": "success"
+    },
+    {
+      "idea": "한글 타이핑 연습 게임",
+      "project_dir": "generated_projects\\catchy",
+      "status": "success"
+    },
+    {
+      "idea": "물 마시기 알림 앱",
+      "project_dir": "generated_projects\\meditation_app",
+      "status": "success"
+    },
+    {
+      "idea": "간단한 가계부 앱",
+      "project_dir": "generated_projects\\meditation_app",
+      "status": "success"
+    },
+    {
+      "idea": "색깔 맞추기 퍼즐 게임",
+      "project_dir": "generated_projects\\colorpop_pangpang",
+      "status": "success"
+    },
+    {
+      "idea": "계단 카운터 앱",
+      "project_dir": "generated_projects\\stepup",
+      "status": "success"
+    },
+    {
+      "idea": "미니 다이어리 앱",
+      "project_dir": "generated_projects\\momento",
+      "status": "success"
+    },
+    {
+      "idea": "동네 산책로 추천 앱",
+      "project_dir": "generated_projects\\sanchaekgil_friend",
+      "status": "success"
+    },
+    {
+      "idea": "오늘의 운세 앱",
+      "project_dir": "generated_projects\\meditation_app",
+      "status": "success"
+    },
+    {
+      "idea": "간단한 암산 연습 앱",
+      "project_dir": "generated_projects\\semsem_master",
+      "status": "success"
+    }
+  ],
+  "next_steps": [
+    "각 프로젝트의 Flutter 코드 구현",
+    "배치 APK 빌드 시스템 구축",
+    "Play Store 에셋 자동 생성",
+    "마케팅 자동화 설정"
+  ]
+}

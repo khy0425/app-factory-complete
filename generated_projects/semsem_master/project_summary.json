@@ -1,0 +1,12 @@
+{
+  "app_name": "semsem_master",
+  "original_idea": "간단한 암산 연습 앱",
+  "generated_date": "2025-09-21",
+  "status": "planning_complete",
+  "next_steps": [
+    "Flutter 프로젝트 생성",
+    "코드 구현",
+    "Play Store 에셋 생성",
+    "테스트 및 배포"
+  ]
+}

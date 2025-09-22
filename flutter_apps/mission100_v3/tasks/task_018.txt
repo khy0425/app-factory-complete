@@ -1,0 +1,83 @@
+# Task ID: 18
+# Title: Workout Calendar Implementation
+# Status: done
+# Dependencies: 4, 11
+# Priority: low
+# Description: Implement the calendar view for tracking workout history
+# Details:
+1. Create a calendar widget using table_calendar or custom implementation
+2. Implement features:
+   - Visual indicators for completed workouts
+   - Different markers for full vs. partial completion
+   - Day selection for viewing workout details
+   - Week/month view toggle
+   - Current program day highlighting
+3. Connect to WorkoutSession repository for data
+4. Add animations for selection and transitions
+5. Implement workout summary on day selection
+
+Example implementation:
+```dart
+Widget buildWorkoutCalendar(List<WorkoutSession> sessions) {
+  // Convert sessions to calendar event format
+  // Configure calendar appearance and behavior
+  // Add event handlers for day selection
+  // Return configured calendar widget
+}
+```
+
+# Test Strategy:
+Test calendar rendering with different data sets. Verify correct markers for workout states. Test day selection and detail view. Perform widget tests for key components.
+
+# Subtasks:
+## 1. Set up basic calendar widget structure [done]
+### Dependencies: None
+### Description: Create the foundation for the workout calendar by implementing a basic calendar widget using table_calendar or a custom implementation with proper styling and layout.
+### Details:
+1. Add table_calendar dependency to pubspec.yaml
+2. Create a new CalendarWidget class that extends StatefulWidget
+3. Implement basic calendar configuration with month/week view toggle
+4. Set up the calendar's visual styling (colors, text styles, header format)
+5. Create a basic layout structure that will later contain the calendar and workout summary section
+
+## 2. Implement workout data integration with calendar [done]
+### Dependencies: None
+### Description: Connect the calendar to the WorkoutSession repository to fetch and display workout history data on the calendar.
+### Details:
+1. Create a method to convert WorkoutSession objects to calendar-compatible event format
+2. Implement data fetching from WorkoutSession repository
+3. Set up StreamBuilder or FutureBuilder to handle async data loading
+4. Create event markers with different styles for completed vs. partial workouts
+5. Implement current program day highlighting logic
+
+## 3. Implement day selection and event handling [done]
+### Dependencies: None
+### Description: Add functionality to handle day selection on the calendar and display appropriate workout information when a day is selected.
+### Details:
+1. Implement onDaySelected callback in the calendar widget
+2. Create a state variable to track the currently selected date
+3. Add visual indicator for the selected day
+4. Implement logic to determine if selected day has workout data
+5. Set up event propagation to parent widgets for handling selection
+
+## 4. Create workout summary display component [done]
+### Dependencies: None
+### Description: Implement the UI component that shows workout details when a specific day is selected on the calendar.
+### Details:
+1. Create a new WorkoutSummaryCard widget
+2. Design layout to show workout name, completion status, duration, and key metrics
+3. Implement conditional rendering based on workout completion status
+4. Add styling for different workout types or completion states
+5. Connect the summary display to the selected date from the calendar
+
+## 5. Add animations and final integration [done]
+### Dependencies: None
+### Description: Implement animations for calendar interactions and finalize the integration of all components into a cohesive workout calendar feature.
+### Details:
+1. Add animations for day selection using AnimatedContainer or custom animations
+2. Implement smooth transitions between week/month views
+3. Add loading animations when fetching workout data
+4. Create animated transitions when showing/hiding the workout summary
+5. Perform final integration testing and optimize performance
+6. Add error handling for missing data scenarios
+

@@ -1,0 +1,45 @@
+{
+  "app": {
+    "name": "Daily Habits",
+    "package_name": "com.example.dailyhabits",
+    "version": "1.0.0",
+    "description": "매일 습관을 기록하고 관리하는 앱",
+    "author": "Habit Apps Team"
+  },
+  "theme": {
+    "primary_color": "#4CAF50",
+    "secondary_color": "#2196F3",
+    "accent_color": "#FF9800",
+    "font_family": "Roboto",
+    "is_dark_mode": false
+  },
+  "features": {
+    "timer_enabled": false,
+    "habit_tracking_enabled": true,
+    "statistics_enabled": true,
+    "achievements_enabled": true,
+    "social_sharing_enabled": true,
+    "backup_enabled": true,
+    "notifications_enabled": true
+  },
+  "ads": {
+    "android_app_id": "YOUR_ANDROID_APP_ID",
+    "android_banner_id": "YOUR_ANDROID_BANNER_ID",
+    "android_interstitial_id": "YOUR_ANDROID_INTERSTITIAL_ID",
+    "android_rewarded_id": "YOUR_ANDROID_REWARDED_ID",
+    "ios_app_id": "YOUR_IOS_APP_ID",
+    "ios_banner_id": "YOUR_IOS_BANNER_ID",
+    "ios_interstitial_id": "YOUR_IOS_INTERSTITIAL_ID",
+    "ios_rewarded_id": "YOUR_IOS_REWARDED_ID",
+    "enable_banner_ads": true,
+    "enable_interstitial_ads": true,
+    "enable_rewarded_ads": false,
+    "test_device_ids": []
+  },
+  "payment": {
+    "subscription_enabled": false,
+    "one_time_purchase_enabled": true,
+    "subscription_product_ids": [],
+    "one_time_product_ids": ["premium_version", "remove_ads"]
+  }
+}

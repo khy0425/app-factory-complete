@@ -1,0 +1,126 @@
+{
+  "admob_automation_date": "2025-09-21",
+  "total_apps": 9,
+  "successful_setups": 9,
+  "results": [
+    {
+      "app_name": "calm_breath",
+      "admob_dir": "generated_projects\\calm_breath\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "catchy",
+      "admob_dir": "generated_projects\\catchy\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "colorpop_pangpang",
+      "admob_dir": "generated_projects\\colorpop_pangpang\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "meditation_app",
+      "admob_dir": "generated_projects\\meditation_app\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "mindbreath",
+      "admob_dir": "generated_projects\\mindbreath\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "momento",
+      "admob_dir": "generated_projects\\momento\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "sanchaekgil_friend",
+      "admob_dir": "generated_projects\\sanchaekgil_friend\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "semsem_master",
+      "admob_dir": "generated_projects\\semsem_master\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    },
+    {
+      "app_name": "stepup",
+      "admob_dir": "generated_projects\\stepup\\admob_setup",
+      "files_created": [
+        "admob_setup_guide.md",
+        "admob_service.dart",
+        "revenue_optimization.md",
+        "admob_ids.json",
+        "apply_admob.sh"
+      ],
+      "status": "success"
+    }
+  ],
+  "next_steps": [
+    "각 앱별 AdMob 계정에서 실제 광고 단위 생성",
+    "실제 AdMob ID로 테스트 ID 교체",
+    "앱별 수익 최적화 전략 실행",
+    "AdMob 정책 준수 확인"
+  ],
+  "revenue_potential": {
+    "per_app_monthly": "$50-200",
+    "total_monthly_estimate": "$450-1800",
+    "optimization_upside": "300-500% with proper optimization"
+  }
+}

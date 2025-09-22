@@ -1,0 +1,79 @@
+# Task ID: 56
+# Title: Fix Achievement Tracking in Workout Screen
+# Status: pending
+# Dependencies: 9, 10, 55
+# Priority: high
+# Description: Fix the achievement tracking issue in workout_screen.dart by correcting the method call from checkAndUpdateAchievements to checkAchievements and ensuring proper data transmission for push-up count and workout duration.
+# Details:
+This task involves fixing a critical bug in the achievement tracking system that prevents users from properly earning achievements after completing workouts. The implementation requires:
+
+1. Locate and modify the method call in workout_screen.dart:
+   - Find all instances where `checkAndUpdateAchievements` is being called
+   - Replace with the correct method name `checkAchievements`
+   - Ensure the method signature matches the implementation in the achievements service
+
+2. Fix data transmission to the achievement checking system:
+   - Identify where workout completion data is being processed
+   - Ensure the push-up count (total reps completed) is correctly calculated and passed to the achievement checking method
+   - Verify that workout duration is properly tracked from start to finish and passed to the achievement checking method
+   - Check for any data type mismatches or formatting issues in the parameters
+
+3. Review the achievement checking logic:
+   - Ensure achievement conditions are being evaluated correctly
+   - Verify that achievements are properly marked as completed when conditions are met
+   - Check for any edge cases that might prevent achievements from triggering
+
+4. Implementation example:
+```dart
+// Before (incorrect implementation)
+void _completeWorkout() {
+  // Other workout completion logic
+  achievementService.checkAndUpdateAchievements(); // Wrong method name and missing parameters
+}
+
+// After (corrected implementation)
+void _completeWorkout() {
+  // Other workout completion logic
+  final int totalPushups = _calculateTotalPushups();
+  final Duration workoutDuration = _calculateWorkoutDuration();
+  
+  achievementService.checkAchievements(
+    pushupCount: totalPushups,
+    workoutDuration: workoutDuration,
+  );
+}
+```
+
+5. Add logging to verify data is being passed correctly:
+   - Implement debug logging before and after the achievement check call
+   - Log the values being passed to help with troubleshooting
+
+# Test Strategy:
+To verify this fix has been properly implemented:
+
+1. Code Review:
+   - Confirm all instances of `checkAndUpdateAchievements` have been replaced with `checkAchievements`
+   - Verify parameter types and names match the method signature
+   - Check that push-up count and workout duration calculations are accurate
+
+2. Manual Testing:
+   - Test achievement triggering with different workout scenarios:
+     - Complete a workout with exactly the number of push-ups needed for an achievement
+     - Complete a workout with duration matching a time-based achievement
+     - Complete multiple workouts to trigger streak-based achievements
+   - Verify achievements appear in the achievements screen after conditions are met
+   - Test edge cases like very short workouts or workouts with modified rep counts
+
+3. Debug Logging Verification:
+   - Review logs to confirm correct data is being passed to the achievement checking method
+   - Verify achievement conditions are being evaluated with the correct values
+
+4. Regression Testing:
+   - Ensure other workout functionality still works correctly
+   - Verify workout history is still properly recorded
+   - Check that workout statistics are still accurate
+
+5. User Scenario Testing:
+   - Complete a full workout flow from start to finish
+   - Verify achievement notifications appear when conditions are met
+   - Check the achievements screen to confirm newly unlocked achievements are displayed correctly

@@ -1,0 +1,124 @@
+{
+  "filtered_keywords": [
+    {
+      "keyword": "타이머",
+      "final_score": 4.048,
+      "relevance": 2.0,
+      "search_potential": 5.359999999999999,
+      "competition": "medium"
+    },
+    {
+      "keyword": "습관을",
+      "final_score": 3.6479999999999997,
+      "relevance": 1.0,
+      "search_potential": 5.359999999999999,
+      "competition": "medium"
+    },
+    {
+      "keyword": "집중",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "시간을",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "실제",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "함께",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "나무를",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "시간",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "모든",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "나무와",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "스톱워치",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "나무",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "숲을",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    },
+    {
+      "keyword": "나만의",
+      "final_score": 2.422,
+      "relevance": 1.0,
+      "search_potential": 3.4,
+      "competition": "low"
+    }
+  ],
+  "categorized_keywords": {
+    "primary": [
+      "타이머"
+    ],
+    "secondary": [
+      "습관을"
+    ],
+    "long_tail": [
+      "집중",
+      "시간을",
+      "실제",
+      "함께",
+      "나무를"
+    ],
+    "action_words": [],
+    "benefit_words": []
+  },
+  "aso_recommendations": [
+    "핵심 키워드 활용: 타이머",
+    "저경쟁 키워드 공략: 집중, 시간을, 실제"
+  ],
+  "filter_applied_at": "2025-09-20T04:54:11.953543"
+}

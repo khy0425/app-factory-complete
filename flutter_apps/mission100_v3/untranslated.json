@@ -1,0 +1,18 @@
+{
+  "en": [
+    "dataManagement",
+    "dataManagementDesc",
+    "appInfo",
+    "appInfoDesc",
+    "dataResetComingSoon",
+    "githubRepository",
+    "feedbackEmail",
+    "developerContact",
+    "openGithub",
+    "emailFeedback",
+    "cannotOpenEmail",
+    "cannotOpenGithub",
+    "appVersion",
+    "builtWithFlutter"
+  ]
+}

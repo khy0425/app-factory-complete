@@ -1,0 +1,27 @@
+{
+  "app_name": "momento",
+  "note": "⚠️ 실제 사용시 AdMob 콘솔에서 생성된 ID로 교체 필요",
+  "android": {
+    "app_id": "ca-app-pub-XXXXXXXXXX~7113724946",
+    "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/71137249461",
+    "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/71137249462",
+    "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/71137249463"
+  },
+  "ios": {
+    "app_id": "ca-app-pub-XXXXXXXXXX~71137249464",
+    "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/71137249465",
+    "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/71137249466",
+    "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/71137249467"
+  },
+  "test_ids": {
+    "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+    "android_banner": "ca-app-pub-3940256099942544/6300978111",
+    "android_interstitial": "ca-app-pub-3940256099942544/1033173712",
+    "android_rewarded": "ca-app-pub-3940256099942544/5224354917",
+    "ios_app_id": "ca-app-pub-3940256099942544~1458002511",
+    "ios_banner": "ca-app-pub-3940256099942544/2934735716",
+    "ios_interstitial": "ca-app-pub-3940256099942544/4411468910",
+    "ios_rewarded": "ca-app-pub-3940256099942544/1712485313"
+  },
+  "setup_required": true
+}

@@ -1,0 +1,29 @@
+# Task ID: 10
+# Title: Workout Session Logic Implementation
+# Status: done
+# Dependencies: 4, 9
+# Priority: high
+# Description: Implement the logic for tracking and saving workout sessions
+# Details:
+1. Create a WorkoutSessionController class
+2. Implement methods to:
+   - Start a new workout session
+   - Track completed reps for each set
+   - Calculate total reps and workout duration
+   - Mark sets and full workout as completed
+   - Save workout data to database
+3. Implement validation to ensure data integrity
+4. Add logic to handle partial workout completion
+5. Implement workout summary generation
+
+Example method:
+```dart
+Future<void> completeSet(int setIndex, int completedReps) async {
+  // Update current workout session with completed reps
+  // Check if all sets are completed
+  // Update database
+}
+```
+
+# Test Strategy:
+Write unit tests for workout session logic. Test set completion, workout completion, and data persistence. Test edge cases like partial workouts or missed workouts.

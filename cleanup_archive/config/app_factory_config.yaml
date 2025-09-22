@@ -1,0 +1,95 @@
+# Flutter App Factory Configuration
+# 앱 팩토리 전역 설정 파일
+
+factory:
+  name: "Flutter App Factory"
+  version: "1.0.0"
+  output_dir: "../../generated_apps"
+
+templates:
+  mission100:
+    path: "../templates/mission100"
+    features:
+      - daily_mission
+      - progress_tracking
+      - achievements
+      - social_sharing
+      - notifications
+      - multi_language
+      - dark_mode
+
+    default_config:
+      primary_color: "#FF5722"
+      secondary_color: "#FFC107"
+      font_family: "Pretendard"
+
+    languages:
+      - ko
+      - en
+      - ja
+      - zh
+
+marketing:
+  aso:
+    min_keyword_length: 2
+    max_keywords: 100
+    optimize_for_countries:
+      - KR
+      - US
+      - JP
+
+  content:
+    blog_platforms:
+      - medium
+      - tistory
+      - naver
+
+    social_platforms:
+      - twitter
+      - facebook
+      - instagram
+      - linkedin
+
+deployment:
+  google_play:
+    track_progression:
+      - internal
+      - alpha
+      - beta
+      - production
+
+    rollout_percentage:
+      alpha: 10
+      beta: 50
+      production: 100
+
+  app_store:
+    testflight:
+      beta_review_required: true
+      external_testing_enabled: true
+
+    submission:
+      auto_release: false
+      phased_release: true
+
+automation:
+  schedule:
+    marketing_check: "0 9 * * *"  # 매일 오전 9시
+    review_monitoring: "*/30 * * * *"  # 30분마다
+    performance_check: "0 0 * * 0"  # 매주 일요일 자정
+
+  notifications:
+    email: "admin@appfactory.com"
+    slack_webhook: ""
+    discord_webhook: ""
+
+api_keys:
+  google_play_console: "${GOOGLE_PLAY_API_KEY}"
+  app_store_connect: "${APP_STORE_CONNECT_KEY}"
+  openai: "${OPENAI_API_KEY}"
+  firebase: "${FIREBASE_API_KEY}"
+
+limits:
+  max_concurrent_builds: 3
+  max_app_size_mb: 150
+  min_flutter_version: "3.10.0"

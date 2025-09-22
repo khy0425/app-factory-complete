@@ -1,0 +1,71 @@
+# Task ID: 15
+# Title: Motivational Message System Implementation
+# Status: done
+# Dependencies: 8, 9
+# Priority: low
+# Description: Implement the system for displaying motivational Chad quotes and messages
+# Details:
+1. Create a MotivationalMessageService class
+2. Implement different message categories as specified in PRD:
+   - Workout start messages (e.g., "Real Chads don't make excuses")
+   - Set completion messages (e.g., "That's what I'm talking about!")
+   - Workout completion messages (e.g., "Another step closer to Chad")
+   - Rest day messages (e.g., "Even Chads need rest, but not too much")
+   - Goal achievement messages (e.g., "Welcome to the Chad Brotherhood")
+   - Failure/success feedback messages
+   - Encouragement messages
+   - Milestone messages
+   - Comeback messages
+3. Implement random message selection with weighting
+4. Add context-aware message selection based on user progress
+5. Integrate with UserLevel enum for level-based message filtering
+6. Implement UI overlay for displaying messages with Chad icon
+
+Example method:
+```dart
+String getWorkoutStartMessage(UserProfile profile) {
+  // Select appropriate message based on profile and randomization
+  // Return motivational message string
+}
+```
+
+# Test Strategy:
+Test message selection logic for different scenarios. Verify appropriate messages are shown in the correct contexts. Test randomization to ensure variety. Verify level-based filtering works correctly. Test UI overlay appearance and dismissal functionality.
+
+# Subtasks:
+## 15.1. MotivationalMessageService Implementation [completed]
+### Dependencies: None
+### Description: Implemented MotivationalMessageService class with 10 message categories and 40+ Chad-style messages
+### Details:
+
+
+## 15.2. UserLevel Enum Extension [completed]
+### Dependencies: None
+### Description: Added levelValue extension method to UserLevel enum (1, 25, 50, 75) and integrated with motivational message system
+### Details:
+
+
+## 15.3. Workout Screen Integration [completed]
+### Dependencies: None
+### Description: Integrated motivational messages into workout_screen.dart for workout start, set completion, and workout completion events
+### Details:
+
+
+## 15.4. Message Categories Implementation [completed]
+### Dependencies: None
+### Description: Implemented all 10 message categories: workoutStart, setCompletion, workoutCompletion, restDay, goalAchievement, failure, success, encouragement, milestone, comeback
+### Details:
+
+
+## 15.5. UI/UX Implementation [completed]
+### Dependencies: None
+### Description: Created modal overlay UI for displaying messages with Chad icon, auto-dismiss timer, and manual close button
+### Details:
+
+
+## 15.6. Technical Implementation [completed]
+### Dependencies: None
+### Description: Implemented MessageCategory enum, MotivationalMessage class, weighted selection algorithm, and context-based message selection
+### Details:
+
+

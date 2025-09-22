@@ -1,0 +1,52 @@
+# Task ID: 32
+# Title: Task #32: Add Bottom Banner Advertisement to Home/Splash Screen with Language Toggle Integration
+# Status: done
+# Dependencies: None
+# Priority: medium
+# Description: Implement a bottom banner advertisement on the home/splash screen that displays naturally whenever users launch the app, maximizing ad revenue while ensuring harmonious placement with the language toggle button.
+# Details:
+1. Design and implement a non-intrusive banner advertisement container at the bottom of the home/splash screen.
+2. Integrate with the existing ad network provider (likely AdMob based on previous tasks).
+3. Configure the ad to load immediately when the app launches to maximize impression opportunities.
+4. Ensure the banner placement doesn't interfere with critical UI elements, especially the language toggle button.
+5. Implement responsive design to accommodate different screen sizes:
+   - For smaller screens: Ensure minimum height for the ad while maintaining visibility of all UI elements
+   - For larger screens: Optimize ad placement for aesthetic balance
+6. Add proper padding/margins around the banner to maintain visual harmony with existing UI elements.
+7. Implement ad refresh logic to periodically reload new advertisements (recommended every 60 seconds).
+8. Handle ad loading failures gracefully - if an ad fails to load, the space should collapse or be filled with a placeholder.
+9. Ensure the language toggle button remains fully functional and visually prominent despite the new ad placement.
+10. Add analytics tracking to monitor ad performance metrics (impressions, clicks, revenue).
+11. Implement A/B testing capability to compare different ad placements and their impact on user engagement.
+12. Optimize ad loading to minimize impact on app startup time and overall performance.
+
+# Test Strategy:
+1. Functional Testing:
+   - Verify the banner ad appears correctly on app launch across multiple device types and screen sizes
+   - Confirm the ad loads properly in both online and offline scenarios (showing appropriate fallbacks when offline)
+   - Test that the language toggle button remains fully functional with the new ad placement
+   - Verify ad refresh functionality works as expected at the configured intervals
+
+2. Performance Testing:
+   - Measure app launch time before and after implementation to ensure minimal impact
+   - Monitor memory usage to confirm the ad implementation doesn't cause memory leaks
+   - Test on low-end devices to ensure performance remains acceptable
+
+3. Visual/UI Testing:
+   - Verify the banner ad and language toggle button are visually harmonious on all supported screen sizes
+   - Confirm proper rendering in both light and dark themes (if applicable)
+   - Ensure no UI elements overlap or get cut off with the new ad placement
+
+4. User Experience Testing:
+   - Conduct user testing to gather feedback on the ad placement and its impact on overall experience
+   - Verify the ad doesn't obstruct important content or functionality
+   - Test accessibility features to ensure the app remains usable with screen readers and other assistive technologies
+
+5. Revenue Verification:
+   - Confirm ad impressions are being properly counted in the ad network dashboard
+   - Verify click-through functionality works correctly
+   - Monitor revenue metrics to ensure the implementation is generating expected income
+
+6. Compliance Testing:
+   - Verify the implementation complies with ad network policies and guidelines
+   - Ensure proper consent mechanisms are in place for regions with specific privacy regulations (GDPR, CCPA)

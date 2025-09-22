@@ -1,0 +1,184 @@
+# Task ID: 13
+# Title: Settings Screen Implementation
+# Status: done
+# Dependencies: 3
+# Priority: low
+# Description: Implement the settings screen for app configuration
+# Details:
+1. Create a settings screen with options for:
+   - Level reset (retake initial test)
+   - Notification settings
+   - Rest timer duration adjustment
+   - Data backup/restore
+   - App theme (optional)
+   - Sound effects toggle
+2. Implement settings persistence using shared preferences
+3. Add confirmation dialogs for destructive actions
+4. Implement settings change handlers
+5. Add about section with app information
+
+# Test Strategy:
+Test each setting option for correct behavior. Verify settings persistence across app restarts. Test confirmation dialogs and navigation. Perform widget tests for key components.
+
+# Subtasks:
+## 1. Create Settings Screen UI Layout [done]
+### Dependencies: None
+### Description: Design and implement the basic UI layout for the settings screen with all required options
+### Details:
+Create a new SettingsActivity or SettingsFragment with a ScrollView containing all setting options. Implement UI elements for level reset, notification settings, rest timer duration (use a slider or number picker), data backup/restore buttons, theme selection (dropdown/radio buttons), sound effects toggle (switch), and an about section. Use appropriate spacing, grouping, and headers for organization. Follow the app's design language for consistency.
+<info added on 2025-05-28T07:00:32.123Z>
+Add a "Chad Evolution Notifications" section to the settings screen with the following toggle switches:
+1. Evolution Completion Notification (default: enabled) - Notifies when a Chad evolution is completed
+2. Evolution Preview Notification (default: enabled) - Sends a notification 1 week before evolution
+3. Evolution Encouragement Notification (default: enabled) - Sends a motivational notification 3 days before evolution
+
+Ensure these new notification settings follow the same UI/UX pattern as existing notification settings. Implement using the existing notification permission management system and store preferences using the established SharedPreferences implementation.
+</info added on 2025-05-28T07:00:32.123Z>
+
+## 2. Implement Settings Persistence with SharedPreferences [done]
+### Dependencies: 13.1
+### Description: Create a settings manager class to handle reading and writing settings to SharedPreferences
+### Details:
+Create a SettingsManager class that uses SharedPreferences to store and retrieve all settings values. Define constants for preference keys. Implement methods for getting/setting each preference type with appropriate default values. Create a method to reset all preferences to defaults. Use apply() for asynchronous writes and commit() only when immediate confirmation is needed.
+<info added on 2025-05-28T07:02:51.914Z>
+The SettingsManager implementation has been completed with the following features:
+
+- SharedPreferences integration for persistent settings storage
+- Comprehensive loading system via _loadSettings() method that initializes all settings at app startup
+- Specialized saving methods including _saveBoolSetting() for boolean values and _saveReminderTime() for time settings
+- Appropriate default values for all settings
+
+Successfully implemented settings include:
+- achievement_notifications
+- workout_reminders
+- push_notifications
+- chad_evolution_notifications
+- chad_evolution_preview_notifications
+- chad_evolution_encouragement_notifications
+- reminder_time
+
+Additional settings managed through dedicated services:
+- Dark mode (ThemeService)
+- Language settings (LocaleService)
+- Difficulty settings (DifficultyService)
+
+This subtask is now complete.
+</info added on 2025-05-28T07:02:51.914Z>
+
+## 3. Connect UI Controls to Settings Manager [done]
+### Dependencies: 13.1, 13.2
+### Description: Link the UI elements to the settings manager to display current values and handle user changes
+### Details:
+Update the settings screen to initialize UI controls with current values from SettingsManager. Implement listeners for each control to update SharedPreferences when changed. For switches and checkboxes, use setOnCheckedChangeListener. For sliders, use setOnSeekBarChangeListener. For dropdowns, use setOnItemSelectedListener. Ensure UI updates immediately reflect changes to provide visual feedback.
+<info added on 2025-05-28T07:03:43.236Z>
+테마 커스터마이징 기능을 위한 설정 화면 업데이트:
+
+1. 테마 섹션에 색상 선택 옵션 추가:
+   - 색상 팔레트 그리드 뷰 구현
+   - 선택된 색상에 체크 표시 표시
+   - 색상 선택 시 ThemeService.setThemeColor() 호출
+
+2. 폰트 크기 설정 추가:
+   - RadioButton 그룹으로 작게/보통/크게 옵션 제공
+   - 선택 시 SettingsManager.setFontScale() 호출
+   - 미리보기 텍스트 샘플 표시
+
+3. 애니메이션 효과 설정:
+   - Switch 컴포넌트로 애니메이션 켜기/끄기 구현
+   - 상태 변경 시 SettingsManager.setAnimationsEnabled() 호출
+
+4. 고대비 모드 설정:
+   - Switch 컴포넌트로 고대비 모드 켜기/끄기 구현
+   - 상태 변경 시 ThemeService.setHighContrastMode() 호출
+
+모든 설정은 SharedPreferences에 즉시 저장되고 UI에 실시간으로 반영되도록 구현합니다. ThemeService와 Provider 패턴을 활용하여 앱 전체에 테마 변경사항이 즉시 적용되도록 합니다.
+</info added on 2025-05-28T07:03:43.236Z>
+
+## 4. Implement Confirmation Dialogs and Action Handlers [done]
+### Dependencies: 13.3
+### Description: Add confirmation dialogs for destructive actions and implement handlers for all settings changes
+### Details:
+Create AlertDialog prompts for destructive actions like level reset and data operations. Implement the actual functionality for each setting: level reset (clear progress data), notification settings (configure system notifications), rest timer adjustments (update timer duration), data backup/restore (implement file I/O operations), theme changes (apply theme changes immediately), and sound effects toggle (enable/disable sound manager). Each handler should be triggered by the appropriate UI interaction.
+<info added on 2025-05-28T07:07:39.830Z>
+구현 진행 상황:
+
+1. 레벨 리셋 확인 다이얼로그:
+   - 사용자에게 모든 진행 상황이 삭제된다는 경고 메시지 표시
+   - "취소" 및 "초기화" 버튼 구현
+   - DataService.resetProgress() 메서드와 연결
+
+2. 데이터 백업/복원:
+   - 백업 파일 생성 및 저장 기능 구현 (JSON 형식)
+   - 파일 선택기를 통한 백업 파일 로드 기능
+   - 백업/복원 작업 전 확인 다이얼로그 표시
+
+3. 사운드 효과 토글:
+   - SoundManager와 연결하여 효과음 활성화/비활성화
+   - 설정 변경 시 즉시 적용되도록 구현
+
+4. 파괴적 작업 확인 다이얼로그:
+   - AlertDialog.Builder 사용하여 표준화된 확인 다이얼로그 생성
+   - 각 작업의 위험도에 따라 경고 메시지 차별화
+   - 실수로 인한 데이터 손실 방지
+
+5. 설정 변경 피드백:
+   - 설정 변경 성공 시 Toast 메시지 또는 Snackbar 표시
+   - 오류 발생 시 적절한 오류 메시지 표시
+
+모든 다이얼로그는 앱의 테마와 일관된 디자인으로 구현하고, 사용자 경험을 고려하여 직관적인 UI/UX 제공.
+</info added on 2025-05-28T07:07:39.830Z>
+
+## 5. Create About Section and Final Integration [done]
+### Dependencies: 13.4
+### Description: Implement the about section with app information and ensure all settings are properly integrated with the rest of the app
+### Details:
+Create the about section with app version, developer info, and any required legal notices. Ensure all app components observe settings changes: update notification scheduling based on notification settings, apply theme changes app-wide, ensure sound effects respect toggle state, etc. Add navigation to the settings screen from appropriate places in the app (e.g., main menu). Perform final testing and refinement of the entire settings experience.
+<info added on 2025-05-28T07:10:12.068Z>
+# About 섹션 구현 계획
+
+## 구현할 About 섹션 내용:
+1. 앱 버전 정보 (pubspec.yaml에서 가져오기)
+2. 개발자 정보
+3. 라이선스 정보
+4. 개인정보 처리방침 링크
+5. 이용약관 링크
+6. 오픈소스 라이브러리 정보
+7. 문의하기 기능
+
+## 기술적 구현:
+- package_info_plus 패키지를 사용하여 앱 버전 정보 가져오기
+- url_launcher 패키지를 사용하여 외부 링크(개인정보 처리방침, 이용약관 등) 열기
+- About 섹션을 설정 화면 하단에 배치
+
+## 최종 통합 작업:
+1. 설정 화면 네비게이션 확인
+2. 모든 설정이 앱 전체에 올바르게 적용되는지 확인
+3. 테마 변경 시 실시간 반영 확인
+4. 알림 설정 변경 시 NotificationService와 연동 확인
+5. 설정 지속성 테스트 (앱 재시작 후에도 설정 유지)
+</info added on 2025-05-28T07:10:12.068Z>
+<info added on 2025-05-28T07:14:19.437Z>
+# About 섹션 구현 완료 보고
+
+## About 섹션 완성 내역:
+- 라이선스 정보 페이지 구현 완료 (Flutter의 showLicensePage 메서드 활용)
+- 개인정보 처리방침 및 이용약관 링크 추가 및 url_launcher 연동
+- URL 열기 실패 시 사용자에게 안내하는 대체 다이얼로그 구현
+- PackageInfo 패키지를 활용하여 버전 정보 다이얼로그 동적 구현
+- 기술 스택 정보 및 앱 상세 정보 섹션 추가
+
+## Chad 이미지 에셋 관련 문제 해결:
+- ChadImageService 내 파일 경로를 실제 assets 디렉토리의 파일명과 일치하도록 수정
+- home_screen.dart의 fallback 이미지 경로 수정 완료
+- 모든 Chad 이미지가 올바른 한글 파일명으로 참조되도록 수정하여 이미지 로딩 오류 해결
+
+## 최종 통합 테스트 결과:
+- 설정 화면의 모든 기능 정상 작동 확인
+- 테마 변경 시 앱 전체에 실시간으로 변경사항 반영 확인
+- 알림 설정이 NotificationService와 정상적으로 연동됨
+- Chad Evolution 알림 설정이 ChadEvolutionService와 연동 확인
+- SharedPreferences를 통한 설정 지속성 보장 (앱 재시작 후에도 설정 유지)
+
+모든 About 섹션 구현 및 최종 통합 작업이 완료되었습니다.
+</info added on 2025-05-28T07:14:19.437Z>
+

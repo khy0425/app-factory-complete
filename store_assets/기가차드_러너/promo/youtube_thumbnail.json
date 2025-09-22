@@ -1,0 +1,12 @@
+{
+  "app_name": "기가차드 러너",
+  "concept": {
+    "name": "youtube_thumbnail",
+    "size": "1280x720",
+    "description": "YouTube 썸네일"
+  },
+  "dimensions": "1280x720",
+  "type": "promo_image",
+  "generated_at": "2025-09-21T15:48:06.892504",
+  "size_kb": 200
+}

@@ -1,0 +1,296 @@
+# Task ID: 25
+# Title: App Launch and Splash Screen Implementation
+# Status: done
+# Dependencies: 24
+# Priority: low
+# Description: Implement the app launch experience and splash screen
+# Details:
+1. Create a branded splash screen with:
+   - App logo and name
+   - Chad character animation
+   - Loading indicator
+   - Transition to onboarding or home screen
+2. Implement app initialization logic during splash
+3. Add data preloading for faster startup
+4. Implement version checking
+5. Add smooth transition animations
+
+Implementation details:
+
+## Completed Implementation:
+1. **Branded splash screen**:
+   - App logo and name display
+   - Fitness icons aligned with Chad theme
+   - Loading indicator
+   - Smooth transition to onboarding/home screen
+
+2. **Engaging animation effects**:
+   - Logo rotation animation (0.0-0.7 interval)
+   - Logo scale animation (0.2-0.8 interval, elasticOut effect)
+   - Overall fade-in animation (0.0-0.6 interval)
+   - App name delayed fade-in (0.4-1.0 interval)
+   - Subtitle delayed fade-in (0.6-1.0 interval)
+   - Loading indicator delayed fade-in (0.8-1.0 interval)
+
+3. **App initialization logic**:
+   - Permission checks (notifications, storage)
+   - Onboarding completion verification
+   - Automatic navigation to appropriate screen
+   - 2.5 seconds animation + 1 second wait time
+
+4. **Data preloading**:
+   - Background preloading of Chad images
+   - Service initialization (theme, locale, notifications, Chad evolution)
+
+5. **Smooth transition animations**:
+   - Screen transitions via MaterialPageRoute
+   - Navigation after animation completion
+
+## Technical implementation:
+- SingleTickerProviderStateMixin usage
+- Multiple animation controllers (fade, scale, rotation)
+- Sequential animations through Intervals
+- Dark/light theme support
+- Responsive design
+
+Example implementation:
+```dart
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _rotationAnimation;
+  late Animation<double> _titleFadeAnimation;
+  late Animation<double> _subtitleFadeAnimation;
+  late Animation<double> _loaderFadeAnimation;
+  
+  @override
+  void initState() {
+    super.initState();
+    _setupAnimations();
+    _initialize();
+  }
+  
+  void _setupAnimations() {
+    _controller = AnimationController(
+      duration: Duration(milliseconds: 2500),
+      vsync: this,
+    );
+    
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.0, 0.6, curve: Curves.easeIn),
+      ),
+    );
+    
+    _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.2, 0.8, curve: Curves.elasticOut),
+      ),
+    );
+    
+    _rotationAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.0, 0.7, curve: Curves.easeInOut),
+      ),
+    );
+    
+    _titleFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.4, 1.0, curve: Curves.easeIn),
+      ),
+    );
+    
+    _subtitleFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.6, 1.0, curve: Curves.easeIn),
+      ),
+    );
+    
+    _loaderFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(0.8, 1.0, curve: Curves.easeIn),
+      ),
+    );
+    
+    _controller.forward();
+  }
+  
+  Future<void> _initialize() async {
+    // Initialize app services
+    await _preloadData();
+    await _checkPermissions();
+    
+    // Wait for animation to complete plus 1 second
+    await Future.delayed(Duration(milliseconds: 3500));
+    
+    // Check if user exists and navigate
+    bool onboardingCompleted = await _checkOnboardingStatus();
+    _navigateToNextScreen(onboardingCompleted);
+  }
+  
+  Future<void> _preloadData() async {
+    // Preload Chad images
+    // Initialize services (theme, locale, notifications)
+  }
+  
+  Future<void> _checkPermissions() async {
+    // Check notification and storage permissions
+  }
+  
+  Future<bool> _checkOnboardingStatus() async {
+    // Check if onboarding is completed
+    return false; // Replace with actual implementation
+  }
+  
+  void _navigateToNextScreen(bool onboardingCompleted) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => onboardingCompleted ? HomeScreen() : OnboardingScreen(),
+      ),
+    );
+  }
+  
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Logo with rotation and scale animations
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return Transform.rotate(
+                  angle: _rotationAnimation.value * 2 * 3.14,
+                  child: Transform.scale(
+                    scale: _scaleAnimation.value,
+                    child: FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: Image.asset(
+                        'assets/images/chad_logo.png',
+                        width: 120,
+                        height: 120,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: 24),
+            // App name with delayed fade-in
+            FadeTransition(
+              opacity: _titleFadeAnimation,
+              child: Text(
+                'CHAD FITNESS',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 8),
+            // Subtitle with delayed fade-in
+            FadeTransition(
+              opacity: _subtitleFadeAnimation,
+              child: Text(
+                'Your Personal Fitness Companion',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ),
+            SizedBox(height: 48),
+            // Loading indicator with delayed fade-in
+            FadeTransition(
+              opacity: _loaderFadeAnimation,
+              child: CircularProgressIndicator(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+# Test Strategy:
+1. Test initialization logic and timing:
+   - Verify all animations execute in the correct sequence
+   - Confirm the 2.5s animation + 1s wait time works as expected
+   - Test permission checking functionality
+
+2. Verify correct navigation after splash:
+   - Test navigation to onboarding for new users
+   - Test navigation to home screen for returning users
+
+3. Test with different app states:
+   - New user flow
+   - Returning user flow
+   - Different permission states
+
+4. Perform widget tests for splash screen:
+   - Test responsive design on different screen sizes
+   - Verify dark/light theme support
+   - Test animation controllers and sequences
+
+5. Visual verification:
+   - Confirm all animations render smoothly
+   - Verify logo, text, and loading indicator appear correctly
+   - Check for any visual glitches during transitions
+
+# Subtasks:
+## 25.1. Create branded splash screen [done]
+### Dependencies: None
+### Description: Implemented splash screen with app logo, name, Chad-themed fitness icons, loading indicator, and smooth transitions
+### Details:
+
+
+## 25.2. Implement animation effects [done]
+### Dependencies: None
+### Description: Added multiple animations: logo rotation (0.0-0.7), logo scale (0.2-0.8), fade-in (0.0-0.6), app name fade (0.4-1.0), subtitle fade (0.6-1.0), and loading indicator fade (0.8-1.0)
+### Details:
+
+
+## 25.3. Implement app initialization logic [done]
+### Dependencies: None
+### Description: Added permission checks, onboarding verification, automatic navigation, and timing (2.5s animation + 1s wait)
+### Details:
+
+
+## 25.4. Add data preloading [done]
+### Dependencies: None
+### Description: Implemented background preloading of Chad images and service initialization (theme, locale, notifications, Chad evolution)
+### Details:
+
+
+## 25.5. Implement transition animations [done]
+### Dependencies: None
+### Description: Added screen transitions via MaterialPageRoute and navigation after animation completion
+### Details:
+
+
+## 25.6. Implement version checking [done]
+### Dependencies: None
+### Description: Add version checking functionality to ensure app is up to date
+### Details:
+
+

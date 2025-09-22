@@ -1,0 +1,80 @@
+{
+  "apps": {
+    "Test Fitness Timer": {
+      "app_id": "Test Fitness Timer",
+      "created_at": "2025-09-21T05:49:31.225945",
+      "raw_name": "test fitness timer",
+      "raw_description": "",
+      "normalized_name": "test fitness timer",
+      "normalized_description": "",
+      "name_keywords": [
+        "fitness",
+        "test",
+        "timer"
+      ],
+      "desc_keywords": [],
+      "all_keywords": [
+        "fitness",
+        "test",
+        "timer"
+      ],
+      "feature_signatures": [
+        "achievement system",
+        "custom routine builder",
+        "exercise database local",
+        "progress charts local data",
+        "workout timer and tracking"
+      ],
+      "category": "fitness",
+      "name_hash": "11cc38a927c2ea913cc21e70bdf398cc",
+      "desc_hash": "d41d8cd98f00b204e9800998ecf8427e",
+      "combined_hash": "e13bb48a11d12187f4c995c6906a25aa",
+      "generation_cost": 0.704,
+      "quality_score": 40
+    },
+    "스쿼트차드 - 200개? Yes. 30일 스쿼트 마스터 챌린지": {
+      "app_id": "스쿼트차드 - 200개? Yes. 30일 스쿼트 마스터 챌린지",
+      "created_at": "2025-09-21T06:16:40.464884",
+      "raw_name": "스쿼트차드 - 200개? yes. 30일 스쿼트 마스터 챌린지",
+      "raw_description": "",
+      "normalized_name": "스쿼트차드 200개 yes 30일 스쿼트 마스터 챌린지",
+      "normalized_description": "",
+      "name_keywords": [
+        "200개",
+        "30일",
+        "yes",
+        "마스터",
+        "스쿼트",
+        "스쿼트차드",
+        "챌린지"
+      ],
+      "desc_keywords": [],
+      "all_keywords": [
+        "200개",
+        "30일",
+        "yes",
+        "마스터",
+        "스쿼트",
+        "스쿼트차드",
+        "챌린지"
+      ],
+      "feature_signatures": [
+        "core utility function",
+        "history tracking",
+        "quick actions",
+        "settings management",
+        "widget support"
+      ],
+      "category": "utilities",
+      "name_hash": "f007090a4dc42c599a970796d9d31e9f",
+      "desc_hash": "d41d8cd98f00b204e9800998ecf8427e",
+      "combined_hash": "b3b40277ee5767e48207026fbc934291",
+      "generation_cost": 0.08,
+      "quality_score": 40
+    }
+  },
+  "metadata": {
+    "created": "2025-09-21T05:48:42.995461",
+    "last_updated": "2025-09-21T06:16:40.464898"
+  }
+}

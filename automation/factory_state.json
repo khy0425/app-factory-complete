@@ -1,0 +1,12 @@
+{
+  "month": "2025-09",
+  "total_spent": 0.7839999999999999,
+  "generation_count": 2,
+  "current_month_apps": [],
+  "last_updated": "2025-09-21T06:16:41.236846",
+  "config": {
+    "monthly_budget": 30.0,
+    "available_budget": 10.0,
+    "max_apps_per_month": 15
+  }
+}

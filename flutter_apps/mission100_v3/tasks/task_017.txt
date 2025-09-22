@@ -1,0 +1,67 @@
+# Task ID: 17
+# Title: Streak System Implementation
+# Status: done
+# Dependencies: 5, 10
+# Priority: low
+# Description: Implement the consecutive workout streak tracking system
+# Details:
+1. Create a StreakService class
+2. Implement logic to:
+   - Track consecutive workout days
+   - Handle streak breaks
+   - Calculate longest streak
+   - Provide streak status
+3. Add streak milestone rewards
+4. Implement streak recovery mechanics
+5. Add streak notifications and reminders
+
+Example implementation:
+```dart
+class StreakService {
+  Future<void> updateStreak(DateTime workoutDate) async {
+    // Get current streak from Progress repository
+    // Check if workout maintains streak
+    // Update streak count or reset if broken
+    // Save updated streak information
+  }
+  
+  Future<bool> isStreakAtRisk() async {
+    // Check if user needs to work out today to maintain streak
+  }
+}
+```
+
+# Test Strategy:
+Test streak calculation with various workout patterns. Verify streak breaks and recoveries are handled correctly. Test date boundary conditions.
+
+# Subtasks:
+## 1. Create StreakService class with basic streak tracking [done]
+### Dependencies: None
+### Description: Implement the core StreakService class with methods to track consecutive workout days and handle streak breaks
+### Details:
+Create a StreakService class with the following methods: 1) updateStreak(DateTime workoutDate) to process new workouts and update streak count, 2) getCurrentStreak() to retrieve the current streak count, 3) private methods to determine if a workout maintains the streak based on date comparison. Implement logic to check if a new workout continues the streak (same day or consecutive day) or breaks it (gap in days). Store streak data using the Progress repository.
+
+## 2. Implement streak statistics and status tracking [done]
+### Dependencies: 17.1
+### Description: Add functionality to track longest streak and provide current streak status information
+### Details:
+Extend the StreakService to track and store the user's longest streak achieved. Implement methods: 1) getLongestStreak() to retrieve the highest streak count, 2) getStreakStatus() to provide information about the current streak (active/inactive, days count), 3) isStreakAtRisk() to determine if the user needs to work out today to maintain their streak. Update the updateStreak method to maintain the longest streak record when appropriate.
+
+## 3. Implement streak milestone rewards system [done]
+### Dependencies: 17.2
+### Description: Create a system to track streak milestones and provide rewards when they are achieved
+### Details:
+Implement a milestone reward system with: 1) Define milestone thresholds (e.g., 7, 30, 100 days), 2) Create a checkMilestones() method that identifies when a milestone is reached, 3) Implement a reward delivery mechanism that triggers when milestones are achieved, 4) Store unlocked rewards in user profile. Extend updateStreak() to check for milestones after updating the streak count.
+
+## 4. Add streak recovery mechanics [done]
+### Dependencies: 17.2
+### Description: Implement functionality to allow users to recover broken streaks under certain conditions
+### Details:
+Create streak recovery features: 1) Implement a recoverStreak() method that allows restoring a broken streak within a configurable grace period (e.g., 1-2 days), 2) Add tracking for available recovery credits that users can earn or purchase, 3) Implement logic to determine when recovery is possible, 4) Create a getRecoveryStatus() method to inform users about recovery options. Update the streak calculation logic to consider recovered days.
+
+## 5. Implement streak notifications and reminders [done]
+### Dependencies: 17.2, 17.4
+### Description: Add a notification system to remind users about maintaining their streak and alert them when streaks are at risk
+### Details:
+Implement streak notification features: 1) Create a scheduleStreakReminder() method to set up daily workout reminders, 2) Implement streakAtRiskNotification() to alert users when they need to work out today to maintain streak, 3) Add streakBrokenNotification() to inform users when a streak breaks and explain recovery options if available, 4) Create milestoneAchievedNotification() to celebrate when users reach streak milestones. Integrate with the device's notification system and implement background checking logic.
+

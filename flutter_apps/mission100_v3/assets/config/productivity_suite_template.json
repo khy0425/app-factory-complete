@@ -1,0 +1,61 @@
+{
+  "app": {
+    "name": "Productivity Suite",
+    "package_name": "com.appfactory.productivity",
+    "version": "1.0.0",
+    "description": "올인원 생산성 도구 - 메모, 할일, 목표 관리를 한 번에",
+    "author": "Productivity Apps Team"
+  },
+  "theme": {
+    "primary_color": "#1976D2",
+    "secondary_color": "#388E3C",
+    "accent_color": "#FF9800",
+    "font_family": "Roboto",
+    "is_dark_mode": false
+  },
+  "features": {
+    "timer_enabled": true,
+    "habit_tracking_enabled": false,
+    "statistics_enabled": true,
+    "achievements_enabled": true,
+    "social_sharing_enabled": true,
+    "backup_enabled": true,
+    "notifications_enabled": true,
+    "note_taking_enabled": true,
+    "todo_management_enabled": true,
+    "goal_tracking_enabled": true,
+    "calendar_integration_enabled": true
+  },
+  "ads": {
+    "android_app_id": "YOUR_ANDROID_APP_ID",
+    "android_banner_id": "YOUR_ANDROID_BANNER_ID", 
+    "android_interstitial_id": "YOUR_ANDROID_INTERSTITIAL_ID",
+    "android_rewarded_id": "YOUR_ANDROID_REWARDED_ID",
+    "ios_app_id": "YOUR_IOS_APP_ID",
+    "ios_banner_id": "YOUR_IOS_BANNER_ID",
+    "ios_interstitial_id": "YOUR_IOS_INTERSTITIAL_ID",
+    "ios_rewarded_id": "YOUR_IOS_REWARDED_ID",
+    "enable_banner_ads": true,
+    "enable_interstitial_ads": false,
+    "enable_rewarded_ads": true,
+    "test_device_ids": []
+  },
+  "payment": {
+    "subscription_enabled": true,
+    "one_time_purchase_enabled": true,
+    "subscription_product_ids": ["pro_monthly", "pro_yearly"],
+    "one_time_product_ids": ["premium_features", "remove_ads", "advanced_analytics"]
+  },
+  "target_market": {
+    "primary_audience": "직장인, 프리랜서, 학생",
+    "age_range": "25-45",
+    "pain_points": ["업무 효율성", "시간 관리", "목표 달성"],
+    "competitor_apps": ["Notion", "Todoist", "Any.do", "Evernote"]
+  },
+  "marketing_strategy": {
+    "primary_keywords": ["생산성", "업무효율", "시간관리", "목표달성", "메모"],
+    "secondary_keywords": ["할일관리", "노트", "계획", "스케줄", "조직"],
+    "content_themes": ["업무 효율성 팁", "시간 관리 노하우", "목표 달성 전략"],
+    "target_platforms": ["블로그", "유튜브", "인스타그램", "링크드인"]
+  }
+}

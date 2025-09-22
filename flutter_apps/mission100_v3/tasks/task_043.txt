@@ -1,0 +1,178 @@
+# Task ID: 43
+# Title: Fix Calendar Display for Workout Records
+# Status: done
+# Dependencies: 4, 10, 40
+# Priority: high
+# Description: Resolve the issue where completed workout records are not being displayed on the calendar screen, including progress indicators and completion status.
+# Details:
+1. Review and debug CalendarScreen data loading logic:
+   - Analyze the current data fetching mechanism in CalendarScreen
+   - Ensure WorkoutSession data is being properly queried and loaded
+
+2. Verify WorkoutSession data and calendar display integration:
+   - Check the data flow from WorkoutSession model to calendar UI
+   - Implement proper data transformation if needed
+
+3. Validate date-based workout record query:
+   - Review SQL query used for fetching workout records
+   - Ensure correct date range is being used for data retrieval
+   - Optimize query performance if necessary
+
+4. Modify calendar UI completion status logic:
+   - Update the UI rendering code to properly reflect workout completion
+   - Implement a clear visual indicator for completed workouts (e.g., checkmark, color change)
+
+5. Synchronize database workout records with calendar display:
+   - Implement a refresh mechanism to update calendar when new workouts are completed
+   - Consider using a state management solution (e.g., Riverpod) for real-time updates
+
+6. Debug _getDayColor() method:
+   - Review the completion rate calculation logic
+   - Ensure correct color assignment based on workout progress
+   - Implement proper null checks and error handling
+
+7. Implement caching mechanism:
+   - Store fetched calendar data in memory to improve performance
+   - Implement a cache invalidation strategy for when new workouts are completed
+
+Example code for updating calendar display:
+
+```dart
+class CalendarScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, child) {
+        final workoutData = ref.watch(workoutDataProvider);
+        return CalendarWidget(
+          workoutData: workoutData,
+          getDayColor: (date, workouts) {
+            // Implement color logic based on workout completion
+            if (workouts.isEmpty) return Colors.grey;
+            final completionRate = calculateCompletionRate(workouts);
+            return getColorForCompletionRate(completionRate);
+          },
+          onDaySelected: (selectedDate) {
+            // Show workout details for selected date
+            showWorkoutDetails(context, selectedDate, workoutData);
+          },
+        );
+      },
+    );
+  }
+}
+```
+
+# Test Strategy:
+1. Unit Tests:
+   - Test _getDayColor() method with various input scenarios
+   - Verify correct color assignment for different completion rates
+   - Test date-based workout record query function
+
+2. Widget Tests:
+   - Create a mock CalendarScreen with predefined workout data
+   - Verify that the calendar correctly displays workout completion status
+   - Test user interactions (e.g., selecting a date shows correct workout details)
+
+3. Integration Tests:
+   - Simulate completing a workout and verify calendar updates accordingly
+   - Test synchronization between database and calendar display
+
+4. Manual Testing:
+   - Complete workouts on various dates and verify calendar display
+   - Check different months and years to ensure correct data loading
+   - Verify color coding and completion indicators are intuitive and visible
+
+5. Performance Testing:
+   - Load large datasets and measure calendar rendering time
+   - Verify smooth scrolling and interaction with populated calendar
+
+6. Edge Case Testing:
+   - Test behavior with no workout data
+   - Verify correct display for partially completed workouts
+   - Check calendar behavior around daylight saving time changes
+
+7. Regression Testing:
+   - Ensure fixing this issue doesn't break other functionalities
+   - Verify that existing workout tracking and statistics features still work correctly
+
+# Subtasks:
+## 1. Debug CalendarScreen Data Loading [done]
+### Dependencies: None
+### Description: Review and fix the data loading logic in CalendarScreen to ensure WorkoutSession data is properly queried and loaded.
+### Details:
+Analyze the current data fetching mechanism in CalendarScreen. Ensure WorkoutSession data is being properly queried and loaded. Check the data flow from WorkoutSession model to calendar UI. Implement proper data transformation if needed.
+<info added on 2025-05-31T18:44:44.130Z>
+### 캘린더 데이터 로딩 문제 분석 시작
+
+**현재 상황 분석:**
+1. CalendarScreen에서 `_loadWorkoutHistory()` 메서드를 통해 `WorkoutHistoryService.getAllWorkouts()` 호출
+2. 데이터 로딩은 성공하지만 캘린더에 제대로 표시되지 않는 문제
+3. 운동 기록 저장 시 콜백 시스템은 구현되어 있음
+
+**발견된 잠재적 문제:**
+1. `_organizeWorkoutEvents()` 메서드에서 날짜 정규화 로직이 제대로 작동하는지 확인 필요
+2. `_getDayColor()` 메서드의 완료율 계산 로직이 복잡하여 성능 문제 가능성
+3. WorkoutHistory 모델의 date 필드 타입 및 저장 형식 확인 필요
+
+**다음 단계:**
+1. WorkoutHistory 모델 구조 확인
+2. 실제 데이터베이스에 저장된 운동 기록 확인
+3. 날짜 정규화 및 이벤트 조직화 로직 디버깅
+</info added on 2025-05-31T18:44:44.130Z>
+<info added on 2025-06-01T04:16:27.903Z>
+### Windows 빌드 이슈 발견 및 대안 접근
+
+**발견된 문제:**
+1. Windows 빌드 시 NuGet 관련 에러 발생 (flutter_inappwebview_windows 플러그인)
+2. "NUGET-NOTFOUND" 에러로 인해 Windows 플랫폼에서 실행 불가
+
+**대안 접근:**
+1. Chrome 브라우저에서 앱 실행하여 디버깅 진행
+2. 웹 플랫폼에서도 캘린더 기능이 동일하게 작동하므로 문제 진단 가능
+
+**다음 단계:**
+1. Chrome에서 앱 실행 확인
+2. 브라우저 개발자 도구에서 디버그 로그 확인
+3. CalendarScreen 데이터 로딩 상태 검증
+4. _getEventsForDay와 _getDayColor 메서드 동작 확인
+
+**향후 Windows 빌드 문제 해결책:**
+- NuGet 설치 필요
+- flutter_inappwebview_windows 플러그인의 종속성 문제 해결
+</info added on 2025-06-01T04:16:27.903Z>
+<info added on 2025-06-01T04:40:46.122Z>
+### 현재 작업 상태 업데이트
+
+**완료된 작업:**
+1. 안드로이드 디바이스에서 앱 실행 확인
+2. 디버깅 로그 코드 추가 완료
+3. 앱이 정상적으로 실행되고 있음 확인
+
+**현재 상황:**
+- 앱이 안드로이드에서 정상 실행됨
+- 캘린더 관련 디버깅 로그는 추가되었으나 실제 로그는 아직 캐치하지 못함
+- 사용자 요청으로 UI 수정 작업을 우선 진행
+
+**일시 중단:**
+UI 수정 작업 완료 후 캘린더 디버깅 재개 예정
+</info added on 2025-06-01T04:40:46.122Z>
+
+## 2. Optimize Date-based Workout Record Query [done]
+### Dependencies: 43.1
+### Description: Review and optimize the SQL query used for fetching workout records based on date range.
+### Details:
+Review SQL query used for fetching workout records. Ensure correct date range is being used for data retrieval. Optimize query performance if necessary. Implement caching mechanism to store fetched calendar data in memory and improve performance.
+
+## 3. Update Calendar UI Completion Status Logic [done]
+### Dependencies: 43.1, 43.2
+### Description: Modify the calendar UI rendering code to properly reflect workout completion status and implement visual indicators.
+### Details:
+Update the UI rendering code to properly reflect workout completion. Implement a clear visual indicator for completed workouts (e.g., checkmark, color change). Debug _getDayColor() method, review the completion rate calculation logic, ensure correct color assignment based on workout progress, and implement proper null checks and error handling.
+
+## 4. Implement Real-time Calendar Updates [done]
+### Dependencies: 43.3
+### Description: Develop a mechanism to synchronize database workout records with calendar display in real-time.
+### Details:
+Implement a refresh mechanism to update calendar when new workouts are completed. Consider using a state management solution (e.g., Riverpod) for real-time updates. Implement a cache invalidation strategy for when new workouts are completed.
+

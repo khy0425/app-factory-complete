@@ -1,0 +1,47 @@
+{
+  "fitness": {
+    "growth": "+25%",
+    "popular_keywords": [
+      "홈트레이닝",
+      "30일챌린지",
+      "AI코치",
+      "실시간피드백"
+    ],
+    "emerging_features": [
+      "AR운동",
+      "그룹챌린지",
+      "음성가이드",
+      "웨어러블연동"
+    ]
+  },
+  "productivity": {
+    "growth": "+15%",
+    "popular_keywords": [
+      "시간관리",
+      "집중력",
+      "루틴",
+      "자동화"
+    ],
+    "emerging_features": [
+      "AI어시스턴트",
+      "음성메모",
+      "습관트래킹",
+      "팀협업"
+    ]
+  },
+  "health": {
+    "growth": "+30%",
+    "popular_keywords": [
+      "멘탈헬스",
+      "수면관리",
+      "영양관리",
+      "스트레스"
+    ],
+    "emerging_features": [
+      "바이오피드백",
+      "개인맞춤",
+      "전문가상담",
+      "커뮤니티"
+    ]
+  }
+}

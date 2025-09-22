@@ -1,4 +1,4 @@
-# squat_master
+# squat100
 
 A new Flutter project.
 

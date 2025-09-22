@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gigachad_runner/main.dart';
+import 'package:runstart/main.dart';
 
 void main() {
-  testWidgets('GigaChad Runner app loads', (WidgetTester tester) async {
+  testWidgets('런스타트 app loads', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const GigaChadRunnerApp());
+    await tester.pumpWidget(const RunStartApp());
 
     // Verify that the app loads without errors
     expect(find.byType(MaterialApp), findsOneWidget);

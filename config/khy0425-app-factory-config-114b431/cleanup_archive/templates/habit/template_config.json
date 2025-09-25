@@ -1,0 +1,129 @@
+{
+  "template_info": {
+    "name": "Alpha Habit Builder",
+    "version": "1.0.0",
+    "category": "Lifestyle",
+    "description": "시그마 남성을 위한 습관 형성 시스템",
+    "target_audience": "18-35세 자기계발 관심층",
+    "estimated_dev_time": "1.5 weeks",
+    "market_potential": "High"
+  },
+
+  "branding": {
+    "primary_color": "#0D1B2A",
+    "secondary_color": "#FFD700",
+    "accent_color": "#FF6B35",
+    "font_heading": "Bebas Neue",
+    "font_body": "Roboto Condensed",
+    "style": "powerful_minimal",
+    "voice": "motivational_mentor"
+  },
+
+  "features": {
+    "core": [
+      "habit_tracking",
+      "daily_check_ins",
+      "streak_counting",
+      "habit_stacking",
+      "reminder_system"
+    ],
+    "gamification": [
+      "habit_levels",
+      "streak_rewards",
+      "challenge_mode",
+      "habit_badges",
+      "progress_visualization"
+    ],
+    "analytics": [
+      "success_rate",
+      "pattern_analysis",
+      "habit_correlation",
+      "monthly_reports",
+      "goal_tracking"
+    ],
+    "social": [
+      "accountability_partner",
+      "habit_sharing",
+      "community_challenges",
+      "progress_photos"
+    ],
+    "premium": [
+      "unlimited_habits",
+      "advanced_analytics",
+      "custom_categories",
+      "habit_coaching"
+    ]
+  },
+
+  "habit_categories": {
+    "fitness": [
+      "daily_workout",
+      "morning_run",
+      "protein_intake",
+      "sleep_schedule"
+    ],
+    "mindset": [
+      "meditation",
+      "gratitude_journal",
+      "positive_affirmations",
+      "visualization"
+    ],
+    "productivity": [
+      "wake_up_early",
+      "cold_shower",
+      "reading",
+      "skill_practice"
+    ],
+    "lifestyle": [
+      "clean_diet",
+      "water_intake",
+      "social_media_limit",
+      "phone_free_time"
+    ]
+  },
+
+  "monetization": {
+    "model": "freemium",
+    "free_tier": {
+      "habits_limit": 3,
+      "basic_tracking": true,
+      "ads": true
+    },
+    "premium_tier": {
+      "price_monthly": 8.99,
+      "price_yearly": 69.99,
+      "unlimited_habits": true,
+      "advanced_features": true,
+      "no_ads": true
+    }
+  },
+
+  "marketing": {
+    "primary_keywords": [
+      "습관형성", "자기계발", "루틴", "목표달성", "습관앱"
+    ],
+    "secondary_keywords": [
+      "알파남성", "시그마라이프스타일", "성공습관", "라이프해킹"
+    ],
+    "content_themes": [
+      "21_day_challenge",
+      "alpha_morning_routine",
+      "success_habits",
+      "transformation_journey"
+    ]
+  },
+
+  "success_metrics": {
+    "week_1": {
+      "downloads": 1200,
+      "dau": 400,
+      "habit_completion": 70
+    },
+    "month_1": {
+      "downloads": 8000,
+      "dau": 2000,
+      "retention_d30": 35,
+      "revenue": 1500
+    }
+  }
+}

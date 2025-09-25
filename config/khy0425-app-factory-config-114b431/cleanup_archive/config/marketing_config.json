@@ -1,0 +1,99 @@
+{
+  "openai_api_key": "YOUR_OPENAI_API_KEY",
+  "google_play_credentials": {
+    "service_account_file": "path/to/service_account.json",
+    "package_names": []
+  },
+  "automation_schedule": {
+    "aso_update_interval_days": 14,
+    "content_generation_enabled": true,
+    "review_monitoring_interval_hours": 6,
+    "daily_report_time": "09:00"
+  },
+  "content_settings": {
+    "blog_platforms": {
+      "wordpress": {
+        "enabled": false,
+        "site_url": "",
+        "username": "",
+        "password": ""
+      },
+      "blogger": {
+        "enabled": false,
+        "blog_id": "",
+        "api_key": ""
+      },
+      "medium": {
+        "enabled": false,
+        "access_token": ""
+      }
+    },
+    "youtube_enabled": true,
+    "auto_posting": false,
+    "content_types": ["review", "tutorial", "comparison"],
+    "language": "ko",
+    "target_keywords_per_app": 10
+  },
+  "review_settings": {
+    "response_enabled": true,
+    "auto_response_threshold": 3,
+    "sentiment_analysis_enabled": true,
+    "response_delay_minutes": 30,
+    "daily_review_limit": 50
+  },
+  "notification_settings": {
+    "slack": {
+      "enabled": false,
+      "webhook_url": "",
+      "channels": {
+        "alerts": "#marketing-alerts",
+        "reports": "#marketing-reports"
+      }
+    },
+    "telegram": {
+      "enabled": false,
+      "bot_token": "",
+      "chat_id": ""
+    },
+    "email": {
+      "enabled": true,
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 587,
+      "username": "",
+      "password": "",
+      "recipients": []
+    },
+    "daily_reports": true,
+    "error_notifications": true
+  },
+  "dashboard_settings": {
+    "enabled": true,
+    "port": 8080,
+    "host": "localhost",
+    "auth_required": false,
+    "refresh_interval_seconds": 300
+  },
+  "storage_settings": {
+    "database_url": "sqlite:///marketing_automation.db",
+    "backup_enabled": true,
+    "backup_interval_days": 7,
+    "log_retention_days": 30
+  },
+  "rate_limits": {
+    "openai_requests_per_minute": 60,
+    "play_store_requests_per_hour": 100,
+    "content_generation_per_day": 10
+  },
+  "apps_to_monitor": [
+    "../assets/config/app_config.json",
+    "../assets/config/timer_app_template.json",
+    "../assets/config/habit_tracker_template.json"
+  ],
+  "experimental_features": {
+    "ai_image_generation": false,
+    "video_content_generation": false,
+    "multi_language_content": false,
+    "competitor_analysis": true,
+    "trend_analysis": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "app_name": "기가차드 러너",
+  "dimensions": "1024x500",
+  "type": "feature_graphic",
+  "generated_at": "2025-09-21T06:29:37.195739",
+  "gemini_prompt": "Feature graphic generation prompt",
+  "size_kb": 250
+}

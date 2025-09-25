@@ -1,0 +1,131 @@
+{
+  "app_name": "기가차드 러너",
+  "short_description": "달린다... Yes.",
+  "full_description": "🔥 기가차드 러너 - 기가차드 되기 프로젝트!\n\n100일 궁극의 러닝 챌린지. 평범한 인간에서 기가차드로의 진화\n\n💪 주요 기능:\n• 기가차드 캐릭터 진화 시스템\n• 100일 러닝 챌린지 프로그램\n• 한국어 맞춤 운동 가이드\n• 일일 챌린지 및 업적 시스템\n• Sigma Mindset 동기부여 시스템\n• 진행률 추적 및 통계\n\n🏆 왜 이 앱인가?\n• Mission100 검증된 운동 시스템\n• 한국어 완벽 지원\n• 오프라인 모드 지원\n• 광고 없는 깔끔한 UI\n• 무료 다운로드!\n\n지금 다운로드하고 기가차드가 되어보세요! 💪\n\n#기가차드 #홈트 #운동 #피트니스 #헬스 #다이어트 #근육\n",
+  "category": "Health & Fitness",
+  "content_rating": "Everyone",
+  "privacy_policy_url": "https://your-domain.com/privacy",
+  "generated_assets": {
+    "app_name": "기가차드 러너",
+    "generation_time": "2025-09-21T15:46:07.878917",
+    "assets": {
+      "feature_graphic": {
+        "type": "feature_graphic",
+        "file_path": "store_assets\\기가차드_러너\\feature_graphic.png",
+        "dimensions": "1024x500",
+        "size_kb": 6,
+        "cost": 0,
+        "method": "pil_temporary",
+        "prompt_used": "\nCreate a COOL GIGACHAD MEME aesthetic Feature Graphic (1024x500px):\n\nDO NOT ADD ANY TEXT. Create a text-free image only.\n\nDesign Requirements:\n- Size: 1024x500 pixels (exact)\n- GIGACHAD MEME AESTHETIC - Cool, confident, alpha male vibes\n- Not childish or overly cartoonish - should feel badass\n- Dark, moody atmosphere with golden accents\n- Leave center-left area clear for text overlay\n\nVisual Elements:\n- GIGACHAD character with iconic features:\n  * Extremely chiseled jawline (the famous Chad jaw)\n  * Muscular physique but realistic proportions\n  * Confident, stoic facial expression\n  * Running with perfect form and composure\n- Aesthetic elements:\n  * Dark city skyline or mountains in background\n  * Subtle motion blur showing speed (not flames or explosions)\n  * Golden hour lighting or neon city lights\n  * Maybe rain or dramatic weather for atmosphere\n  * Other runners in background looking inferior/struggling\n\nStyle: SIGMA MALE AESTHETIC, DARK AND MOODY, COOL, CONFIDENT\nThink \"Patrick Bateman running scene\" meets GigaChad meme\nThis should look COOL and make people want to become a Chad\nNOT childish, NOT overly colorful, YES mysterious and badass\n",
+        "status": "temporary"
+      },
+      "app_icon": {
+        "type": "app_icon",
+        "file_path": "store_assets\\기가차드_러너\\app_icon_512.png",
+        "dimensions": "512x512",
+        "size_kb": 191,
+        "cost": 0.039,
+        "method": "nano_banana",
+        "prompt_used": "\nCreate a high-quality app icon (512x512px) for a running app:\n\nDesign Requirements:\n- Size: 512x512 pixels (perfect square)\n- App store ready (iOS/Android compatible)\n- Simple, recognizable design\n- Works well at small sizes (16px to 512px)\n- RUNNING theme only (no gym equipment)\n- No text or letters anywhere\n- Modern, minimalist design\n\nVisual Elements:\n- Running shoe or runner silhouette\n- Motion lines showing speed/movement\n- Outdoor running elements (road, trail)\n- Dynamic pose suggesting forward motion\n- Bold, geometric shapes\n- Dark background with golden accents\n- NO gym equipment or weights\n- NO text or letters\n- NO color codes visible\n\nStyle: Minimalist, dynamic, outdoor running focused\nThe icon should instantly communicate \"running app\"!\n",
+        "status": "success"
+      },
+      "screenshots": {
+        "type": "screenshots",
+        "count": 5,
+        "screenshots": [
+          {
+            "name": "main_screen",
+            "title": "메인 화면",
+            "file_path": "store_assets\\기가차드_러너\\screenshots\\screenshot_1_main_screen.png",
+            "dimensions": "1080x1920",
+            "size_kb": 1402,
+            "cost": 0.039,
+            "method": "nano_banana",
+            "prompt_used": "\nCreate a mobile app screenshot (1080x1920px) for 기가차드 러너:\n\nScreen: 메인 화면\nDescription: 기가차드 러너 메인 대시보드, Chad 캐릭터와 진행률 표시\n\nDesign Requirements:\n- Size: 1080x1920 pixels (mobile phone ratio)\n- Korean text where appropriate\n- 기가차드 러너 branding\n- Chad/fitness theme\n- Dark UI theme (black/gold/red)\n- Modern Material Design\n- Show actual app interface\n- Realistic mobile UI elements\n- Status bar at top\n- Navigation elements\n\nContent:\n- 기가차드 러너 메인 대시보드, Chad 캐릭터와 진행률 표시\n- Korean UI text\n- Chad character elements\n- Fitness/workout related icons\n- Progress bars and statistics\n- Modern button designs\n\nThe screenshot should look like a real, polished mobile app!\n",
+            "status": "success"
+          },
+          {
+            "name": "workout_screen",
+            "title": "운동 화면",
+            "file_path": "store_assets\\기가차드_러너\\screenshots\\screenshot_2_workout_screen.png",
+            "dimensions": "1080x1920",
+            "size_kb": 1306,
+            "cost": 0.039,
+            "method": "nano_banana",
+            "prompt_used": "\nCreate a mobile app screenshot (1080x1920px) for 기가차드 러너:\n\nScreen: 운동 화면\nDescription: 운동 실행 화면, 타이머와 동작 가이드\n\nDesign Requirements:\n- Size: 1080x1920 pixels (mobile phone ratio)\n- Korean text where appropriate\n- 기가차드 러너 branding\n- Chad/fitness theme\n- Dark UI theme (black/gold/red)\n- Modern Material Design\n- Show actual app interface\n- Realistic mobile UI elements\n- Status bar at top\n- Navigation elements\n\nContent:\n- 운동 실행 화면, 타이머와 동작 가이드\n- Korean UI text\n- Chad character elements\n- Fitness/workout related icons\n- Progress bars and statistics\n- Modern button designs\n\nThe screenshot should look like a real, polished mobile app!\n",
+            "status": "success"
+          },
+          {
+            "name": "progress_screen",
+            "title": "진행률 화면",
+            "file_path": "store_assets\\기가차드_러너\\screenshots\\screenshot_3_progress_screen.png",
+            "dimensions": "1080x1920",
+            "size_kb": 1227,
+            "cost": 0.039,
+            "method": "nano_banana",
+            "prompt_used": "\nCreate a mobile app screenshot (1080x1920px) for 기가차드 러너:\n\nScreen: 진행률 화면\nDescription: 레벨업 시스템과 업적 화면\n\nDesign Requirements:\n- Size: 1080x1920 pixels (mobile phone ratio)\n- Korean text where appropriate\n- 기가차드 러너 branding\n- Chad/fitness theme\n- Dark UI theme (black/gold/red)\n- Modern Material Design\n- Show actual app interface\n- Realistic mobile UI elements\n- Status bar at top\n- Navigation elements\n\nContent:\n- 레벨업 시스템과 업적 화면\n- Korean UI text\n- Chad character elements\n- Fitness/workout related icons\n- Progress bars and statistics\n- Modern button designs\n\nThe screenshot should look like a real, polished mobile app!\n",
+            "status": "success"
+          },
+          {
+            "name": "stats_screen",
+            "title": "통계 화면",
+            "file_path": "store_assets\\기가차드_러너\\screenshots\\screenshot_4_stats_screen.png",
+            "dimensions": "1080x1920",
+            "size_kb": 1339,
+            "cost": 0.039,
+            "method": "nano_banana",
+            "prompt_used": "\nCreate a mobile app screenshot (1080x1920px) for 기가차드 러너:\n\nScreen: 통계 화면\nDescription: 운동 기록과 차트 분석\n\nDesign Requirements:\n- Size: 1080x1920 pixels (mobile phone ratio)\n- Korean text where appropriate\n- 기가차드 러너 branding\n- Chad/fitness theme\n- Dark UI theme (black/gold/red)\n- Modern Material Design\n- Show actual app interface\n- Realistic mobile UI elements\n- Status bar at top\n- Navigation elements\n\nContent:\n- 운동 기록과 차트 분석\n- Korean UI text\n- Chad character elements\n- Fitness/workout related icons\n- Progress bars and statistics\n- Modern button designs\n\nThe screenshot should look like a real, polished mobile app!\n",
+            "status": "success"
+          },
+          {
+            "name": "settings_screen",
+            "title": "설정 화면",
+            "file_path": "store_assets\\기가차드_러너\\screenshots\\screenshot_5_settings_screen.png",
+            "dimensions": "1080x1920",
+            "size_kb": 1132,
+            "cost": 0.039,
+            "method": "nano_banana",
+            "prompt_used": "\nCreate a mobile app screenshot (1080x1920px) for 기가차드 러너:\n\nScreen: 설정 화면\nDescription: 앱 설정과 프로필 관리\n\nDesign Requirements:\n- Size: 1080x1920 pixels (mobile phone ratio)\n- Korean text where appropriate\n- 기가차드 러너 branding\n- Chad/fitness theme\n- Dark UI theme (black/gold/red)\n- Modern Material Design\n- Show actual app interface\n- Realistic mobile UI elements\n- Status bar at top\n- Navigation elements\n\nContent:\n- 앱 설정과 프로필 관리\n- Korean UI text\n- Chad character elements\n- Fitness/workout related icons\n- Progress bars and statistics\n- Modern button designs\n\nThe screenshot should look like a real, polished mobile app!\n",
+            "status": "success"
+          }
+        ],
+        "status": "completed"
+      },
+      "promo_images": {
+        "type": "promo_images",
+        "count": 3,
+        "images": [
+          {
+            "name": "social_media_square",
+            "file_path": "store_assets\\기가차드_러너\\promo\\social_media_square.png",
+            "dimensions": "1080x1080",
+            "description": "Instagram/Facebook 정사각형 포스트",
+            "status": "generated"
+          },
+          {
+            "name": "social_media_story",
+            "file_path": "store_assets\\기가차드_러너\\promo\\social_media_story.png",
+            "dimensions": "1080x1920",
+            "description": "Instagram/Facebook 스토리",
+            "status": "generated"
+          },
+          {
+            "name": "youtube_thumbnail",
+            "file_path": "store_assets\\기가차드_러너\\promo\\youtube_thumbnail.png",
+            "dimensions": "1280x720",
+            "description": "YouTube 썸네일",
+            "status": "generated"
+          }
+        ],
+        "status": "completed"
+      }
+    }
+  },
+  "upload_checklist": {
+    "feature_graphic": "✅ 1024x500 PNG",
+    "app_icon": "✅ 512x512 PNG",
+    "screenshots": "✅ 5개",
+    "app_bundle": "⏳ APK/AAB 파일 준비 필요",
+    "store_listing": "✅ 완료"
+  }
+}

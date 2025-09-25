@@ -4,7 +4,7 @@
       "stepNumber": 1,
       "title": "시작 자세",
       "description": "플랭크 자세로 시작하여 손과 발의 위치를 정확히 설정합니다.",
-      "imagePath": "assets/images/form_guide/step1_start_position.png",
+      "imagePath": "assets/images/pushup_forms/standard/pushup_animation.gif",
       "keyPoints": [
         "손은 어깨 바로 아래 위치",
         "손가락은 앞을 향하게",
@@ -19,7 +19,7 @@
       "stepNumber": 2,
       "title": "하강 동작",
       "description": "팔꿈치를 구부리며 천천히 몸을 아래로 내립니다.",
-      "imagePath": "assets/images/form_guide/step2_descending.png",
+      "imagePath": "assets/images/pushup_forms/standard/biomechanics_pushup.png",
       "keyPoints": [
         "팔꿈치는 45도 각도로 구부림",
         "가슴이 바닥에 거의 닿을 때까지",
@@ -34,7 +34,7 @@
       "stepNumber": 3,
       "title": "최하점 자세",
       "description": "가슴이 바닥에 거의 닿는 최하점에서 잠시 정지합니다.",
-      "imagePath": "assets/images/form_guide/step3_bottom_position.png",
+      "imagePath": "assets/images/pushup_forms/standard/biomechanics_pushup.png",
       "keyPoints": [
         "가슴과 바닥 사이 주먹 하나 간격",
         "몸의 일직선 유지",
@@ -49,7 +49,7 @@
       "stepNumber": 4,
       "title": "상승 동작",
       "description": "팔을 펴며 시작 자세로 돌아갑니다.",
-      "imagePath": "assets/images/form_guide/step4_ascending.png",
+      "imagePath": "assets/images/pushup_forms/standard/pushup_animation.gif",
       "keyPoints": [
         "팔을 힘차게 펴기",
         "코어 근육으로 몸 지지",
@@ -64,7 +64,7 @@
       "stepNumber": 5,
       "title": "완료 자세",
       "description": "시작 자세로 완전히 돌아와 다음 반복을 준비합니다.",
-      "imagePath": "assets/images/form_guide/step5_finish_position.png",
+      "imagePath": "assets/images/pushup_forms/standard/biomechanics_pushup.png",
       "keyPoints": [
         "팔꿈치 완전히 펴진 상태",
         "몸의 일직선 유지",
@@ -80,8 +80,8 @@
     {
       "title": "엉덩이가 너무 높이 올라감",
       "description": "엉덩이를 높이 들면 코어 근육 사용이 줄어들고 효과가 떨어집니다.",
-      "wrongImagePath": "assets/images/mistakes/high_hips_wrong.png",
-      "correctImagePath": "assets/images/mistakes/high_hips_correct.png",
+      "wrongImagePath": "assets/images/pushup_forms/standard/high_hips_wrong.png",
+      "correctImagePath": "assets/images/pushup_forms/standard/high_hips_correct.png",
       "severity": "high",
       "corrections": [
         "코어 근육을 긴장시켜 몸을 일직선으로 유지",
@@ -92,8 +92,8 @@
     {
       "title": "엉덩이가 너무 아래로 처짐",
       "description": "엉덩이가 처지면 허리에 무리가 가고 부상 위험이 증가합니다.",
-      "wrongImagePath": "assets/images/mistakes/sagging_hips_wrong.png",
-      "correctImagePath": "assets/images/mistakes/sagging_hips_correct.png",
+      "wrongImagePath": "assets/images/pushup_forms/standard/sagging_hips_wrong.png",
+      "correctImagePath": "assets/images/pushup_forms/standard/sagging_hips_correct.png",
       "severity": "high",
       "corrections": [
         "복근과 둔근을 동시에 수축",
@@ -143,7 +143,7 @@
       "name": "무릎 푸시업",
       "description": "무릎을 바닥에 대고 하는 초보자용 푸시업",
       "difficulty": "beginner",
-      "imagePath": "assets/images/variations/knee_pushup.png",
+      "imagePath": "assets/images/pushup_forms/knee/knee_step1.jpg",
       "instructions": [
         "무릎을 바닥에 대고 시작",
         "손은 어깨 바로 아래 위치",
@@ -160,7 +160,7 @@
       "name": "인클라인 푸시업",
       "description": "벤치나 계단을 이용한 경사 푸시업",
       "difficulty": "beginner",
-      "imagePath": "assets/images/variations/incline_pushup.png",
+      "imagePath": "assets/images/pushup_forms/standard/pushup_animation.gif",
       "instructions": [
         "벤치나 계단에 손을 올림",
         "발은 바닥에 고정",
@@ -177,7 +177,7 @@
       "name": "다이아몬드 푸시업",
       "description": "손을 다이아몬드 모양으로 모은 고난도 푸시업",
       "difficulty": "advanced",
-      "imagePath": "assets/images/variations/diamond_pushup.png",
+      "imagePath": "assets/images/pushup_forms/diamond/diamond_pushup.png",
       "instructions": [
         "양손을 가슴 아래에서 다이아몬드 모양으로",
         "엄지와 검지로 삼각형 만들기",
@@ -191,20 +191,54 @@
       ]
     },
     {
-      "name": "원암 푸시업",
-      "description": "한 팔로만 하는 최고 난이도 푸시업",
+      "name": "파이크 푸시업",
+      "description": "어깨 근육을 집중적으로 강화하는 고급 푸시업",
       "difficulty": "advanced",
-      "imagePath": "assets/images/variations/one_arm_pushup.png",
+      "imagePath": "assets/images/pushup_forms/pike/pike_pushup.gif",
       "instructions": [
-        "한 손은 등 뒤로",
-        "다리를 넓게 벌려 균형 유지",
-        "몸의 회전 최소화",
-        "극도로 천천히 동작"
+        "다운독 자세로 시작",
+        "엉덩이를 높이 들어올림",
+        "머리가 바닥에 가까워질 때까지 하강",
+        "어깨 힘으로만 밀어올리기"
       ],
       "benefits": [
-        "최고 수준의 근력 발달",
-        "균형감각 향상",
-        "정신력 강화"
+        "어깨 근육 집중 강화",
+        "핸드스탠드 연습",
+        "상체 안정성 향상"
+      ]
+    },
+    {
+      "name": "와이드 그립 푸시업",
+      "description": "손을 넓게 벌려 가슴 근육을 강화하는 푸시업",
+      "difficulty": "intermediate",
+      "imagePath": "assets/images/pushup_forms/wide/wide_namuwiki.png",
+      "instructions": [
+        "손을 어깨보다 1.5배 넓게 벌림",
+        "손가락은 약간 바깥쪽 향하게",
+        "가슴이 바닥에 닿을 때까지",
+        "넓은 가슴으로 밀어올리기"
+      ],
+      "benefits": [
+        "가슴 근육 집중 강화",
+        "상체 폭 증가",
+        "어깨 안정성 향상"
+      ]
+    },
+    {
+      "name": "디클라인 푸시업",
+      "description": "발을 높게 올려 상체에 더 큰 부하를 주는 푸시업",
+      "difficulty": "advanced",
+      "imagePath": "assets/images/pushup_forms/decline/decline_namuwiki_new.png",
+      "instructions": [
+        "발을 벤치나 의자에 올림",
+        "손은 어깨 아래 정확히 위치",
+        "몸은 아래쪽으로 기울어진 직선",
+        "중력의 저항을 이겨내며 동작"
+      ],
+      "benefits": [
+        "상체 근력 대폭 강화",
+        "어깨와 가슴 상부 발달",
+        "고급 근력 발달"
       ]
     }
   ],

@@ -171,6 +171,17 @@ flutter:
     - assets/images/썬글차드.jpg
     - assets/images/눈빔차드.jpg
     - assets/images/더블차드.jpg
+    # 푸시업 자세 가이드 이미지 assets
+    - assets/images/pushup_forms/
+    - assets/images/pushup_forms/standard/
+    - assets/images/pushup_forms/knee/
+    - assets/images/pushup_forms/incline/
+    - assets/images/pushup_forms/wide/
+    - assets/images/pushup_forms/diamond/
+    - assets/images/pushup_forms/decline/
+    - assets/images/pushup_forms/archer/
+    - assets/images/pushup_forms/pike/
+    - assets/images/pushup_forms/clap/
     - assets/data/pushup_form_guide.json
     - assets/data/pushup_form_guide_en.json
     - assets/config/

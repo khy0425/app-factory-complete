@@ -8,6 +8,25 @@
 api_keys.py
 config_secrets.py
 
+# API 키 및 민감한 정보
+*API_KEY*
+*SECRET*
+*PASSWORD*
+*TOKEN*
+*key.dart
+*keys.dart
+*secrets.dart
+*config.dart
+google-services.json
+GoogleService-Info.plist
+firebase_options.dart
+keystore.properties
+key.properties
+
+# MD 파일들 (문서/기획서)
+*.md
+!README.md
+
 # Python 캐시
 __pycache__/
 *.py[cod]
@@ -49,6 +68,12 @@ tmp/
 # 생성된 앱들의 민감한 정보
 apps/*/config/secrets.json
 apps/*/keys/
+flutter_apps/*/android/key.properties
+flutter_apps/*/android/keystore.properties
+flutter_apps/*/android/app/google-services.json
+flutter_apps/*/ios/Runner/GoogleService-Info.plist
+flutter_apps/*/lib/firebase_options.dart
+flutter_apps/*/android/app/seeds.txt
 
 # 데이터베이스
 *.db

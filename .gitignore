@@ -88,3 +88,6 @@ flutter_apps/*/android/app/seeds.txt
 .Trashes
 ehthumbs.db
 Thumbs.db
+# 보안 민감 파일들
+test_key_access.py
+.claude/settings.local.json

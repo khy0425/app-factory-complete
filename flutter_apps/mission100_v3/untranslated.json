@@ -1,10 +1,7 @@
 {
   "en": [
-    "dataManagement",
     "dataManagementDesc",
-    "appInfo",
     "appInfoDesc",
-    "dataResetComingSoon",
     "githubRepository",
     "feedbackEmail",
     "developerContact",
@@ -12,7 +9,6 @@
     "emailFeedback",
     "cannotOpenEmail",
     "cannotOpenGithub",
-    "appVersion",
     "builtWithFlutter"
   ]
 }

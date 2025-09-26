@@ -1,0 +1,70 @@
+{
+  "보고서_생성시간": "2025-09-22T18:11:21.704463",
+  "우선순위_앱_현황": {
+    "1_Mission100": {
+      "name": "Mission100 - 푸쉬업 마스터",
+      "folder": "mission100_v3",
+      "package": "com.reaf.mission100",
+      "version": "2.1.0+9",
+      "status": "✅ 플레이스토어 업로드 완료",
+      "next_action": "성과 모니터링 및 마케팅",
+      "priority": "최우선 (완료)",
+      "folder_exists": true,
+      "pubspec_exists": true,
+      "android_config_exists": false,
+      "has_build_folder": true
+    },
+    "2_GigaChad_Runner": {
+      "name": "GigaChad Runner - GPS 런닝 트래커",
+      "folder": "gigachad_runner",
+      "package": "com.reaf.gigachad_runner",
+      "version": "1.0.0+1",
+      "status": "⚡ 패키지명 설정 완료, APK 빌드 시도 중",
+      "next_action": "APK 빌드 완료 후 스토어 등록",
+      "priority": "2순위",
+      "folder_exists": true,
+      "pubspec_exists": true,
+      "android_config_exists": true,
+      "has_build_folder": true
+    },
+    "3_Squat_Master": {
+      "name": "Squat Master - 스쿼트 챌린지",
+      "folder": "squat_master",
+      "package": "com.reaf.squat_master",
+      "version": "1.0.0+1",
+      "status": "⚡ 패키지명 설정 완료, 의존성 준비 완료",
+      "next_action": "APK 빌드 및 스토어 등록",
+      "priority": "3순위",
+      "folder_exists": true,
+      "pubspec_exists": true,
+      "android_config_exists": true,
+      "has_build_folder": true
+    }
+  },
+  "전체_요약": {
+    "총_앱수": 3,
+    "완료된_앱": 1,
+    "준비중인_앱": 2,
+    "예상_출시순서": [
+      "Mission100 (완료)",
+      "GigaChad Runner (1-2일 내)",
+      "Squat Master (2-3일 내)"
+    ]
+  },
+  "다음_단계_계획": {
+    "즉시_실행": [
+      "GigaChad Runner APK 빌드 완료",
+      "Squat Master APK 빌드 완료"
+    ],
+    "단기_계획": [
+      "두 앱 Google Play Console 등록",
+      "스토어 리스팅 자료 준비",
+      "APK 업로드 및 검토 제출"
+    ],
+    "중기_계획": [
+      "세 앱 성과 비교 분석",
+      "가장 성과 좋은 앱 타입 파악",
+      "성공 패턴 기반 추가 앱 개발"
+    ]
+  }
+}

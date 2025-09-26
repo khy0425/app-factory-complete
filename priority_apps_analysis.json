@@ -1,0 +1,56 @@
+{
+  "collection_time": "2025-09-22T22:07:01.989374",
+  "priority_apps": {
+    "mission100": {
+      "display_name": "Mission100",
+      "korean_name": "미션100",
+      "package": "com.reaf.mission100",
+      "status": "출시완료",
+      "description": "6주 만에 푸쉬업 100개 달성",
+      "performance": {
+        "installs": 8490,
+        "active_users": 1782,
+        "uninstalls": 148,
+        "retention_rate": 1.18,
+        "revenue": 27.47,
+        "ratings": 3.9,
+        "reviews_count": 554,
+        "last_updated": "2025-09-22T22:07:01.989606"
+      }
+    },
+    "squatpt": {
+      "display_name": "SquatPT",
+      "korean_name": "스쿼트PT",
+      "package": "com.reaf.squatpt",
+      "status": "출시준비",
+      "description": "헬스장 PT 안 받아도 완벽한 스쿼트 마스터",
+      "performance": {
+        "installs": 636,
+        "active_users": 734,
+        "uninstalls": 844,
+        "retention_rate": 1.33,
+        "revenue": 92.02,
+        "ratings": 4.3,
+        "reviews_count": 370,
+        "last_updated": "2025-09-22T22:07:02.490164"
+      }
+    },
+    "runstart": {
+      "display_name": "RunStart",
+      "korean_name": "런스타트",
+      "package": "com.reaf.runstart",
+      "status": "출시준비",
+      "description": "러닝 못해본 사람도 12주면 러너",
+      "performance": {
+        "installs": 4906,
+        "active_users": 302,
+        "uninstalls": 512,
+        "retention_rate": 0.66,
+        "revenue": 64.9,
+        "ratings": 4.4,
+        "reviews_count": 356,
+        "last_updated": "2025-09-22T22:07:02.990730"
+      }
+    }
+  }
+}

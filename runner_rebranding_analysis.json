@@ -1,0 +1,104 @@
+{
+  "분석_결과": {
+    "현재_이름": "GigaChad Runner",
+    "문제점": [
+      "기가차드 밈이 일반 사용자에게 이상함",
+      "브랜딩이 Mission100과 다른 방향",
+      "앱스토어에서 검색하기 어려움",
+      "전문적이지 않은 이미지"
+    ],
+    "새_이름_후보": {
+      "RunMaster": {
+        "full_name": "RunMaster - GPS 런닝 트래커",
+        "package": "com.reaf.runmaster",
+        "description": "간단하고 강력한 런닝 마스터",
+        "keywords": [
+          "런닝",
+          "GPS",
+          "마스터",
+          "트래커"
+        ],
+        "appeal": "Mission100과 같은 'Master' 시리즈 브랜딩"
+      },
+      "RunGoal": {
+        "full_name": "RunGoal - 목표달성 런닝 앱",
+        "package": "com.reaf.rungoal",
+        "description": "목표를 달성하는 런닝 앱",
+        "keywords": [
+          "런닝",
+          "목표",
+          "달성",
+          "챌린지"
+        ],
+        "appeal": "Mission100과 유사한 목표 달성 컨셉"
+      },
+      "RunChallenge": {
+        "full_name": "RunChallenge - 30일 런닝 챌린지",
+        "package": "com.reaf.runchallenge",
+        "description": "30일 런닝 챌린지 앱",
+        "keywords": [
+          "런닝",
+          "챌린지",
+          "30일",
+          "습관"
+        ],
+        "appeal": "Mission100의 챌린지 컨셉과 일치"
+      },
+      "Run100": {
+        "full_name": "Run100 - 100일 런닝 마스터",
+        "package": "com.reaf.run100",
+        "description": "100일 런닝 마스터 챌린지",
+        "keywords": [
+          "런닝",
+          "100일",
+          "마스터",
+          "챌린지"
+        ],
+        "appeal": "Mission100과 완벽한 시리즈 매치"
+      },
+      "RunDaily": {
+        "full_name": "RunDaily - 매일 런닝 습관",
+        "package": "com.reaf.rundaily",
+        "description": "매일 런닝하는 습관 만들기",
+        "keywords": [
+          "런닝",
+          "매일",
+          "습관",
+          "일상"
+        ],
+        "appeal": "일상적이고 친근한 이미지"
+      }
+    },
+    "추천_이름": "Run100"
+  },
+  "추천_이름": "Run100",
+  "리브랜딩_계획": {
+    "리브랜딩_정보": {
+      "이전_이름": "GigaChad Runner",
+      "새_이름": "Run100 - 100일 런닝 마스터",
+      "이전_패키지": "com.reaf.gigachad_runner",
+      "새_패키지": "com.reaf.run100",
+      "이전_폴더": "gigachad_runner",
+      "새_폴더": "run100"
+    },
+    "변경_작업": [
+      "폴더명 변경",
+      "pubspec.yaml 앱 이름 변경",
+      "Android 패키지명 변경",
+      "앱 아이콘 및 브랜딩 자료 업데이트",
+      "마케팅 문구 및 설명 변경"
+    ],
+    "파일_변경_목록": {
+      "pubspec.yaml": "name 및 description 변경",
+      "android/app/build.gradle.kts": "namespace 및 applicationId 변경",
+      "README.md": "앱 이름 및 설명 변경",
+      "마케팅 자료": "새 브랜딩으로 업데이트"
+    },
+    "브랜딩_전략": {
+      "시리즈_통일": "Mission100 → Run100 → Squat100 시리즈",
+      "목표_설정": "100일 챌린지 컨셉 통일",
+      "사용자_경험": "일관된 UI/UX 디자인",
+      "마케팅": "숫자 기반 목표 달성 브랜드"
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "분석_시간": "2025-09-22T19:01:21.546479",
+  "현재_프로그램_특징": {
+    "mission100": {
+      "current_name": "Mission100",
+      "concept": "6주 만에 푸쉬업 100개 달성",
+      "scientific_base": "Progressive Overload 원칙",
+      "status": "이미 출시됨 - 유지"
+    },
+    "squat": {
+      "current_name": "Squat Master / Squat100",
+      "scientific_base": "2023년 Scientific Reports 연구 기반",
+      "progression": "Assisted → Bodyweight → Bulgarian Split → Pistol Squats",
+      "key_features": [
+        "Progressive Overload 원칙 적용",
+        "10단계 차드 승급 시스템",
+        "과학적 단계별 진행",
+        "부상 방지 설계"
+      ]
+    },
+    "runner": {
+      "current_name": "GigaChad Runner / Run100",
+      "scientific_base": "None to Run (N2R) 12주 프로그램 (C25K 개선판)",
+      "key_features": [
+        "높은 중도포기율 해결",
+        "부상 방지 + 유연한 설계",
+        "시간 기반 인터벌 훈련",
+        "강화 운동 포함",
+        "12주 과학적 프로그램"
+      ]
+    }
+  },
+  "이름_옵션": {
+    "squat_options": {
+      "SquatScience": {
+        "full_name": "SquatScience - 과학적 스쿼트 마스터",
+        "package": "com.reaf.squatscience",
+        "appeal": "과학적 접근법 강조",
+        "keywords": [
+          "과학",
+          "연구",
+          "스쿼트",
+          "전문"
+        ],
+        "cons": "일반인에게 어려울 수 있음"
+      },
+      "SquatPro": {
+        "full_name": "SquatPro - 전문가급 스쿼트 트레이닝",
+        "package": "com.reaf.squatpro",
+        "appeal": "전문성과 접근성 균형",
+        "keywords": [
+          "전문",
+          "프로",
+          "트레이닝",
+          "마스터"
+        ],
+        "cons": "과학적 기반 명시적이지 않음"
+      },
+      "SquatProgression": {
+        "full_name": "SquatProgression - 단계별 스쿼트 마스터",
+        "package": "com.reaf.squatprogression",
+        "appeal": "Progressive Overload 개념 반영",
+        "keywords": [
+          "단계별",
+          "진행",
+          "발전",
+          "체계적"
+        ],
+        "cons": "이름이 다소 길음"
+      },
+      "SquatEvolution": {
+        "full_name": "SquatEvolution - 진화하는 스쿼트 트레이닝",
+        "package": "com.reaf.squatevolution",
+        "appeal": "10단계 승급 시스템 + 진화 컨셉",
+        "keywords": [
+          "진화",
+          "발전",
+          "단계",
+          "트레이닝"
+        ],
+        "cons": "과학적 느낌보다 게임적"
+      },
+      "SquatMaster": {
+        "full_name": "SquatMaster - 과학적 스쿼트 프로그램",
+        "package": "com.reaf.squatmaster",
+        "appeal": "기존 이름 유지 + 설명 강화",
+        "keywords": [
+          "마스터",
+          "전문",
+          "프로그램"
+        ],
+        "cons": "과학적 특징 부각 부족"
+      }
+    },
+    "runner_options": {
+      "RunnerEvolution": {
+        "full_name": "RunnerEvolution - 12주 과학적 런닝 프로그램",
+        "package": "com.reaf.runnerevolution",
+        "appeal": "N2R 12주 프로그램 + 진화 컨셉",
+        "keywords": [
+          "진화",
+          "12주",
+          "과학적",
+          "런닝"
+        ],
+        "cons": "이름이 길 수 있음"
+      },
+      "RunPro": {
+        "full_name": "RunPro - 전문가급 런닝 트레이닝",
+        "package": "com.reaf.runpro",
+        "appeal": "전문성 + 간결함",
+        "keywords": [
+          "전문",
+          "프로",
+          "런닝",
+          "트레이닝"
+        ],
+        "cons": "N2R 프로그램 특징 부각 부족"
+      },
+      "RunProgression": {
+        "full_name": "RunProgression - 단계별 런닝 마스터",
+        "package": "com.reaf.runprogression",
+        "appeal": "단계별 프로그램 강조",
+        "keywords": [
+          "단계별",
+          "진행",
+          "체계적",
+          "런닝"
+        ],
+        "cons": "12주 특징 명시적이지 않음"
+      },
+      "RunScience": {
+        "full_name": "RunScience - 과학적 런닝 프로그램",
+        "package": "com.reaf.runscience",
+        "appeal": "과학적 기반 직접 명시",
+        "keywords": [
+          "과학",
+          "연구",
+          "런닝",
+          "프로그램"
+        ],
+        "cons": "일반인에게 딱딱할 수 있음"
+      },
+      "None2Run": {
+        "full_name": "None2Run - 12주 런닝 마스터 프로그램",
+        "package": "com.reaf.none2run",
+        "appeal": "N2R 프로그램 직접 반영",
+        "keywords": [
+          "None2Run",
+          "12주",
+          "마스터",
+          "프로그램"
+        ],
+        "cons": "브랜딩 일관성 부족"
+      }
+    }
+  },
+  "최종_추천": {
+    "squat_app": {
+      "recommended": "SquatProgression",
+      "reasoning": [
+        "Progressive Overload 핵심 개념 반영",
+        "Scientific Reports 연구의 단계별 접근법 표현",
+        "10단계 승급 시스템과 완벽 매치",
+        "전문적이면서도 이해하기 쉬움",
+        "Mission100과 브랜딩 조화"
+      ],
+      "alternative": "SquatPro (더 간결하지만 과학적 특징 부족)"
+    },
+    "runner_app": {
+      "recommended": "RunProgression",
+      "reasoning": [
+        "N2R 12주 프로그램의 체계적 접근법 반영",
+        "부상 방지 + 유연한 설계의 단계별 특성 표현",
+        "시간 기반 인터벌의 점진적 발전 의미",
+        "SquatProgression과 시리즈 통일성",
+        "과학적이면서도 접근 가능한 이름"
+      ],
+      "alternative": "RunnerEvolution (12주 명시하지만 다소 길음)"
+    }
+  },
+  "시리즈_컨셉": {
+    "series_name": "Progression Series",
+    "core_philosophy": "과학적 연구 기반의 체계적 운동 발전 프로그램",
+    "unified_branding": {
+      "Mission100": "푸쉬업 Progressive Overload (6주)",
+      "SquatProgression": "스쿼트 4단계 진화 (Scientific Reports 기반)",
+      "RunProgression": "런닝 12주 체계적 발전 (N2R 프로그램)"
+    },
+    "scientific_credibility": [
+      "2023년 Scientific Reports 연구 기반",
+      "Progressive Overload 원칙 적용",
+      "None to Run (C25K 개선) 프로그램",
+      "부상 방지 과학적 설계",
+      "단계별 체계적 접근법"
+    ],
+    "user_benefits": [
+      "과학적 검증된 방법론",
+      "체계적 진행으로 높은 성공률",
+      "부상 위험 최소화",
+      "개인 수준에 맞는 단계별 적용",
+      "장기적 지속 가능한 습관 형성"
+    ]
+  }
+}

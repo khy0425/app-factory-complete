@@ -1,0 +1,202 @@
+name: 🏃‍♂️ GigaChad Runner CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+jobs:
+  # 코드 품질 및 테스트
+  test:
+    name: 🧪 Test & Analyze
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: 🎯 Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.32.0'
+        channel: 'stable'
+        cache: true
+
+    - name: 📦 Get dependencies
+      run: flutter pub get
+
+    - name: 🔍 Verify format
+      run: dart format --output=none --set-exit-if-changed .
+
+    - name: 📊 Analyze project source
+      run: flutter analyze
+
+    - name: 🧪 Run tests
+      run: flutter test --coverage
+
+    - name: 📈 Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: coverage/lcov.info
+        fail_ci_if_error: true
+
+  # Android 빌드
+  build-android:
+    name: 🤖 Build Android APK
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' || github.event_name == 'release'
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: 🎯 Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.32.0'
+        channel: 'stable'
+        cache: true
+
+    - name: 📦 Get dependencies
+      run: flutter pub get
+
+    - name: 🔨 Build APK (Debug)
+      if: github.event_name == 'push'
+      run: flutter build apk --debug
+
+    - name: 🔨 Build APK (Release)
+      if: github.event_name == 'release'
+      run: flutter build apk --release
+
+    - name: 📤 Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: gigachad-runner-${{ github.event_name == 'release' && 'release' || 'debug' }}-apk
+        path: build/app/outputs/flutter-apk/*.apk
+        retention-days: 30
+
+  # AAB 빌드 (Play Store용)
+  build-aab:
+    name: 📱 Build Android App Bundle
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'release'
+
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: ☕ Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: 🎯 Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.32.0'
+        channel: 'stable'
+        cache: true
+
+    - name: 📦 Get dependencies
+      run: flutter pub get
+
+    - name: 🔨 Build App Bundle
+      run: flutter build appbundle --release
+
+    - name: 📤 Upload AAB artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: gigachad-runner-release-aab
+        path: build/app/outputs/bundle/release/*.aab
+        retention-days: 30
+
+  # 릴리즈 자동화
+  release:
+    name: 🚀 Create Release
+    runs-on: ubuntu-latest
+    needs: [test, build-android, build-aab]
+    if: github.event_name == 'release'
+
+    steps:
+    - name: 📥 Download APK
+      uses: actions/download-artifact@v4
+      with:
+        name: gigachad-runner-release-apk
+        path: ./artifacts/
+
+    - name: 📥 Download AAB
+      uses: actions/download-artifact@v4
+      with:
+        name: gigachad-runner-release-aab
+        path: ./artifacts/
+
+    - name: 📋 Get APK info
+      id: apk_info
+      run: |
+        APK_FILE=$(find ./artifacts -name "*.apk" | head -1)
+        AAB_FILE=$(find ./artifacts -name "*.aab" | head -1)
+        echo "apk_file=$APK_FILE" >> $GITHUB_OUTPUT
+        echo "aab_file=$AAB_FILE" >> $GITHUB_OUTPUT
+
+    - name: 🏷️ Upload Release Assets
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ${{ steps.apk_info.outputs.apk_file }}
+          ${{ steps.apk_info.outputs.aab_file }}
+        name: GigaChad Runner ${{ github.event.release.tag_name }}
+        body: |
+          ## 🏃‍♂️ GigaChad Runner ${{ github.event.release.tag_name }}
+
+          ### 📱 다운로드
+          - **APK**: Android 기기에 직접 설치
+          - **AAB**: Google Play Store 배포용
+
+          ### ✨ 변경사항
+          ${{ github.event.release.body }}
+
+          ### 🔧 기술 정보
+          - Flutter: 3.32.0
+          - Dart: 3.0+
+          - Android: API 21+
+
+          ---
+          **Made with 💪 by Chad Developers**
+        draft: false
+        prerelease: ${{ github.event.release.prerelease }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # 코드 품질 게이트
+  quality-gate:
+    name: 🛡️ Quality Gate
+    runs-on: ubuntu-latest
+    needs: [test, build-android]
+    if: github.event_name == 'pull_request'
+
+    steps:
+    - name: ✅ All checks passed
+      run: |
+        echo "🎉 All quality checks passed!"
+        echo "✅ Tests: Passed"
+        echo "✅ Analysis: Passed"
+        echo "✅ Build: Passed"
+        echo "🚀 Ready to merge!"

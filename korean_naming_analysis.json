@@ -1,0 +1,167 @@
+{
+  "분석_시간": "2025-09-22T19:03:57.905206",
+  "스쿼트_옵션": {
+    "스쿼트백과": {
+      "english": "SquatWiki",
+      "package": "com.reaf.squatwiki",
+      "appeal": "모든 스쿼트 지식이 담긴 백과사전",
+      "target": "정보를 원하는 사용자",
+      "score": 7
+    },
+    "스쿼트마스터": {
+      "english": "SquatMaster",
+      "package": "com.reaf.squatmaster",
+      "appeal": "마스터가 되는 과정",
+      "target": "성취욕구가 강한 사용자",
+      "score": 8
+    },
+    "스쿼트100": {
+      "english": "Squat100",
+      "package": "com.reaf.squat100",
+      "appeal": "Mission100과 시리즈 통일성",
+      "target": "명확한 목표를 원하는 사용자",
+      "score": 9
+    },
+    "스쿼트업": {
+      "english": "SquatUp",
+      "package": "com.reaf.squatup",
+      "appeal": "레벨업, 업그레이드 느낌",
+      "target": "게임 감성을 좋아하는 사용자",
+      "score": 8
+    },
+    "스쿼트챌린지": {
+      "english": "SquatChallenge",
+      "package": "com.reaf.squatchallenge",
+      "appeal": "도전과 성취의 즐거움",
+      "target": "챌린지 문화에 익숙한 MZ세대",
+      "score": 9
+    },
+    "완벽한스쿼트": {
+      "english": "PerfectSquat",
+      "package": "com.reaf.perfectsquat",
+      "appeal": "과학적으로 완벽한 스쿼트 학습",
+      "target": "정확한 자세를 원하는 사용자",
+      "score": 8
+    },
+    "스쿼트PT": {
+      "english": "SquatPT",
+      "package": "com.reaf.squatpt",
+      "appeal": "개인 트레이너 느낌",
+      "target": "PT받는 느낌을 원하는 사용자",
+      "score": 9
+    }
+  },
+  "러닝_옵션": {
+    "런닝100": {
+      "english": "Running100",
+      "package": "com.reaf.running100",
+      "appeal": "Mission100과 시리즈 통일",
+      "target": "목표 지향적 사용자",
+      "score": 8
+    },
+    "런마스터": {
+      "english": "RunMaster",
+      "package": "com.reaf.runmaster",
+      "appeal": "런닝 마스터가 되는 과정",
+      "target": "전문가가 되고 싶은 사용자",
+      "score": 8
+    },
+    "러닝메이트": {
+      "english": "RunningMate",
+      "package": "com.reaf.runningmate",
+      "appeal": "함께 달리는 친구 느낌",
+      "target": "동기부여가 필요한 사용자",
+      "score": 9
+    },
+    "런투런": {
+      "english": "RunToRun",
+      "package": "com.reaf.runtorun",
+      "appeal": "None to Run 프로그램 직접 반영",
+      "target": "초보자",
+      "score": 7
+    },
+    "런업": {
+      "english": "RunUp",
+      "package": "com.reaf.runup",
+      "appeal": "레벨업, 실력 향상",
+      "target": "게임 감성 선호 사용자",
+      "score": 8
+    },
+    "12주런닝": {
+      "english": "Run12Weeks",
+      "package": "com.reaf.run12weeks",
+      "appeal": "12주 프로그램 명확히 표현",
+      "target": "체계적 프로그램 선호자",
+      "score": 9
+    },
+    "런데이": {
+      "english": "RunDay",
+      "package": "com.reaf.runday",
+      "appeal": "매일 달리는 일상",
+      "target": "습관 형성 희망자",
+      "score": 8
+    },
+    "런스타트": {
+      "english": "RunStart",
+      "package": "com.reaf.runstart",
+      "appeal": "런닝 시작을 도와주는 앱",
+      "target": "완전 초보자",
+      "score": 9
+    }
+  },
+  "최종_추천": {
+    "squat_final": {
+      "1순위": "스쿼트PT",
+      "이유": [
+        "PT받는 느낌으로 프리미엄 인식",
+        "Scientific Reports 연구 기반 = 전문 PT",
+        "한국에서 PT 문화 매우 활성화",
+        "과학적이면서도 친근한 이미지",
+        "10단계 승급 = PT 레벨 시스템"
+      ],
+      "2순위": "스쿼트챌린지",
+      "2순위_이유": "MZ세대 챌린지 문화와 부합"
+    },
+    "runner_final": {
+      "1순위": "런스타트",
+      "이유": [
+        "None to Run 컨셉 완벽 반영",
+        "초보자 타겟 명확",
+        "시작의 설렘과 도전 의미",
+        "12주 후 진짜 러너가 되는 여정",
+        "부상 없이 안전하게 시작"
+      ],
+      "2순위": "러닝메이트",
+      "2순위_이유": "함께하는 느낌으로 동기부여"
+    },
+    "series_concept": {
+      "브랜드": "피트니스 마스터 시리즈",
+      "라인업": [
+        "Mission100 - 푸쉬업 미션",
+        "스쿼트PT - 과학적 스쿼트 PT",
+        "런스타트 - 12주 런닝 시작"
+      ],
+      "공통_마케팅": "과학적 연구 기반 + 전문가 프로그램"
+    }
+  },
+  "마케팅_메시지": {
+    "스쿼트PT": {
+      "메인": "헬스장 PT 안 받아도 완벽한 스쿼트 마스터",
+      "서브": [
+        "2023년 최신 연구 기반 프로그램",
+        "무릎 안전한 4단계 진화 시스템",
+        "10만원 PT비 아끼고 무료로 전문가 되기"
+      ],
+      "타겟_감정": "PT비 아까워하는 사람들의 마음"
+    },
+    "런스타트": {
+      "메인": "러닝 한번도 못해본 사람도 12주면 러너",
+      "서브": [
+        "작심삼일 NO! 과학적 12주 프로그램",
+        "무릎 부상 걱정 없는 체계적 시작",
+        "매일 5분부터 시작하는 기적"
+      ],
+      "타겟_감정": "시작이 두려운 초보자의 마음"
+    }
+  }
+}

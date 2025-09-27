@@ -1,0 +1,290 @@
+// ignore_for_file: undefined_class, undefined_getter, undefined_setter, undefined_method, undefined_function, undefined_identifier, uri_does_not_exist, invalid_constant, unused_import, extends_non_class, invalid_override, missing_required_param, avoid_print
+
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// 범용 운동 앱 레벨 선택 시스템 템플릿
+class UniversalLevelSelectionScreen extends StatefulWidget {
+  final String appName;
+  final String exerciseType;
+  final List<UserLevel> levels;
+  final Color primaryColor;
+
+  const UniversalLevelSelectionScreen({
+    super.key,
+    required this.appName,
+    required this.exerciseType,
+    required this.levels,
+    this.primaryColor = const Color(0xFFFFD700),
+  });
+
+  @override
+  State<UniversalLevelSelectionScreen> createState() =>
+      _UniversalLevelSelectionScreenState();
+}
+
+class _UniversalLevelSelectionScreenState
+    extends State<UniversalLevelSelectionScreen> {
+  int? selectedLevel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF1A1A1A),
+      appBar: AppBar(
+        title: Text(
+          '💪 당신의 ${widget.exerciseType} 레벨은?',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: widget.primaryColor,
+          ),
+        ),
+        backgroundColor: const Color(0xFF2A2A2A),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          _buildHeaderInfo(),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: widget.levels.length,
+              itemBuilder: (context, index) {
+                final level = widget.levels[index];
+                final isSelected = selectedLevel == level.id;
+                return _buildLevelCard(level, isSelected);
+              },
+            ),
+          ),
+          if (selectedLevel != null) _buildStartButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeaderInfo() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color(0xFF2A2A2A).withOpacity(0.8),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: widget.primaryColor.withOpacity(0.3)),
+        ),
+        child: const Text(
+          '🔥 정직하게 선택하세요!\n실력에 맞는 프로그램으로 더 빠르고 효과적인 성장!',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.white70,
+            height: 1.5,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLevelCard(UserLevel level, bool isSelected) {
+    return GestureDetector(
+      onTap: () => setState(() => selectedLevel = level.id),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          color: isSelected ? level.color.withOpacity(0.2) : const Color(0xFF2A2A2A),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isSelected ? level.color : Colors.transparent,
+            width: 3,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                level.title,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: isSelected ? level.color : Colors.white,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                level.description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                ),
+              ),
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: level.color.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  level.difficulty,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: level.color,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStartButton() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child: SizedBox(
+        width: double.infinity,
+        height: 56,
+        child: ElevatedButton(
+          onPressed: () => _startWithSelectedLevel(),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: widget.primaryColor,
+            foregroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          child: Text(
+            '🔥 ${widget.appName} 시작하기!',
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _startWithSelectedLevel() async {
+    if (selectedLevel == null) return;
+
+    final level = widget.levels.firstWhere((l) => l.id == selectedLevel);
+    final prefs = await SharedPreferences.getInstance();
+
+    // 사용자 레벨 정보 저장
+    await prefs.setInt('user_level_id', level.id);
+    await prefs.setString('exercise_type', widget.exerciseType);
+    await prefs.setString('level_config', jsonEncode(level.toMap()));
+    await prefs.setBool('has_selected_level', true);
+
+    if (!mounted) return;
+
+    // 메인 화면으로 이동
+    Navigator.of(context).pushReplacementNamed('/home');
+  }
+}
+
+/// 사용자 레벨 데이터 구조
+class UserLevel {
+  final int id;
+  final String title;
+  final String description;
+  final String difficulty;
+  final Color color;
+  final Map<String, dynamic> config;
+
+  const UserLevel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.difficulty,
+    required this.color,
+    this.config = const {},
+  });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'difficulty': difficulty,
+      'color': color.value,
+      'config': config,
+    };
+  }
+}
+
+/// 운동별 레벨 시스템 팩토리
+class ExerciseLevelFactory {
+  /// 팔굽혀펴기 레벨 시스템
+  static List<UserLevel> get pushupLevels => [
+    const UserLevel(
+      id: 1,
+      title: "🥺 완전 초보자",
+      description: "무릎 팔굽혀펴기도 5개가 힘들어요",
+      difficulty: "초급",
+      color: Color(0xFF8D6E63),
+      config: {"startingWeek": 1, "pushupType": "knee"},
+    ),
+    const UserLevel(
+      id: 2,
+      title: "💪 운동 경험자",
+      description: "표준 팔굽혀펴기 10-30개 정도 할 수 있어요",
+      difficulty: "중급",
+      color: Color(0xFF2196F3),
+      config: {"startingWeek": 2, "pushupType": "standard"},
+    ),
+    const UserLevel(
+      id: 3,
+      title: "🔥 고급자",
+      description: "표준 팔굽혀펴기 30개 이상 가능해요",
+      difficulty: "고급",
+      color: Color(0xFFFF5722),
+      config: {"startingWeek": 4, "pushupType": "advanced"},
+    ),
+  ];
+
+  /// 운동 타입별 레벨 시스템 가져오기
+  static List<UserLevel> getLevelsForExercise(String exerciseType) {
+    switch (exerciseType.toLowerCase()) {
+      case 'pushup':
+      case '팔굽혀펴기':
+        return pushupLevels;
+      default:
+        return _getDefaultLevels();
+    }
+  }
+
+  static List<UserLevel> _getDefaultLevels() {
+    return [
+      const UserLevel(
+        id: 1,
+        title: "🥺 완전 초보자",
+        description: "운동을 처음 시작해요",
+        difficulty: "초급",
+        color: Color(0xFF8D6E63),
+      ),
+      const UserLevel(
+        id: 2,
+        title: "💪 운동 경험자",
+        description: "기본적인 운동은 할 수 있어요",
+        difficulty: "중급",
+        color: Color(0xFF2196F3),
+      ),
+      const UserLevel(
+        id: 3,
+        title: "🔥 고급자",
+        description: "고강도 운동도 가능해요",
+        difficulty: "고급",
+        color: Color(0xFFFF5722),
+      ),
+    ];
+  }
+}

@@ -1,0 +1,135 @@
+// ignore_for_file: undefined_class, undefined_getter, undefined_setter, undefined_method, undefined_function, undefined_identifier, uri_does_not_exist, invalid_constant, unused_import, extends_non_class, invalid_override, missing_required_param, avoid_print
+
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+/// {{APP_NAME}} 알림 서비스 템플릿
+class NotificationService {
+  static final FlutterLocalNotificationsPlugin _notifications =
+      FlutterLocalNotificationsPlugin();
+  static bool _isInitialized = false;
+
+  /// 알림 서비스 초기화
+  static Future<void> initialize() async {
+    if (_isInitialized) return;
+
+    const AndroidInitializationSettings androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const DarwinInitializationSettings iosSettings =
+        DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
+    const InitializationSettings initSettings = InitializationSettings(
+      android: androidSettings,
+      iOS: iosSettings,
+    );
+
+    await _notifications.initialize(initSettings);
+    _isInitialized = true;
+  }
+
+  /// 알림 권한 요청
+  static Future<bool> requestPermission() async {
+    final status = await Permission.notification.request();
+    return status.isGranted;
+  }
+
+  /// 즉시 알림 표시
+  static Future<void> showNotification({
+    required int id,
+    required String title,
+    required String body,
+  }) async {
+    await initialize();
+
+    const NotificationDetails notificationDetails = NotificationDetails(
+      android: AndroidNotificationDetails(
+        '{{CHANNEL_NAME}}',
+        '{{APP_NAME}} 알림',
+        channelDescription: '{{APP_NAME}} 앱 알림',
+        importance: Importance.high,
+        priority: Priority.high,
+      ),
+      iOS: DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      ),
+    );
+
+    await _notifications.show(
+      id,
+      title,
+      body,
+      notificationDetails,
+    );
+  }
+
+  /// 일일 운동 알림 설정
+  static Future<void> scheduleDailyWorkoutReminder({
+    required TimeOfDay time,
+    String title = '🔥 운동 시간! {{APP_NAME}}',
+    String body = '💪 오늘의 운동을 시작해보세요!',
+  }) async {
+    await initialize();
+
+    final now = DateTime.now();
+    var scheduledDate = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      time.hour,
+      time.minute,
+    );
+
+    // 오늘 시간이 지났으면 내일로 설정
+    if (scheduledDate.isBefore(now)) {
+      scheduledDate = scheduledDate.add(const Duration(days: 1));
+    }
+
+    const NotificationDetails notificationDetails = NotificationDetails(
+      android: AndroidNotificationDetails(
+        'daily_workout',
+        '일일 운동 알림',
+        channelDescription: '매일 운동 시간 알림',
+        importance: Importance.high,
+        priority: Priority.high,
+      ),
+      iOS: DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      ),
+    );
+
+    await _notifications.show(
+      1,
+      title,
+      body,
+      notificationDetails,
+    );
+  }
+
+  /// 업적 달성 알림
+  static Future<void> showAchievementNotification(
+    String achievementTitle,
+    String description,
+  ) async {
+    await showNotification(
+      id: 2,
+      title: '🏆 업적 달성!',
+      body: '$achievementTitle: $description',
+    );
+  }
+
+  /// 모든 알림 취소
+  static Future<void> cancelAllNotifications() async {
+    await _notifications.cancelAll();
+  }
+}

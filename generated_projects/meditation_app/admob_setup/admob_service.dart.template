@@ -1,0 +1,250 @@
+// lib/services/admob_service.dart
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+class AdMobService {
+  static final AdMobService _instance = AdMobService._internal();
+
+  factory AdMobService() {
+    return _instance;
+  }
+
+  AdMobService._internal();
+
+  // AdMob 설정 - 실제 값으로 교체해야 합니다.
+  final Map<String, dynamic> _adMobConfig = {
+    "app_name": "meditation_app",
+    "note": "⚠️ 실제 사용시 AdMob 콘솔에서 생성된 ID로 교체 필요",
+    "android": {
+      "app_id": "ca-app-pub-XXXXXXXXXX~4236475790",
+      "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/42364757901",
+      "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/42364757902",
+      "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/42364757903"
+    },
+    "ios": {
+      "app_id": "ca-app-pub-XXXXXXXXXX~42364757904",
+      "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/42364757905",
+      "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/42364757906",
+      "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/42364757907"
+    },
+    "test_ids": {
+      "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+      "android_banner": "ca-app-pub-3940256099942544/6300978111",
+      "android_interstitial": "ca-app-pub-3940256099942544/1033173712",
+      "android_rewarded": "ca-app-pub-3940256099942544/5224354917",
+      "ios_app_id": "ca-app-pub-3940256099942544~1458002511",
+      "ios_banner": "ca-app-pub-3940256099942544/2934735716",
+      "ios_interstitial": "ca-app-pub-3940256099942544/4411468910",
+      "ios_rewarded": "ca-app-pub-3940256099942544/1712485313"
+    },
+    "setup_required": true
+  };
+
+
+  String get _appId => kReleaseMode
+      ? _getPlatformAppId()
+      : _getPlatformTestAppId();
+
+  String _getPlatformAppId() {
+    if (Platform.isAndroid) {
+      return _adMobConfig['android']!['app_id'] as String;
+    } else if (Platform.isIOS) {
+      return _adMobConfig['ios']!['app_id'] as String;
+    } else {
+      throw Exception('Unsupported platform');
+    }
+  }
+
+  String _getPlatformTestAppId() {
+    if (Platform.isAndroid) {
+      return _adMobConfig['test_ids']!['android_app_id'] as String;
+    } else if (Platform.isIOS) {
+      return _adMobConfig['test_ids']!['ios_app_id'] as String;
+    } else {
+      throw Exception('Unsupported platform');
+    }
+  }
+
+
+  String get _bannerAdUnitId => kReleaseMode
+      ? _getPlatformAdUnitId('banner')
+      : _getPlatformTestAdUnitId('banner');
+
+  String _getPlatformAdUnitId(String adType) {
+    if (Platform.isAndroid) {
+      return _adMobConfig['android']![adType + '_ad_unit'] as String;
+    } else if (Platform.isIOS) {
+      return _adMobConfig['ios']![adType + '_ad_unit'] as String;
+    } else {
+      throw Exception('Unsupported platform');
+    }
+  }
+
+  String _getPlatformTestAdUnitId(String adType) {
+    if (Platform.isAndroid) {
+      return _adMobConfig['test_ids']!['android_' + adType] as String;
+    } else if (Platform.isIOS) {
+      return _adMobConfig['test_ids']!['ios_' + adType] as String;
+    } else {
+      throw Exception('Unsupported platform');
+    }
+  }
+
+  //Interstitial and Rewarded  methods are similar, omitted for brevity.  Follow the pattern of bannerAd
+
+  Future<BannerAd?> loadBannerAd() async {
+    try {
+      return BannerAd(
+        adUnitId: _bannerAdUnitId,
+        size: AdSize.banner,
+        request: const AdRequest(),
+        listener: BannerAdListener(
+          onAdLoaded: (ad) => print('Banner ad loaded.'),
+          onAdFailedToLoad: (ad, error) {
+            print('Banner ad failed to load: $error');
+            // 재시도 로직 추가
+            Future.delayed(const Duration(seconds: 5), () => loadBannerAd());
+          },
+          onAdOpened: (ad) => print('Banner ad opened.'),
+          onAdClosed: (ad) => print('Banner ad closed.'),
+        ),
+      )..load();
+    } catch (e) {
+      print('Error loading banner ad: $e');
+      return null;
+    }
+  }
+
+  // ... other ad loading and showing methods for interstitial and rewarded ads ...
+
+  // 광고 표시 빈도 제한 (예시 - 간단한 시간 기반 제한)
+  DateTime? _lastInterstitialShown;
+  Duration get interstitialShowInterval => const Duration(minutes: 10);
+
+  bool canShowInterstitialAd() {
+    return _lastInterstitialShown == null ||
+        DateTime.now().difference(_lastInterstitialShown!) >= interstitialShowInterval;
+  }
+
+  void recordInterstitialAdShown() {
+    _lastInterstitialShown = DateTime.now();
+  }
+
+  // Interstitial Ad methods
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialLoaded = false;
+
+  String get _interstitialAdUnitId => kReleaseMode
+      ? _getPlatformAdUnitId('interstitial')
+      : _getPlatformTestAdUnitId('interstitial');
+
+  Future<void> loadInterstitialAd() async {
+    if (_isInterstitialLoaded) return;
+
+    await InterstitialAd.load(
+      adUnitId: _interstitialAdUnitId,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          _interstitialAd = ad;
+          _isInterstitialLoaded = true;
+          print('InterstitialAd loaded.');
+        },
+        onAdFailedToLoad: (error) {
+          print('InterstitialAd failed to load: $error');
+          _isInterstitialLoaded = false;
+          Future.delayed(const Duration(seconds: 5), loadInterstitialAd);
+        },
+      ),
+    );
+
+    _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (ad) {},
+      onAdDismissedFullScreenContent: (ad) {
+        _isInterstitialLoaded = false;
+        ad.dispose();
+        loadInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        print('Failed to show interstitial ad: $error');
+        ad.dispose();
+      },
+    );
+  }
+
+  Future<void> showInterstitialAd() async {
+    if (canShowInterstitialAd() && _isInterstitialLoaded && _interstitialAd != null) {
+      _interstitialAd?.show();
+      recordInterstitialAdShown();
+    } else {
+      print('InterstitialAd not ready or frequency limit reached.');
+    }
+  }
+
+  // Rewarded Ad methods
+  RewardedAd? _rewardedAd;
+  bool _isRewardedLoaded = false;
+
+  String get _rewardedAdUnitId => kReleaseMode
+      ? _getPlatformAdUnitId('rewarded')
+      : _getPlatformTestAdUnitId('rewarded');
+
+  Future<void> loadRewardedAd() async {
+    if (_isRewardedLoaded) return;
+
+    await RewardedAd.load(
+      adUnitId: _rewardedAdUnitId,
+      request: const AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          _rewardedAd = ad;
+          _isRewardedLoaded = true;
+          print('RewardedAd loaded.');
+        },
+        onAdFailedToLoad: (error) {
+          print('RewardedAd failed to load: $error');
+          _isRewardedLoaded = false;
+          Future.delayed(const Duration(seconds: 5), loadRewardedAd);
+        },
+      ),
+    );
+
+    _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (ad) {},
+      onAdDismissedFullScreenContent: (ad) {
+        _isRewardedLoaded = false;
+        ad.dispose();
+        loadRewardedAd();
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        print('Failed to show rewarded ad: $error');
+        ad.dispose();
+      },
+    );
+  }
+
+  Future<void> showRewardedAd() async {
+    if (_isRewardedLoaded && _rewardedAd != null) {
+      _rewardedAd?.show(onUserEarnedReward: (ad, reward) {
+        print('User earned reward: ${reward.amount} ${reward.type}');
+      });
+    } else {
+      print('RewardedAd not loaded yet.');
+    }
+  }
+
+  // Initialization method to be called once on app startup
+  Future<InitializationStatus> initializeAdMob() async {
+    MobileAds.instance.initialize();
+    return MobileAds.instance.initializationStatus;
+  }
+
+  // Cleanup
+  void dispose() {
+    _interstitialAd?.dispose();
+    _rewardedAd?.dispose();
+  }
+}

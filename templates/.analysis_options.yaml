@@ -1,0 +1,24 @@
+# 템플릿 파일용 분석 옵션 - 오류 무시
+analyzer:
+  exclude:
+    - '**'  # 모든 템플릿 파일 분석 제외
+
+  errors:
+    # 모든 오류를 무시
+    undefined_class: ignore
+    undefined_getter: ignore
+    undefined_setter: ignore
+    undefined_method: ignore
+    undefined_function: ignore
+    undefined_identifier: ignore
+    uri_does_not_exist: ignore
+    invalid_constant: ignore
+    unused_import: ignore
+    dead_code: ignore
+
+linter:
+  rules:
+    # 모든 린트 규칙 비활성화
+    - avoid_print: false
+    - prefer_const_constructors: false
+    - prefer_const_literals_to_create_immutables: false

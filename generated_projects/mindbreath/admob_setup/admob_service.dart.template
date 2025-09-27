@@ -1,0 +1,196 @@
+// lib/services/admob_service.dart
+import 'dart:async';
+import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+class AdMobService {
+  // 싱글톤 패턴
+  static final AdMobService _instance = AdMobService._internal();
+  factory AdMobService() => _instance;
+  AdMobService._internal();
+
+  // AdMob 설정
+  final Map<String, dynamic> _adMobConfig = {
+    "app_name": "mindbreath",
+    "note": "⚠️ 실제 사용시 AdMob 콘솔에서 생성된 ID로 교체 필요",
+    "android": {
+      "app_id": "ca-app-pub-XXXXXXXXXX~8408921719",
+      "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/84089217191",
+      "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/84089217192",
+      "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/84089217193"
+    },
+    "ios": {
+      "app_id": "ca-app-pub-XXXXXXXXXX~84089217194",
+      "banner_ad_unit": "ca-app-pub-XXXXXXXXXX/84089217195",
+      "interstitial_ad_unit": "ca-app-pub-XXXXXXXXXX/84089217196",
+      "rewarded_ad_unit": "ca-app-pub-XXXXXXXXXX/84089217197"
+    },
+    "test_ids": {
+      "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+      "android_banner": "ca-app-pub-3940256099942544/6300978111",
+      "android_interstitial": "ca-app-pub-3940256099942544/1033173712",
+      "android_rewarded": "ca-app-pub-3940256099942544/5224354917",
+      "ios_app_id": "ca-app-pub-3940256099942544~1458002511",
+      "ios_banner": "ca-app-pub-3940256099942544/2934735716",
+      "ios_interstitial": "ca-app-pub-3940256099942544/4411468910",
+      "ios_rewarded": "ca-app-pub-3940256099942544/1712485313"
+    },
+    "setup_required": true
+  };
+
+  // 플랫폼별 ID 관리
+  String get _appId => kReleaseMode
+      ? Platform.isAndroid
+          ? _adMobConfig['android']!['app_id'] as String
+          : _adMobConfig['ios']!['app_id'] as String
+      : Platform.isAndroid
+          ? _adMobConfig['test_ids']!['android_app_id'] as String
+          : _adMobConfig['test_ids']!['ios_app_id'] as String;
+
+  String get _bannerAdUnitId => kReleaseMode
+      ? Platform.isAndroid
+          ? _adMobConfig['android']!['banner_ad_unit'] as String
+          : _adMobConfig['ios']!['banner_ad_unit'] as String
+      : Platform.isAndroid
+          ? _adMobConfig['test_ids']!['android_banner'] as String
+          : _adMobConfig['test_ids']!['ios_banner'] as String;
+
+  String get _interstitialAdUnitId => kReleaseMode
+      ? Platform.isAndroid
+          ? _adMobConfig['android']!['interstitial_ad_unit'] as String
+          : _adMobConfig['ios']!['interstitial_ad_unit'] as String
+      : Platform.isAndroid
+          ? _adMobConfig['test_ids']!['android_interstitial'] as String
+          : _adMobConfig['test_ids']!['ios_interstitial'] as String;
+
+  String get _rewardedAdUnitId => kReleaseMode
+      ? Platform.isAndroid
+          ? _adMobConfig['android']!['rewarded_ad_unit'] as String
+          : _adMobConfig['ios']!['rewarded_ad_unit'] as String
+      : Platform.isAndroid
+          ? _adMobConfig['test_ids']!['android_rewarded'] as String
+          : _adMobConfig['test_ids']!['ios_rewarded'] as String;
+
+
+  // 광고 초기화
+  Future<InitializationStatus> initializeAdMob() async {
+    MobileAds.instance.initialize();
+    return MobileAds.instance.initializationStatus;
+  }
+
+
+  // Banner 광고 로드 및 표시 (수익 최적화를 위해 적절한 위치에 배치)
+  BannerAd? _bannerAd;
+  Future<void> showBannerAd() async {
+    if (_bannerAd != null) return;
+    _bannerAd?.dispose();
+    _bannerAd = BannerAd(
+      adUnitId: _bannerAdUnitId,
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          print('BannerAd loaded.');
+        },
+        onAdFailedToLoad: (ad, error) {
+          print('BannerAd failedToLoad: $error');
+          // 재시도 로직 추가 (예: 5초 후 재시도)
+          Future.delayed(const Duration(seconds: 5), showBannerAd);
+        },
+        onAdOpened: (ad) => print('BannerAd opened.'),
+        onAdClosed: (ad) => print('BannerAd closed.'),
+        onAdImpression: (ad) => print('BannerAd impression.'),
+      ),
+    );
+    await _bannerAd!.load();
+  }
+
+
+  // Interstitial 광고 로드 및 표시 (사용자 경험 고려, 적절한 시점에 표시)
+  InterstitialAd? _interstitialAd;
+  Future<void> showInterstitialAd() async {
+    if (_interstitialAd != null) return;
+
+    await InterstitialAd.load(
+      adUnitId: _interstitialAdUnitId,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad) {
+          _interstitialAd = ad;
+          print('InterstitialAd loaded.');
+          ad.show();
+        },
+        onAdFailedToLoad: (error) {
+          print('InterstitialAd failedToLoad: $error');
+          // 재시도 로직 추가 (예: 5초 후 재시도)
+          Future.delayed(const Duration(seconds: 5), showInterstitialAd);
+        },
+      ),
+    );
+
+    _interstitialAd?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (ad) => print('InterstitialAd opened.'),
+      onAdDismissedFullScreenContent: (ad) {
+        print('InterstitialAd closed.');
+        ad.dispose();
+        _interstitialAd = null;
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        print('Failed to show interstitial ad: $error');
+        ad.dispose();
+      },
+      onAdImpression: (ad) => print('InterstitialAd impression.'),
+    );
+  }
+
+
+  // Rewarded 광고 로드 및 표시 (보상형 광고, 사용자에게 보상 제공)
+  RewardedAd? _rewardedAd;
+  Future<void> showRewardedAd() async {
+    if (_rewardedAd != null) return;
+
+    await RewardedAd.load(
+      adUnitId: _rewardedAdUnitId,
+      request: const AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          _rewardedAd = ad;
+          print('RewardedAd loaded.');
+          ad.show(onUserEarnedReward: (ad, reward) {
+            print('User earned reward: ${reward.amount} ${reward.type}'); // 보상 처리
+          });
+        },
+        onAdFailedToLoad: (error) {
+          print('RewardedAd failedToLoad: $error');
+          // 재시도 로직 추가 (예: 5초 후 재시도)
+          Future.delayed(const Duration(seconds: 5), showRewardedAd);
+        },
+      ),
+    );
+
+    _rewardedAd?.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (ad) => print('RewardedAd opened.'),
+      onAdDismissedFullScreenContent: (ad) {
+        print('RewardedAd closed.');
+        ad.dispose();
+        _rewardedAd = null;
+        // 보상 지급 로직 추가
+      },
+      onAdFailedToShowFullScreenContent: (ad, error) {
+        print('Failed to show rewarded ad: $error');
+        ad.dispose();
+      },
+      onAdImpression: (ad) => print('RewardedAd impression.'),
+    );
+  }
+
+
+  // 광고 제거 (메모리 효율)
+  void disposeAds() {
+    _bannerAd?.dispose();
+    _interstitialAd?.dispose();
+    _rewardedAd?.dispose();
+  }
+}
